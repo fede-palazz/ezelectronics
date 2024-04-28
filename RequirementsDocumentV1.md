@@ -55,7 +55,7 @@ EZElectronics (read EaSy Electronics) is a software application designed to help
 
 ## Context Diagram
 
-![alt text](image-4.png)
+![alt text](Immagini/contextDiagram.png)
 
 ## Interfaces
 
@@ -129,9 +129,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 |  FR3.2  |         |    X    |
 |  FR3.3  |         |    X    |
 |  FR3.4  |         |    X    |
-| **FR4** |         |    X    |
-|  FR4.1  |         |    X    |
-|  FR4.2  |         |    X    |
+| **FR4** |    X    |    X    |
+|  FR4.1  |    X    |    X    |
+|  FR4.2  |    X    |    X    |
 |  FR4.3  |    X    |    X    |
 |  FR4.4  |    X    |    X    |
 |  FR4.5  |    X    |    X    |
@@ -155,7 +155,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ## Use case diagram
 
-![alt text](image.png)
+![alt text](Immagini/useCaseDiagram.png)
 
 ## Use cases
 
@@ -205,13 +205,13 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Post condition      | L’utente è loggato    |
 | Nominal Scenario    | Scenario 2.1          |
 | Variants            | Nessuna               |
-| Exceptions          | Scenario 2.2          |
+| Exceptions          | Scenario 2.2, 2.3     |
 
 #### Scenario 2.1
 
 | **Scenario 2.1** | **Login - SUCCESS**                                                                                |
 | ---------------- | -------------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è registrato, non loggato e nome utente e password corrispondono                          |
+| Precondition     | L’utente è registrato e non loggato                          |
 | Post condition   | L’utente è loggato                                                                                 |
 | Step#            | Description                                                                                        |
 | 1                | L’utente chiede di loggarsi                                                                        |
@@ -225,7 +225,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 2.2** | **Password errata**                                                                                |
 | ---------------- | -------------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è registrato, non loggato e nome utente e password non corrispondono                      |
+| Precondition     | L’utente è registrato e non loggato                       |
 | Post condition   | L’utente non è loggato                                                                             |
 | Step#            | Description                                                                                        |
 | 1                | L’utente chiede di loggarsi                                                                        |
@@ -234,6 +234,20 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 4                | Il sistema legge i dati richiesti                                                                  |
 | 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
 | 6                | Il sistema vede che la password è errata e restituisce errore                                      |
+
+#### Scenario 2.3
+
+| **Scenario 2.3** | **Utente non registrato**                                                                                |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| Precondition     | L’utente è registrato e non loggato                       |
+| Post condition   | L’utente non è loggato                                                                             |
+| Step#            | Description                                                                                        |
+| 1                | L’utente chiede di loggarsi                                                                        |
+| 2                | Il sistema chiede utente e password                                                                |
+| 3                | L’utente inserisce utente e password                                                               |
+| 4                | Il sistema legge i dati richiesti                                                                  |
+| 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
+| 6                | Il sistema vede che l’username non è associato a nessun account e restitusce errore|
 
 ### UC3, LOGOUT
 
@@ -287,40 +301,52 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Post condition   | Il prodotto non è aggiunto al carrello                                                    |
 | Step#            | Description                                                                               |
 | 1                | L’utente chiede di aggiungere un prodotto al carrello                                     |
-| 2                | Il sistema verifica che l’utente sia loggato e il prodotto sia disponibile                |
-| 3                | Il sistema riconosce che il prodotto non è disponibile e visualizza un messaggio d’errore |
+| 2                | Il sistema verifica che l’utente sia loggato                                              |
+| 3                | Il sistema verifica il prodotto sia disponibile                                           |
+| 4                | Il sistema riconosce che il prodotto non è disponibile e visualizza un messaggio d’errore |
 
 ### UC5, RIMOZIONE DI UN PRODOTTO DAL CARRELLO
 
 | **Actors Involved** | **Cliente, Manager**                           |
 | ------------------- | ---------------------------------------------- |
-| Precondition        | L’utente è loggato                             |
-| Postcondition       | Il prodotto è rimosso dal carrello dell’utente |
+| Precondition        | L’utente è loggato e il prodotto X è presente nel carrello                             |
+| Postcondition       | Il prodotto X è rimosso dal carrello dell’utente |
 | Nominal Scenario    | Scenario 5.1                                   |
 | Variants            | Nessuna                                        |
-| Exceptions          | Scenario 5.2                                   |
+| Exceptions          | Scenario 5.2, 5.3                                   |
 
 #### Scenario 5.1
 
-| **Scenario 5.1** | **Prodotto rimosso con successo**                                               |
-| ---------------- | ------------------------------------------------------------------------------- |
-| Precondition     | L’utente è loggato e il prodotto è nel carrello dell’utente                     |
-| Post condition   | Il prodotto è rimosso dal carrello dell’utente                                  |
-| Step#            | Description                                                                     |
-| 1                | L’utente chiede di rimuovere un prodotto al carrello                            |
-| 2                | Il sistema verifica che l’utente sia loggato e il prodotto sia nel suo carrello |
-| 3                | Il sistema rimuove il prodotto dal carrello                                     |
+| **Scenario 5.1** | **Prodotto rimosso con successo**                                                |
+| ---------------- | -------------------------------------------------------------------------------  |
+| Precondition     | L’utente è loggato e il prodotto è nel carrello dell’utente                      |
+| Post condition   | Il prodotto X è rimosso dal carrello dell’utente                                 |
+| Step#            | Description                                                                      |
+| 1                | L’utente chiede di rimuovere un prodotto X al carrello                           |
+| 2                | Il sistema verifica che l’utente sia loggato e il prodotto X sia nel suo carrello|
+| 3                | Il sistema rimuove il prodotto X dal carrello                                    |
 
 #### Scenario 5.2
 
 | **Scenario 5.2** | **Prodotto non presente nel carrello**                                                        |
 | ---------------- | --------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è loggato e il prodotto non si trova nel carrello dell’utente                        |
+| Precondition     | L’utente è loggato e il prodotto X non si trova nel carrello dell’utente                      |
 | Post condition   | Il prodotto non è rimosso dal carrello dell’utente                                            |
 | Step#            | Description                                                                                   |
 | 1                | L’utente chiede di rimuovere un prodotto al carrello                                          |
 | 2                | Il sistema verifica che l’utente sia loggato e il prodotto sia nel suo carrello               |
 | 3                | Il sistema riconosce che il prodotto non si trova nel carrello e mostra un messaggio d’errore |
+
+#### Scenario 5.3
+
+| **Scenario 5.3** | **Utente non loggato**                                                        |
+| ---------------- | --------------------------------------------------------------------------------------------- |
+| Precondition     | L’utente è loggato                                                                            |
+| Post condition   | Il prodotto non è rimosso dal carrello dell’utente                                            |
+| Step#            | Description                                                                                   |
+| 1                | L’utente chiede di rimuovere un prodotto al carrello                                          |
+| 2                | Il sistema verifica che l’utente sia loggato e il prodotto sia nel suo carrello               |
+| 3                | Il sistema riconosce che l’utente non è loggato e mostra un messaggio d’errore |
 
 ### UC6, VISUALIZZARE IL CARRELLO
 
@@ -330,7 +356,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Postcondition       | La pagina del carrello viene visualizzata |
 | Nominal Scenario    | Scenario 6.1                              |
 | Variants            | Nessuna                                   |
-| Exceptions          | Nessuna                                   |
+| Exceptions          | Scenario 6.2                                   |
 
 #### Scenario 6.1
 
@@ -338,6 +364,17 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | ---------------- | -------------------------------------------------------- |
 | Precondition     | L’utente è loggato                                       |
 | Post condition   | La pagina del carrello viene visualizzata                |
+| Step#            | Description                                              |
+| 1                | L’utente richiede di visualizzare il carrello            |
+| 2                | Il sistema verifica che l’utente sia loggato             |
+| 3                | Il sistema rimanda l’utente alla pagina del suo carrello |
+
+#### Scenario 6.2
+
+| **Scenario 6.2** | **Carrello non visualizzato**                   |
+| ---------------- | -------------------------------------------------------- |
+| Precondition     | L’utente è loggato                                       |
+| Post condition   | La pagina del carrello non viene visualizzata                |
 | Step#            | Description                                              |
 | 1                | L’utente richiede di visualizzare il carrello            |
 | 2                | Il sistema verifica che l’utente sia loggato             |
@@ -351,7 +388,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Postcondition       | La pagina con profilo e storico ordini viene visualizzata |
 | Nominal Scenario    | Scenario 7.1                                              |
 | Variants            | Nessuna                                                   |
-| Exceptions          | Nessuna                                                   |
+| Exceptions          | Scenario 7.2                                                   |
 
 #### Scenario 7.1
 
@@ -364,11 +401,24 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che l’utente sia loggato                         |
 | 3                | Il sistema rimanda l’utente alla pagina con profilo e storico ordini |
 
+#### Scenario 7.2
+
+| **Scenario 7.2** | **Storico ordini non visualizzato, utente non loggato**                         |
+| ---------------- | -------------------------------------------------------------------- |
+| Precondition     | L’utente è loggato                                                   |
+| Post condition   | La pagina con profilo e storico ordini non viene visualizzata            |
+| Step#            | Description                                                          |
+| 1                | L’utente richiede di visualizzare dello storico                      |
+| 2                | Il sistema verifica che l’utente sia loggato                         |
+| 3                | Il sistema riconosce che l’utente non è loggato e restituisce un messaggio d’errore 
+
+ |
+
 ### UC8, REGISTRAZIONE DI UN NUOVO PRODOTTO
 
 | **Actors Involved** | **Manager**                        |
 | ------------------- | ---------------------------------- |
-| Precondition        | Un manager è loggato               |
+| Precondition        | Un manager è loggato e il prodotto non esiste nel database               |
 | Postcondition       | Il nuovo prodotto viene registrato |
 | Nominal Scenario    | Scenario 8.1                       |
 | Variants            | Nessuna                            |
@@ -388,7 +438,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 #### Scenario 8.2
 
-| **Scenario 8.2** | **L'id del prodotto esiste già**                                                   |
+| **Scenario 8.2** | **ID non univoco**                                                   |
 | ---------------- | ---------------------------------------------------------------------------------- |
 | Precondition     | Un manager è loggato e il prodotto esiste nel database                             |
 | Post condition   | Il prodotto non è aggiunto al database                                             |
@@ -396,7 +446,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 1                | Il manager richiede di registrare un nuovo prodotto                                |
 | 2                | Il sistema richiede i dati necessari per un nuovo prodotto                         |
 | 3                | Il sistema controlla la validità dei dati e l’univocità dell’id                    |
-| 4                | Il sistema trova nel database un prodotto con lo stesso id e restituisce un errore |
+| 4                | Il sistema non registra il prodotto e ritorna un messaggio di errore di “id non univoco”
+
+ |
 
 ### UC9, REGISTRAZIONE DELL’ARRIVO DI UN SET DI PRODOTTI
 
@@ -406,13 +458,13 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Postcondition       | Il set di nuovi prodotti è registrato |
 | Nominal Scenario    | Scenario 9.1                          |
 | Variants            | Nessuna                               |
-| Exceptions          | Scenario 9.2                          |
+| Exceptions          | Nessuna                               |
 
 #### Scenario 9.1
 
 | **Scenario 9.1** | **Arrivo set di prodotti registrato con successo**                                                                                            |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Precondition     | Un manager è loggato                                                                                                                          |
+| Precondition     | Un manager è loggato                                                                                                     |
 | Post condition   | Il set di nuovi prodotti è registrato                                                                                                         |
 | Step#            | Description                                                                                                                                   |
 | 1                | Il manager richiede di registrare l’arrivo di un set di prodotti                                                                              |
@@ -598,12 +650,12 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 # Glossary
 
-![alt text](image-1.png)
+![alt text](Immagini/glossary.png)
 
 # System Design
 
--->todo
+![alt text](Immagini/systemDesign.png)
 
 # Deployment Diagram
 
-![alt text](image-3.png)
+![alt text](Immagini/deploymentDiagram.png)

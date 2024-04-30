@@ -37,13 +37,12 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 | ---------------------------- | -------------------------------: | 
 |**Requirement document**    | **40** |
 | --Review del sistema attuale| 5 |
-| --Aggiunti stakeholders e context diagram| 5 |
-| --Aggiunte interfacce e user stories| 5 |
-| --Aggiunti requisiti funzionali e non funzionali| 5 |
-| --Aggiunto diagramma dei casi d’uso ed alcuni scenari| 5 |
-| --Aggiunti scenari aggiuntivi| 5 |
+| --Aggiunti stakeholders e context diagram| 6 |
+| --Aggiunte interfacce e user stories| 6 |
+| --Aggiunti requisiti funzionali e non funzionali| 6 |
+| --Aggiunto diagramma dei casi d’uso e scenari| 6 |
 | --Aggiornato diagramma dei casi d'uso| 5 |
-| --Aggiornato deployment diagram| 5 |
+| --Aggiornato deployment diagram| 6 |
 | --GUI prototype |20|
 | **Code** |150|
 | --Analisi dei metodi forniti in UserController| 10|

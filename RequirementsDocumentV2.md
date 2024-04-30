@@ -126,47 +126,50 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ## Functional Requirements
 
-| **ID**  | **Descrizione**                                                                                               |
-|:-----:|:-----------------------------------------------------------------------------------------------------------:|
-| **FR1** | Gestione del carrello                                                                                     |
-| FR1.1 | Un Cliente deve poter aggiungere un prodotto al carrello                                                   |
-| FR1.2 | Un Cliente deve poter eliminare un prodotto nel carrello                                                    |
-| FR1.3 | Un Cliente deve poter visualizzare il proprio carrello                                                      |
-| FR1.4 | Un Cliente deve poter svuotare il proprio carrello                                                          |
-| FR1.5 | Un Cliente deve poter effettuare il check out del proprio carrello                                          |
-| FR1.6 | Un Cliente deve poter visualizzare la cronologia dei carrelli già pagati in passato                        |
-| **FR2** | Gestione degli utenti                                                                                     |
-| FR2.1 | Un utente deve essere in grado di creare un proprio account personale con il ruolo di Customer            |
-| FR2.2 | Un utente che vuole registrarsi come Manager deve poter mandare una richiesta di registrazione a un Admin |
-| FR2.3 | Un utente deve essere in grado di effettuare il login alla piattaforma                                      |
-| FR2.4 | Un utente deve essere in grado di effettuare il logout dalla piattaforma                                    |
-| FR2.5 | Un utente deve essere in grado di reperire le informazioni sul proprio account                              |
-| **FR3** | Gestione dei prodotti                                                                                     |
-| FR3.1 | Un Manager deve essere in grado di registrare uno o più nuovi prodotti                                      |
-| FR3.2 | Un Manager deve essere in grado di cancellare un prodotto esistente                                          |
-| FR3.3 | Il sistema deve contrassegnare i prodotti come venduti                                                      |
-| **FR4** | Visualizzazione dei prodotti                                                                              |
-| FR4.1 | Un utente deve essere in grado di visualizzare la lista di tutti i prodotti                                 |
-| FR4.3 | Un utente deve essere in grado di visualizzare tutti i prodotti appartenenti ad una specifica categoria    |
-| FR4.4 | Un utente deve essere in grado di visualizzare tutti i prodotti dello stesso modello                        |
-| FR4.5 | Un utente deve essere in grado di filtrare i prodotti venduti da quelli disponibili                         |
-| FR4.6 | Un utente deve essere in grado di ordinare i prodotti nella pagina secondo prezzo crescente o decrescente |
-| **FR5** | Gestione pagamento                                                                                        |
-| FR5.1 | Un cliente deve poter richiedere il pagamento del proprio carrello                                           |
-| FR5.2 | Il sistema deve elaborare i dati del cliente e reindirizzare il cliente al sito di gestione pagamento       |
-| **FR6** | Gestione spedizione prodotti                                                                             |
-| FR6.1 | Un cliente deve poter selezionare un metodo di spedizione fra quelli proposti                               |
-| FR6.2 | Un cliente deve essere in grado di memorizzare nuovi indirizzi, modificare o eliminare quelli esistenti    |
-| FR6.3 | Il sistema deve mostrare ai clienti il prezzo finale compreso di costo prodotti e costi di spedizione      |
-| FR6.4 | Il sistema deve integrarsi con il gestore delle spedizioni per generare etichette di spedizione valide      |
-| FR6.5 | Il sistema deve fornire ai clienti un’interfaccia per monitorare le loro spedizioni                         |
-| FR6.6 | Il sistema deve fornire un metodo di segnalazione di problemi sulle spedizione                              |
-| **FR7** | Funzioni amministratore                                                                                  |
-| FR7.1 | Un Admin deve essere in grado di approvare le registrazioni dei manager dei negozi                          |
-| FR7.2 | Un Admin deve essere in grado di eliminare tutti gli utenti (testing)                                       |
-| FR7.3 | Un Admin deve essere in grado di eliminare tutti i prodotti (testing)                                       |
-| FR7.4 | Un Admin deve essere in grado di eliminare tutti i carrelli degli utenti (testing)                          |
-| FR7.5 | Un Admin deve essere in grado di configurare le opzioni di spedizione e relative tariffe                   |
+| **ID**   | **Description**                                                              |
+| :----: | :------------------------------------------------------------------------:|
+| **FR1**  | Gestione del carrello                                                    |
+| FR1.1 | Un Cliente deve poter aggiungere un prodotto al carrello                |
+| FR1.2 | Un Cliente deve poter aggiungere più prodotti dello stesso modello al carrello |
+| FR1.3 | Un Cliente deve poter eliminare un prodotto nel carrello                 |
+| FR1.4 | Un Cliente deve poter visualizzare il proprio carrello                   |
+| FR1.5 | Un Cliente deve poter svuotare il proprio carrello                       |
+| FR1.6 | Un Cliente deve poter effettuare il check out del proprio carrello        |
+| FR1.7 | Un Cliente deve poter visualizzare la cronologia dei carrelli già pagati in passato (ovvero gli acquisti precedenti) |
+| **FR2**  | Gestione degli utenti                                                   |
+| FR2.1 | Un utente deve essere in grado di creare un proprio account personale con il ruolo di Customer |
+| FR2.2 | Un utente che vuole registrarsi come Manager deve poter mandare una richiesta di registrazione a un Admin, che la potrà approvare |
+| FR2.3 | Un utente deve essere in grado di effettuare il login alla piattaforma    |
+| FR2.4 | Un utente deve essere in grado di effettuare il logout dalla piattaforma   |
+| FR2.5 | Un utente deve essere in grado di reperire le informazioni sul proprio account |
+| FR2.6 | Un utente deve essere in grado di modificare le informazioni sul proprio account |
+| **FR3**  | Gestione dei prodotti                                                    |
+| FR3.1 | Un Manager deve essere in grado di registrare uno o più nuovi prodotti  |
+| FR3.2 | Un Manager deve essere in grado di aggiungere e modificare i modelli     |
+| FR3.3 | Un Manager deve essere in grado di cancellare uno o più prodotti esistenti |
+| FR3.4 | Il Manager deve poter contrassegnare i prodotti come venduti              |
+| **FR4**  | Visualizzazione dei prodotti                                             |
+| FR4.1 | Un utente deve essere in grado di visualizzare la lista di tutti i prodotti |
+| FR4.2 | Un utente deve essere in grado di visualizzare tutti i prodotti appartenenti ad una specifica categoria |
+| FR4.3 | Un utente deve essere in grado di visualizzare tutti i modelli venduti dai diversi negozi |
+| FR4.4 | Un utente deve essere in grado di filtrare i prodotti che sono stati venduti da quelli disponibili |
+| FR4.5 | Un utente deve essere in grado di ordinare i prodotti nella pagina secondo prezzo crescente o decrescente |
+| FR4.6 | Un utente deve essere in grado di filtrare i prodotti attraverso l’inserimento di un range di prezzo |
+| **FR5**  | Gestione pagamento                                                       |
+| FR5.1 | Un cliente deve poter richiedere il pagamento del proprio carrello       |
+| FR5.2 | Il sistema deve notificare al cliente l’avvenuto pagamento del suo carrello |
+| **FR6**  | Gestione spedizione prodotti                                             |
+| FR6.1 | Un cliente deve poter selezionare un metodo di spedizione fra quelli proposti |
+| FR6.2 | Un cliente deve essere in grado di memorizzare nuovi indirizzi, modificare o eliminare quelli esistenti |
+| FR6.3 | Il sistema deve mostrare ai clienti il prezzo finale compreso di costo prodotti e costi di spedizione |
+| FR6.4 | Il sistema deve fornire ai clienti un’interfaccia per monitorare lo stato dell’ordine |
+| **FR7**  | Funzioni amministratore                                                  |
+| FR7.1 | Un Admin deve essere in grado di registrare, modificare ed eliminare un negozio |
+| FR7.2 | Un Admin deve essere in grado di approvare le registrazioni dei manager dei negozi |
+| FR7.3 | Un Admin deve essere in grado di visualizzare, aggiungere, modificare ed eliminare tutti gli utenti (testing) |
+| FR7.4 | Un Admin deve essere in grado di visualizzare, aggiungere, modificare ed eliminare tutti i prodotti (testing) |
+| FR7.5 | Un Admin deve essere in grado di visualizzare, modificare ed eliminare tutti i carrelli degli utenti (testing) |
+
 
 
 ## Table of rights
@@ -180,39 +183,40 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 |  FR1.4  |    X    |         |       |
 |  FR1.5  |    X    |         |       |
 |  FR1.6  |    X    |         |       |
-| **FR2** |    X    |    X    |   X   |
-|  FR2.1  |    X    |    X    |       |
-|  FR2.2  |    X    |    X    |   X   |
-|  FR2.3  |    X    |    X    |       |
-|  FR2.4  |    X    |    X    |       |
-|  FR2.5  |    X    |    X    |       |
-| **FR3** |         |    X    |   X   |
+|  FR1.7  |    X    |         |       |
+| **FR2** |   X    |     X   |   X   |
+|  FR2.1  |    X    |        |       |
+|  FR2.2  |        |    X    |      |
+|  FR2.3  |    X    |    X    |  X     |
+|  FR2.4  |    X    |    X    |  X     |
+|  FR2.5  |    X    |    X    |    X   |
+|  FR2.6  |    X    |    X    |    X   |
+| **FR3** |         |    X    |      |
 |  FR3.1  |         |    X    |       |
 |  FR3.2  |         |    X    |       |
 |  FR3.3  |         |    X    |       |
-| **FR4** |    X    |    X    |       |
-|  FR4.1  |    X    |    X    |       |
-|  FR4.2  |    X    |    X    |       |
-|  FR4.3  |    X    |    X    |       |
-|  FR4.4  |    X    |    X    |       |
-|  FR4.5  |    X    |    X    |       |
-|  FR4.6  |    X    |    X    |       |
-|  **FR5**  |    X    |    X    |       |
-|  FR5.1  |    X    |    X    |       |
-|  FR5.2  |    X    |    X    |       |
-|  **FR6**  |    X    |    X    |       |
-|  FR6.1  |    X    |    X    |       |
-|  FR6.2  |    X    |    X    |       |
-|  FR6.3  |    X    |    X    |       |
-|  FR6.4  |    X    |    X    |       |
-|  FR6.5  |    X    |    X    |       |
-|  FR6.6  |    X    |    X    |       |
-|  **FR7**  |    X    |    X    |       |
-|  FR7.1  |    X    |    X    |       |
-|  FR7.2  |    X    |    X    |       |
-|  FR7.3  |    X    |    X    |       |
-|  FR7.4  |    X    |    X    |       |
-|  FR7.5  |    X    |    X    |       |
+|  FR3.4  |         |    X    |       |
+| **FR4** |    X    |    X    |  X     |
+|  FR4.1  |    X    |    X    |   X    |
+|  FR4.2  |    X    |    X    |    X   |
+|  FR4.3  |    X    |    X    |     X  |
+|  FR4.4  |    X    |    X    |     X  |
+|  FR4.5  |    X    |    X    |     X  |
+|  FR4.6  |    X    |    X    |   X    |
+|  **FR5**  |    X    |        |       |
+|  FR5.1  |    X    |        |       |
+|  FR5.2  |    X    |        |       |
+|  **FR6**  |    X    |        |       |
+|  FR6.1  |    X    |        |       |
+|  FR6.2  |    X    |        |       |
+|  FR6.3  |    X    |        |       |
+|  FR6.4  |    X    |        |       |
+|  **FR7**  |        |        | X      |
+|  FR7.1  |        |        |   X    |
+|  FR7.2  |        |        |   X    |
+|  FR7.3  |        |        |   X    |
+|  FR7.4  |        |        |   X    |
+|  FR7.5  |        |        |   X    |
 
 
 
@@ -232,8 +236,8 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | NFR8 | Affidabilità| L'applicazione deve essere progettata per essere resistente ai guasti e per garantire la disponibilità continua del servizio, con un obiettivo di uptime del 99%. | Tutti i FR            |
 | NFR9 | Sicurezza   | Tutte le comunicazioni tra l'applicazione e i server devono essere crittografate utilizzando protocolli sicuri come HTTPS per proteggere i dati degli utenti durante la trasmissione | Tutti i FR |
 | NFR10| Manutenibilità | L'applicazione dovrebbe avere il minor numero di bug possibile in modo che gli utenti non segnalino più di tre problemi all'anno                              | Tutti i FR            |
-| NFR11| Sicurezza   | Tutti i pagamenti devono essere crittografati utilizzando protocolli sicuri come HTTPS/TLS per proteggere i dati sensibili degli utenti.                       | FR5                   |
-| NFR12| Sicurezza   | Il sistema deve risolvere eventuali problemi nelle spedizioni entro un massimo di 24 ore dalla segnalazione.                                                  | FR6                   |
+| NFR11| Sicurezza   | Il servizio di pagamenti deve utilizzare protocolli sicuri come HTTPS/TLS per proteggere i dati sensibili degli utenti.                     | FR5                   |
+
 
 
 # Use case diagram and use cases

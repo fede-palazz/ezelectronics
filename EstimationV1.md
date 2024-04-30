@@ -44,9 +44,9 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 | --Review del documento finale| 8 |
 | **GUI prototype** |20|
 | Review degli use case | 5 |
-| Scelta del tool da utilizzare | 5 |
-| Scelta del design system | 5 |
-| Traduzione di use case in UI | 5 |
+| Scelta del tool da utilizzare | 1 |
+| Scelta del design system | 1 |
+| Traduzione di use case in UI | 13 |
 | **Code** |150|
 | --Analisi dei metodi forniti in UserController| 10|
 | --Creazione e completamento dei metodi nel UserDAO| 20|

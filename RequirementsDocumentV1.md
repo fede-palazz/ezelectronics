@@ -17,71 +17,71 @@ Version: V1 - description of EZElectronics in CURRENT form (as received by teach
 
 ## Contents
 
-- [Requirements Document - current EZElectronics](#requirements-document---current-ezelectronics)
-  - [Contents](#contents)
-  - [Informal description](#informal-description)
-  - [Stakeholders](#stakeholders)
-  - [Context Diagram and interfaces](#context-diagram-and-interfaces)
-    - [Context Diagram](#context-diagram)
-    - [Interfaces](#interfaces)
-  - [Stories and personas](#stories-and-personas)
-  - [Functional and non functional requirements](#functional-and-non-functional-requirements)
-    - [Functional Requirements](#functional-requirements)
-    - [Table of rights](#table-of-rights)
-    - [Non Functional Requirements](#non-functional-requirements)
-  - [Use case diagram and use cases](#use-case-diagram-and-use-cases)
-    - [Use case diagram](#use-case-diagram)
-    - [Use cases](#use-cases)
-      - [UC1 - Creazione account](#uc1---creazione-account)
-        - [Scenario 1.1](#scenario-11)
-      - [Scenario 1.2](#scenario-12)
-      - [UC2 - Login](#uc2---login)
-        - [Scenario 2.1](#scenario-21)
-        - [Scenario 2.2](#scenario-22)
-      - [UC3 - Logout](#uc3---logout)
-        - [Scenario 3.1](#scenario-31)
-      - [UC4 - Visualizza informazioni profilo](#uc4---visualizza-informazioni-profilo)
-        - [Scenario 4.1](#scenario-41)
-      - [UC5 - Aggiunta di un prodotto al carrello](#uc5---aggiunta-di-un-prodotto-al-carrello)
-        - [Scenario 5.1](#scenario-51)
-        - [Scenario 5.2](#scenario-52)
-      - [UC6 - Rimozione di un prodotto dal carrello](#uc6---rimozione-di-un-prodotto-dal-carrello)
-      - [Scenario 6.1](#scenario-61)
-      - [Scenario 6.2](#scenario-62)
-      - [UC7 - Visualizzazione del carrello](#uc7---visualizzazione-del-carrello)
-        - [Scenario 7.1](#scenario-71)
-      - [UC8 - Svuotamento del carrello](#uc8---svuotamento-del-carrello)
-        - [Scenario 8.1](#scenario-81)
-      - [UC9 - Pagamento del carrello](#uc9---pagamento-del-carrello)
-        - [Scenario 9.1](#scenario-91)
-        - [Scenario 9.2](#scenario-92)
-        - [Scenario 9.3](#scenario-93)
-      - [UC10 - Visualizzazione degli ordini passati](#uc10---visualizzazione-degli-ordini-passati)
-        - [Scenario 10.1](#scenario-101)
-      - [UC11 - Registrazione nuovo prodotto](#uc11---registrazione-nuovo-prodotto)
-        - [Scenario 11.1](#scenario-111)
-        - [Scenario 11.2](#scenario-112)
-    - [UC12 - Registrazione set di prodotti](#uc12---registrazione-set-di-prodotti)
-      - [Scenario 12.1](#scenario-121)
-      - [UC13 - Eliminazione di un prodotto](#uc13---eliminazione-di-un-prodotto)
-        - [Scenario 13.1](#scenario-131)
-        - [Scenario 13.2](#scenario-132)
-      - [UC14 - SEGNALAZIONE PRODOTTO COME VENDUTO](#uc14---segnalazione-prodotto-come-venduto)
-        - [Scenario 14.1](#scenario-141)
-      - [Scenario 14.2](#scenario-142)
-      - [Scenario 14.3](#scenario-143)
-- [TODO](#todo)
-      - [UC15 - Ricerca prodotti](#uc15---ricerca-prodotti)
-        - [Scenario 15.1](#scenario-151)
-        - [Scenario 15.2](#scenario-152)
-        - [Scenario 15.3](#scenario-153)
-        - [Scenario 15.4](#scenario-154)
-        - [Scenario 15.5](#scenario-155)
-      - [UC16 - Filtraggio dei prodotti](#uc16---filtraggio-dei-prodotti)
-  - [Glossary](#glossary)
-  - [System Design](#system-design)
+* [Informal description](#informal-description)
+   * [Stakeholders](#stakeholders)
+   * [Context Diagram and interfaces](#context-diagram-and-interfaces)
+      + [Context Diagram](#context-diagram)
+      + [Interfaces](#interfaces)
+   * [Stories and personas](#stories-and-personas)
+   * [Functional and non functional requirements](#functional-and-non-functional-requirements)
+      + [Functional Requirements](#functional-requirements)
+      + [Table of rights](#table-of-rights)
+      + [Non Functional Requirements](#non-functional-requirements)
+   * [Use case diagram and use cases](#use-case-diagram-and-use-cases)
+      + [Use case diagram](#use-case-diagram)
+      + [Use cases](#use-cases)
+         - [UC1 - Creazione account](#uc1-creazione-account)
+            * [Scenario 1.1](#scenario-11)
+            * [Scenario 1.2](#scenario-12)
+         - [UC2 - Login](#uc2-login)
+            * [Scenario 2.1](#scenario-21)
+            * [Scenario 2.2](#scenario-22)
+         - [UC3 - Logout](#uc3-logout)
+            * [Scenario 3.1](#scenario-31)
+         - [UC4 - Visualizza informazioni profilo](#uc4-visualizza-informazioni-profilo)
+            * [Scenario 4.1](#scenario-41)
+         - [UC5 - Aggiunta di un prodotto al carrello](#uc5-aggiunta-di-un-prodotto-al-carrello)
+            * [Scenario 5.1](#scenario-51)
+            * [Scenario 5.2](#scenario-52)
+         - [UC6 - Rimozione di un prodotto dal carrello](#uc6-rimozione-di-un-prodotto-dal-carrello)
+            * [Scenario 6.1](#scenario-61)
+            * [Scenario 6.2](#scenario-62)
+         - [UC7 - Visualizzazione del carrello](#uc7-visualizzazione-del-carrello)
+            * [Scenario 7.1](#scenario-71)
+         - [UC8 - Svuotamento del carrello](#uc8-svuotamento-del-carrello)
+            * [Scenario 8.1](#scenario-81)
+         - [UC9 - Pagamento del carrello](#uc9-pagamento-del-carrello)
+            * [Scenario 9.1](#scenario-91)
+            * [Scenario 9.2](#scenario-92)
+            * [Scenario 9.3](#scenario-93)
+         - [UC10 - Visualizzazione degli ordini passati](#uc10-visualizzazione-degli-ordini-passati)
+            * [Scenario 10.1](#scenario-101)
+         - [UC11 - Registrazione nuovo prodotto](#uc11-registrazione-nuovo-prodotto)
+            * [Scenario 11.1](#scenario-111)
+            * [Scenario 11.2](#scenario-112)
+         - [UC12 - Registrazione set di prodotti](#uc12-registrazione-set-di-prodotti)
+            * [Scenario 12.1](#scenario-121)
+         - [UC13 - Eliminazione di un prodotto](#uc13-eliminazione-di-un-prodotto)
+            * [Scenario 13.1](#scenario-131)
+            * [Scenario 13.2](#scenario-132)
+         - [UC14 - Segnalazione prodotto come venduto](#uc14-segnalazione-prodotto-come-venduto)
+            * [Scenario 14.1](#scenario-141)
+            * [Scenario 14.2](#scenario-142)
+            * [Scenario 14.3](#scenario-143)
+         - [UC15 - Ricerca prodotti](#uc15-ricerca-prodotti)
+            * [Scenario 15.1](#scenario-151)
+            * [Scenario 15.2](#scenario-152)
+            * [Scenario 15.3](#scenario-153)
+            * [Scenario 15.4](#scenario-154)
+            * [Scenario 15.5](#scenario-155)
+         - [UC16 - Filtraggio dei prodotti](#uc16-filtraggio-dei-prodotti)
+            * [Scenario 16.1](#scenario-161)
+            * [Scenario 16.2](#scenario-162)
+            * [Scenario 16.3](#scenario-163)
+   * [Glossary](#glossary)
+   * [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
-  - [Analisi dei difetti](#analisi-dei-difetti)
+   * [Analisi dei difetti](#analisi-dei-difetti)
 
 ## Informal description
 
@@ -228,7 +228,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 5                | Il sistema controlla che l’username non sia associato a un account esistente |
 | 6                | Il sistema salva i dati e registra l’utente                  |
 
-#### Scenario 1.2
+##### Scenario 1.2
 
 | **Scenario 1.2** | **Username già registrato**                                  |
 | ---------------- | ------------------------------------------------------------ |
@@ -367,7 +367,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Variants            | Nessuna                                          |
 | Exceptions          | Scenario 6.2                                     |
 
-#### Scenario 6.1
+##### Scenario 6.1
 
 | **Scenario 6.1** | **Prodotto rimosso con successo**                            |
 | ---------------- | ------------------------------------------------------------ |
@@ -378,7 +378,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che il cliente sia loggato e che il prodotto X sia presente nel suo carrello |
 | 3                | Il sistema rimuove il prodotto X dal carrello del cliente    |
 
-#### Scenario 6.2
+##### Scenario 6.2
 
 | **Scenario 6.2** | **Prodotto non presente nel carrello**                       |
 | ---------------- | ------------------------------------------------------------ |
@@ -540,9 +540,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 5                 | Il sistema nota che l'id fornito è associato ad un prodotto già esistente |
 | 6                 | Il sistema non registra il prodotto e ritorna un messaggio di errore |
 
-
-
-### UC12 - Registrazione set di prodotti
+#### UC12 - Registrazione set di prodotti
 
 | **Actors Involved** | **Manager**                     |
 | ------------------- | ------------------------------- |
@@ -552,7 +550,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Variants            | Nessuna                         |
 | Exceptions          | Nessuna                         |
 
-#### Scenario 12.1
+##### Scenario 12.1
 
 | **Scenario 12.1** | **Set di prodotti registrato con successo**                  |
 | ----------------- | ------------------------------------------------------------ |
@@ -598,7 +596,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                 | Il sistema controlla l’esistenza del prodotto con il dato id |
 | 4                 | Il sistema non trova un prodotto con l'id fornito e restituisce un messaggio di errore |
 
-#### UC14 - SEGNALAZIONE PRODOTTO COME VENDUTO
+#### UC14 - Segnalazione prodotto come venduto
 
 | **Actors Involved** | **Manager**                        |
 | ------------------- | ---------------------------------- |
@@ -620,7 +618,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                 | Il sistema controlla l’esistenza del prodotto con il dato id |
 | 4                 | Il sistema segna il prodotto come venduto e ritorna un messaggio di conferma |
 
-#### Scenario 14.2
+##### Scenario 14.2
 
 | **Scenario 14.2** | **ID del prodotto non esistente**                            |
 | ----------------- | ------------------------------------------------------------ |
@@ -632,7 +630,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                 | Il sistema controlla l’esistenza del prodotto con il dato id |
 | 4                 | Il sistema non trova un prodotto con l'id fornito e resistuisce un messaggio di errore |
 
-#### Scenario 14.3
+##### Scenario 14.3
 
 | **Scenario 14.3** | **Prodotto già venduto**                                     |
 | ----------------- | ------------------------------------------------------------ |
@@ -643,10 +641,6 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                 | Il sistema verifica che il manager sia loggato               |
 | 3                 | Il sistema controlla l’esistenza del prodotto con il dato id |
 | 4                 | Il sistema nota che il prodotto indicato è gia stato segnato come venduto e ritorna un messaggio di errore |
-
-
-
-# TODO
 
 #### UC15 - Ricerca prodotti
 
@@ -660,61 +654,60 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ##### Scenario 15.1
 
-| Scenario 15.1  | Search products                                              |
-| :------------: | :----------------------------------------------------------- |
-|  Precondition  | User U is logged in                                          |
-| Post condition | Products are shown                                           |
-|     Step#      | Description                                                  |
-|       1        | Customer C asks to show all products                         |
-|       2        | System asks if to filter products by sold/not sold/no filter |
-|       3        | User selects the filter criterion                            |
-|       4        | System shows the products matching the chosen criterion      |
+| Scenario 15.1  | Ricerca prodotti                                      |
+| :------------: | :---------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                    |
+| Post condition | La lista dei prodotti viene visualizzata              |
+|     Step#      | Description                                           |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti |
+|       2        | Il sistema verifica che l'utente sia loggato          |
+|       3        | Il sistema restituisce la lista dei prodotti          |
 
 ##### Scenario 15.2
 
-| Scenario 15.2  | Search products by category                                  |
+| Scenario 15.2  | Ricerca prodotto per categoria                               |
 | :------------: | :----------------------------------------------------------- |
-|  Precondition  | User U is logged in                                          |
-| Post condition | Products are shown                                           |
+|  Precondition  | L'utente è loggato                                           |
+| Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata |
 |     Step#      | Description                                                  |
-|       1        | Customer C asks to show products by category                 |
-|       2        | System asks to select category and if to filter products by sold/not sold/no filter |
-|       3        | User selects category and the filter criterion               |
-|       4        | System shows the products matching the chosen criteria       |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
+|       2        | Il sistema verifica che l'utente sia loggato                 |
+|       3        | Il sistema restituisce la lista dei prodotti appartenenti alla categoria C |
 
 ##### Scenario 15.3
 
-| Scenario 15.3  | Search products by model                                     |
+| Scenario 15.3  | Ricerca prodotto per modello                                 |
 | :------------: | :----------------------------------------------------------- |
-|  Precondition  | User U is logged in                                          |
-| Post condition | Products are shown                                           |
+|  Precondition  | L'utente è loggato                                           |
+| Post condition | La lista dei prodotti con modello M viene visualizzata       |
 |     Step#      | Description                                                  |
-|       1        | Customer C asks to show products by model                    |
-|       2        | System asks for model and if to filter products by sold/not sold/no filter |
-|       3        | User provides model and selects the filter criterion         |
-|       4        | System shows the products matching the chosen criteria       |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M |
+|       2        | Il sistema verifica che l'utente sia loggato                 |
+|       3        | Il sistema restituisce la lista dei prodotti con modello M   |
 
 ##### Scenario 15.4
 
-| Scenario 15.4  | Show a single product                           |
-| :------------: | :---------------------------------------------- |
-|  Precondition  | User U is logged in                             |
-| Post condition | Product P's information is shown                |
-|     Step#      | Description                                     |
-|       1        | Customer C asks to show product P's information |
-|       2        | System checks if the product P exists           |
-|       3        | System shows the product P's information        |
+| Scenario 15.4  | Visualizzazione di un singolo prodotto                       |
+| :------------: | :----------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                           |
+| Post condition | Le informazioni del prodotto P vengono mostrate              |
+|     Step#      | Description                                                  |
+|       1        | L'utente chiede di visualizzare le informazioni del prodotto P |
+|       2        | Il sistema verifica che l'utente sia loggato                 |
+|       3        | Il sistema verifica che il prodotto P esista                 |
+|       4        | Il sistema restituisce le informazioni del prodotto P        |
 
 ##### Scenario 15.5
 
-| Scenario 15.5  | Not existing product                                    |
-| :------------: | :------------------------------------------------------ |
-|  Precondition  | User U is logged in                                     |
-| Post condition | Operation failed                                        |
-|     Step#      | Description                                             |
-|       1        | Customer C asks to show product P's information         |
-|       2        | System checks if the product P exists. It doesn't exist |
-|       3        | System shows an error message                           |
+| Scenario 15.5  | Prodotto non esistente                                       |
+| :------------: | :----------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                           |
+| Post condition | L'operazione fallisce con un errore                          |
+|     Step#      | Description                                                  |
+|       1        | L'utente chiede di visualizzare le informazioni del prodotto P |
+|       2        | Il sistema verifica che l'utente sia loggato                 |
+|       3        | Il sistema verifica che il prodotto P esista                 |
+|       4        | Il sistema non trova il prodotto P e restituisce un messaggio di errore |
 
 #### UC16 - Filtraggio dei prodotti
 
@@ -723,10 +716,47 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 |   Precondition   | L'utente è loggato                                           |
 |  Post condition  | La lista dei prodotti viene visualizzata con l'applicazione dei filtri selezionati |
 | Nominal Scenario | Scenario 16.1                                                |
-|     Variants     | -                                                            |
-|    Exceptions    | -                                                            |
+|     Variants     | Scenario 16.2, 16.3                                          |
+|    Exceptions    | Nessuna                                                      |
 
+##### Scenario 16.1
 
+| Scenario 16.1  | Ricerca prodotti                                             |
+| :------------: | :----------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                           |
+| Post condition | La lista dei prodotti viene visualizzata                     |
+|     Step#      | Description                                                  |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti        |
+|       2        | Il sistema verifica che l'utente sia loggato                 |
+|       3        | Il sistema restituisce la lista dei prodotti                 |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
+|       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
+
+##### Scenario 16.2
+
+| Scenario 16.2  | Ricerca prodotto per categoria                               |
+| :------------: | :----------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                           |
+| Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata |
+|     Step#      | Description                                                  |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
+|       2        | Il sistema verifica che l'utente sia loggato                 |
+|       3        | Il sistema restituisce la lista dei prodotti appartenenti alla categoria C |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
+|       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
+
+##### Scenario 16.3
+
+| Scenario 16.3  | Ricerca prodotto per modello                                 |
+| :------------: | :----------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                           |
+| Post condition | La lista dei prodotti con modello M viene visualizzata       |
+|     Step#      | Description                                                  |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M |
+|       2        | Il sistema verifica che l'utente sia loggato                 |
+|       3        | Il sistema restituisce la lista dei prodotti con modello M   |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
+|       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
 
 ## Glossary
 

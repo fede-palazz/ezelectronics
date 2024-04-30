@@ -157,12 +157,12 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | FR4.6 | Un utente deve essere in grado di filtrare i prodotti attraverso l’inserimento di un range di prezzo |
 | **FR5**  | Gestione pagamento                                                       |
 | FR5.1 | Un cliente deve poter richiedere il pagamento del proprio carrello       |
-| FR5.2 | Il sistema deve notificare al cliente l’avvenuto pagamento del suo carrello |
+| FR5.2 | Il cliente deve essere informato dell’avvenuto pagamento del suo carrello |
 | **FR6**  | Gestione spedizione prodotti                                             |
 | FR6.1 | Un cliente deve poter selezionare un metodo di spedizione fra quelli proposti |
 | FR6.2 | Un cliente deve essere in grado di memorizzare nuovi indirizzi, modificare o eliminare quelli esistenti |
-| FR6.3 | Il sistema deve mostrare ai clienti il prezzo finale compreso di costo prodotti e costi di spedizione |
-| FR6.4 | Il sistema deve fornire ai clienti un’interfaccia per monitorare lo stato dell’ordine |
+| FR6.3 | Il cliente deve poter visualizzare il prezzo finale compreso di costo prodotti e costi di spedizione |
+| FR6.4 | Il cliente deve poter monitorare lo stato dell'ordine |
 | **FR7**  | Funzioni amministratore                                                  |
 | FR7.1 | Un Admin deve essere in grado di registrare, modificare ed eliminare un negozio |
 | FR7.2 | Un Admin deve essere in grado di approvare le registrazioni dei manager dei negozi |
@@ -244,7 +244,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ## Use case diagram
 
-![alt text](Immagini/useCaseDiagram.png)
+![use case diagram](Immagini/useCaseDiagramv2.png)
 
 ## Use cases
 

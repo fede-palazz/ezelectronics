@@ -1,7 +1,7 @@
 # Project Estimation - CURRENT
 Date:
 
-Version:
+Version: V1
 
 
 # Estimation approach
@@ -34,8 +34,36 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 # Estimate by activity decomposition
 ### 
 |         Activity name    | Estimated effort (person hours)   |             
-| ----------- | ------------------------------- | 
-| | |
+| ---------------------------- | -------------------------------: | 
+|**Requirement document**    | **40** |
+| --Review del sistema attuale| 5 |
+| --Aggiunti stakeholders e context diagram| 5 |
+| --Aggiunte interfacce e user stories| 5 |
+| --Aggiunti requisiti funzionali e non funzionali| 5 |
+| --Aggiunto diagramma dei casi d’uso ed alcuni scenari| 5 |
+| --Aggiunti scenari aggiuntivi| 5 |
+| --Aggiornato diagramma dei casi d'uso| 5 |
+| --Aggiornato deployment diagram| 5 |
+| --GUI prototype |20|
+| **Code** |150|
+| --Analisi dei metodi forniti in UserController| 10|
+| --Creazione e completamento dei metodi nel UserDAO| 20|
+| --Completamento dei metodi in UserController| 20|
+| --Analisi dei metodi forniti in CartController| 10 |
+| --Creazione e completamento dei metodi nel CartDAO| 20|
+| --Completamento dei metodi in CartController| 20|
+| --Analisi dei metodi forniti in ProductController| 10|
+| --Creazione e completamento dei metodi nel ProductDAO| 20|
+| --Completamento dei metodi in ProductController| 20 |
+| **Unit tests** | 35 |
+| --Identificazione dei metodi da testare|5|
+| --Creazione dei test necessari|25|0
+| --Verifica del corretto funzionamento dei test|5|
+| api tests | 50 |
+| --Identificazione dei metodi da testare|5|
+| --Creazione dei test necessari|40|
+| --Verifica del corretto funzionamento dei test|5|
+| **Management documents**  | 10 |
 ###
 Insert here Gantt chart with above activities
 
@@ -43,9 +71,9 @@ Insert here Gantt chart with above activities
 
 Report here the results of the three estimation approaches. The  estimates may differ. Discuss here the possible reasons for the difference
 
-|             | Estimated effort                        |   Estimated duration |          
+|             | Estimated effort                        |   Estimated duration(settimane) |          
 | ----------- | ------------------------------- | ---------------|
-| estimate by size |||
-| estimate by product decomposition |||
-| estimate by activity decomposition |||
+| estimate by size |150|1|
+| estimate by product decomposition |305|2|
+| estimate by activity decomposition |305|2|
 

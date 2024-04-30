@@ -43,7 +43,7 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 | --Aggiunto diagramma dei casi d’uso e scenari| 6 |
 | --Aggiornato diagramma dei casi d'uso| 5 |
 | --Aggiornato deployment diagram| 6 |
-| --GUI prototype |20|
+| **GUI prototype** |20|
 | **Code** |150|
 | --Analisi dei metodi forniti in UserController| 10|
 | --Creazione e completamento dei metodi nel UserDAO| 20|

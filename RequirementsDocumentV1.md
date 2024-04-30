@@ -644,77 +644,74 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                 | Il sistema controlla l’esistenza del prodotto con il dato id |
 | 4                 | Il sistema nota che il prodotto indicato è gia stato segnato come venduto e ritorna un messaggio di errore |
 
-
-
-# TODO
-
 #### UC15 - Ricerca prodotti
 
-| Actors Involved  | Cliente, Manager                         |
-| :--------------: | :--------------------------------------- |
-|   Precondition   | L'utente è loggato                       |
-|  Post condition  | La lista dei prodotti viene visualizzata |
-| Nominal Scenario | Scenario 15.1                            |
-|     Variants     | Scenario 15.2, 15.3, 15.4                |
-|    Exceptions    | Scenario 15.5                            |
+
+| **Actors involved** | **Cliente**                    |
+| ------------------- | ------------------------------ |
+| Precondition        | L’utente è loggato             |
+| Postcondition       | Lista di prodotti visualizzata |
+| Nominal Scenario    | Scenario 15.1                  |
+| Variants            | Scenario 15.2, 15.3, 15.4      |
+| Exceptions          | Scenario 15.5                  |
 
 ##### Scenario 15.1
 
-| Scenario 15.1  | Search products                                              |
-| :------------: | :----------------------------------------------------------- |
-|  Precondition  | User U is logged in                                          |
-| Post condition | Products are shown                                           |
-|     Step#      | Description                                                  |
-|       1        | Customer C asks to show all products                         |
-|       2        | System asks if to filter products by sold/not sold/no filter |
-|       3        | User selects the filter criterion                            |
-|       4        | System shows the products matching the chosen criterion      |
+| Scenario 15.1  |                       Ricerca prodotti                        |
+| :------------: | :----------------------------------------------------------: |
+|  Precondizione |                    L'utente U è loggato                     |
+| Post condizione|                  I prodotti sono mostrati                   |
+|     Passo#     |                         Descrizione                        |
+|       1        |          L’utente chiede di mostrare tutti i prodotti  |
+|       2        | Il sistema chiede se filtrare i prodotti per venduti/non venduti/nessun filtro |
+|       3        |               L'utente seleziona il criterio di filtro     |
+|       4        |   Il sistema mostra i prodotti corrispondenti al criterio scelto   |
 
 ##### Scenario 15.2
 
-| Scenario 15.2  | Search products by category                                  |
-| :------------: | :----------------------------------------------------------- |
-|  Precondition  | User U is logged in                                          |
-| Post condition | Products are shown                                           |
-|     Step#      | Description                                                  |
-|       1        | Customer C asks to show products by category                 |
-|       2        | System asks to select category and if to filter products by sold/not sold/no filter |
-|       3        | User selects category and the filter criterion               |
-|       4        | System shows the products matching the chosen criteria       |
+| Scenario 15.2  |                        Ricerca prodotti per categoria                       |
+| :------------: | :--------------------------------------------------------------------------: |
+|  Precondizione |                            L'utente è loggato                             |
+| Post condizione|                          I prodotti sono mostrati                           |
+|     Passo#     |                               Descrizione                                   |
+|       1        |                   L’utente chiede di mostrare prodotti per categoria     |
+|       2        | Il sistema chiede di selezionare la categoria e se filtrare i prodotti per venduti/non venduti/nessun filtro |
+|       3        |            L'utente seleziona la categoria e il criterio di filtro           |
+|       4        |              Il sistema mostra i prodotti corrispondenti ai criteri scelti  |
 
 ##### Scenario 15.3
 
-| Scenario 15.3  | Search products by model                                     |
-| :------------: | :----------------------------------------------------------- |
-|  Precondition  | User U is logged in                                          |
-| Post condition | Products are shown                                           |
-|     Step#      | Description                                                  |
-|       1        | Customer C asks to show products by model                    |
-|       2        | System asks for model and if to filter products by sold/not sold/no filter |
-|       3        | User provides model and selects the filter criterion         |
-|       4        | System shows the products matching the chosen criteria       |
+| Scenario 15.3  |                            Ricerca prodotti per modello                           |
+| :------------: | :---------------------------------------------------------------------------------: |
+|  Precondizione |                            L'utente è loggato                                   |
+| Post condizione|                            I prodotti sono mostrati                               |
+|     Passo#     |                               Descrizione                                         |
+|       1        |                L’utente chiede di mostrare prodotti per modello               |
+|       2        | Il sistema chiede il modello e se filtrare i prodotti per venduti/non venduti/nessun filtro |
+|       3        |            L'utente fornisce il modello e seleziona il criterio di filtro          |
+|       4        |           Il sistema mostra i prodotti corrispondenti ai criteri scelti           |
 
 ##### Scenario 15.4
 
-| Scenario 15.4  | Show a single product                           |
-| :------------: | :---------------------------------------------- |
-|  Precondition  | User U is logged in                             |
-| Post condition | Product P's information is shown                |
-|     Step#      | Description                                     |
-|       1        | Customer C asks to show product P's information |
-|       2        | System checks if the product P exists           |
-|       3        | System shows the product P's information        |
+| Scenario 15.4  |                      Mostra un singolo prodotto                     |
+| :------------: | :-------------------------------------------------------------: |
+|  Precondizione |                   L'utente è loggato                         |
+| Post condizione|            Le informazioni del prodotto P sono mostrate         |
+|     Passo#     |                         Descrizione                            |
+|       1        | L’utente chiede di mostrare le informazioni del prodotto P |
+|       2        |          Il sistema verifica se il prodotto P esiste          |
+|       3        |       Il sistema mostra le informazioni del prodotto P        |
 
 ##### Scenario 15.5
 
-| Scenario 15.5  | Not existing product                                    |
-| :------------: | :------------------------------------------------------ |
-|  Precondition  | User U is logged in                                     |
-| Post condition | Operation failed                                        |
-|     Step#      | Description                                             |
-|       1        | Customer C asks to show product P's information         |
-|       2        | System checks if the product P exists. It doesn't exist |
-|       3        | System shows an error message                           |
+| Scenario 15.5  |                        Prodotto non esistente                        |
+| :------------: | :---------------------------------------------------------------: |
+|  Precondizione |                      L'utente è loggato                         |
+| Post condizione|                        Operazione fallita                         |
+|     Passo#     |                           Descrizione                             |
+|       1        | L’utente chiede di mostrare le informazioni del prodotto P   |
+|       2        | Il sistema verifica se il prodotto P esiste. Non esiste         |
+|       3        |                   Il sistema mostra un messaggio di errore       |
 
 #### UC16 - Filtraggio dei prodotti
 

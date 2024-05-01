@@ -98,6 +98,32 @@ Version: V2 - description of EZElectronics
       - [Scenario 26.1](#scenario-261)
       - [Scenario 26.2](#scenario-262)
       - [Scenario 26.3](#scenario-263)
+    - [UC27 - Aggiungi negozio](#uc27---aggiungi-negozio)
+      - [Scenario 27.1](#scenario-271)
+    - [UC28 - Modifica negozio](#uc28---modifica-negozio)
+      - [Scenario 28.1](#scenario-281)
+      - [Scenario 28.2](#scenario-282)
+    - [UC29 - Eliminazione di un negozio](#uc29---eliminazione-di-un-negozio)
+      - [Scenario 29.1](#scenario-291)
+      - [Scenario 29.2](#scenario-292)
+    - [U30 - Approvazione di un Manager](#u30---approvazione-di-un-manager)
+      - [Scenario 30.1](#scenario-301)
+      - [Scenario 30.2](#scenario-302)
+    - [UC31 - Aggiunta di un utente](#uc31---aggiunta-di-un-utente)
+      - [Scenario 31.1](#scenario-311)
+      - [Scenario 31.2](#scenario-312)
+    - [UC32 - Modifica di un utente](#uc32---modifica-di-un-utente)
+      - [Scenario 32.1](#scenario-321)
+      - [Scenario 32.2](#scenario-322)
+    - [UC33 - Eliminazione di un utente](#uc33---eliminazione-di-un-utente)
+      - [Scenario 33.1](#scenario-331)
+      - [Scenario 33.2](#scenario-332)
+    - [UC34 - Eliminazione di un prodotto](#uc34---eliminazione-di-un-prodotto)
+      - [Scenario 34.1](#scenario-341)
+      - [Scenario 34.2](#scenario-342)
+    - [UC35 - Eliminazione di un carrello/ordine](#uc35---eliminazione-di-un-carrelloordine)
+      - [Scenario 35.1](#scenario-351)
+      - [Scenario 35.2](#scenario-352)
 - [Glossary](#glossary)
 - [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
@@ -1122,6 +1148,304 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che il manager sia loggato                   |
 | 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
 | 4                | Il sistema nota che il prodotto indicato è gia stato segnato come venduto e ritorna un messaggio di errore |
+
+### UC27 - Aggiungi negozio
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il negozio viene aggiunto |
+| Nominal Scenario    | Scenario 27.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                         |
+
+#### Scenario 27.1
+
+| **Scenario 27.1** | **Negozio aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio viene aggiunto          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di aggiungere un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al negozio, ovvero nome, indirizzo e partita IVA      |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva il negozio nel database |
+
+### UC28 - Modifica negozio
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il negozio viene modificato |
+| Nominal Scenario    | Scenario 28.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 28.2                         |
+
+#### Scenario 28.1
+
+| **Scenario 28.1** | **Negozio modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio viene modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato e che il negozio esista                 |
+| 3                | Il sistema permette all'admin di modificare il negozio, ovvero nome, indirizzo e partita IVA     |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva le modifiche apportate al negozio |
+
+#### Scenario 28.2
+
+| **Scenario 28.2** | **Negozio non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio non viene modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato e che il negozio esista                 |
+| 3                | Il sistema rileva che il negozio non esiste e restituisce un messaggio di errore |
+
+### UC29 - Eliminazione di un negozio
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il negozio è eliminato |
+| Nominal Scenario    | Scenario 29.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 29.2                         |
+
+#### Scenario 29.1
+
+| **Scenario 29.1** | **Negozio eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del negozio con il dato id      |
+| 4                | Il sistema rimuove il negozio e ritorna un messaggio di conferma |
+
+#### Scenario 29.2
+
+| **Scenario 29.2** | **ID del negozio non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del negozio con il dato id      |
+| 4                | Il sistema non trova un negozio con l'id fornito e restituisce un messaggio di errore |
+
+### U30 - Approvazione di un Manager
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato e possiede delle richieste di approvazione in sospeso                                    |
+| Postcondition       | Il manager è approvato |
+| Nominal Scenario    | Scenario 30.1                                              |
+| Variants            |Nessuna                                                   |
+| Exceptions          | Scenario 30.2                    |
+
+#### Scenario 30.1
+
+| **Scenario 30.1** | **Manager approvato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il manager è approvato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di approvare un manager  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del manager con il dato id      |
+| 4                | Il sistema approva il manager e ritorna un messaggio di conferma |
+
+#### Scenario 30.2
+
+| **Scenario 30.2** | **Manager già approvato**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il manager è approvato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di approvare un manager  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del manager con il dato id      |
+| 4                | Il sistema nota che il manager indicato è gia stato approvato e ritorna un messaggio di errore |
+
+### UC31 - Aggiunta di un utente
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | L'utente è aggiunto |
+| Nominal Scenario    | Scenario 31.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 31.2                         |
+
+#### Scenario 31.1
+
+| **Scenario 31.1** | **Utente aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente è aggiunto          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di aggiungere un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema chiede i dati relativi all'utente, ovvero nome, cognome, email e password e ruolo      |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva l'utente nel database |
+
+#### Scenario 31.2
+
+| **Scenario 31.2** | **Username dell'utente già esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente non è aggiunto          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di aggiungere un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema chiede i dati relativi all'utente, ovvero nome, cognome, email e password e ruolo      |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema rileva che l'utente con lo stesso username esiste già e restituisce un messaggio di errore |
+
+### UC32 - Modifica di un utente
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | L'utente è modificato |
+| Nominal Scenario    | Scenario 32.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 32.2                         |
+
+#### Scenario 32.1
+
+| **Scenario 32.1** | **Utente modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente è modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato e che l'utente esista                 |
+| 3                | Il sistema permette all'admin di modificare l'utente, ovvero nome, cognome, email e password e ruolo     |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva le modifiche apportate all'utente |
+
+#### Scenario 32.2
+
+| **Scenario 32.2** | **Utente non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente non è modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato e che l'utente esista                 |
+| 3                | Il sistema rileva che l'utente non esiste e restituisce un messaggio di errore |
+
+### UC33 - Eliminazione di un utente
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | L'utente è eliminato |
+| Nominal Scenario    | Scenario 33.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 33.2                         |
+
+#### Scenario 33.1
+
+| **Scenario 33.1** | **Utente eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza dell'utente con il dato id      |
+| 4                | Il sistema rimuove l'utente e ritorna un messaggio di conferma |
+
+#### Scenario 33.2
+
+| **Scenario 33.2** | **ID dell'utente non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza dell'utente con il dato id      |
+| 4                | Il sistema non trova un utente con l'id fornito e restituisce un messaggio di errore |
+
+### UC34 - Eliminazione di un prodotto
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il prodotto è eliminato |
+| Nominal Scenario    | Scenario 34.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 34.2                         |
+
+#### Scenario 34.1
+
+| **Scenario 34.1** | **Prodotto eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il prodotto è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema rimuove il prodotto e ritorna un messaggio di conferma |
+
+#### Scenario 34.2
+
+| **Scenario 34.2** | **ID del prodotto non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il prodotto non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema non trova un prodotto con l'id fornito e restituisce un messaggio di errore |
+
+### UC35 - Eliminazione di un carrello/ordine
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il carrello è eliminato |
+| Nominal Scenario    | Scenario 35.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 35.2                         |
+
+#### Scenario 35.1
+
+| **Scenario 35.1** | **Carrello eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il carrello è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un carrello  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del carrello con il dato id      |
+| 4                | Il sistema rimuove il carrello e ritorna un messaggio di conferma |
+
+#### Scenario 35.2
+
+| **Scenario 35.2** | **ID del carrello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il carrello non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un carrello  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del carrello con il dato id      |
+| 4                | Il sistema non trova un carrello con l'id fornito e restituisce un messaggio di errore |
+
 
 
 

@@ -40,45 +40,55 @@ Version: V2 - description of EZElectronics
       - [Scenario 4.1](#scenario-41)
     - [UC5 - Visualizza informazioni profilo](#uc5---visualizza-informazioni-profilo)
       - [Scenario 5.1](#scenario-51)
-      - [UC5 - Aggiunta di un prodotto al carrello](#uc5---aggiunta-di-un-prodotto-al-carrello)
-        - [Scenario 5.1](#scenario-51-1)
-        - [Scenario 5.2](#scenario-52)
-      - [UC6 - Rimozione di un prodotto dal carrello](#uc6---rimozione-di-un-prodotto-dal-carrello)
-        - [Scenario 6.1](#scenario-61)
-        - [Scenario 6.2](#scenario-62)
-      - [UC7 - Modifica quantità di un prodotto nel carrello](#uc7---modifica-quantità-di-un-prodotto-nel-carrello)
-        - [Scenario 7.1](#scenario-71)
-        - [Scenario 7.2](#scenario-72)
-      - [UC8 - Visualizzazione del carrello](#uc8---visualizzazione-del-carrello)
-        - [Scenario 8.1](#scenario-81)
-      - [UC9 - Svuotamento del carrello](#uc9---svuotamento-del-carrello)
-        - [Scenario 9.1](#scenario-91)
-      - [UC10 - Pagamento del carrello](#uc10---pagamento-del-carrello)
-        - [Scenario 10.1](#scenario-101)
-        - [Scenario 10.2](#scenario-102)
-        - [Scenario 10.3](#scenario-103)
-      - [UC10 - Visualizzazione degli ordini passati](#uc10---visualizzazione-degli-ordini-passati)
-        - [Scenario 10.1](#scenario-101-1)
+    - [UC6 - Modifica informazioni profilo](#uc6---modifica-informazioni-profilo)
+      - [Scenario 6.1](#scenario-61)
+    - [UC7 - Aggiunta di un prodotto al carrello](#uc7---aggiunta-di-un-prodotto-al-carrello)
+      - [Scenario 7.1](#scenario-71)
+      - [Scenario 7.2](#scenario-72)
+    - [UC8 - Rimozione di un prodotto dal carrello](#uc8---rimozione-di-un-prodotto-dal-carrello)
+      - [Scenario 8.1](#scenario-81)
+      - [Scenario 8.2](#scenario-82)
+    - [UC9 - Modifica quantità di un prodotto nel carrello](#uc9---modifica-quantità-di-un-prodotto-nel-carrello)
+      - [Scenario 9.1](#scenario-91)
+      - [Scenario 9.2](#scenario-92)
+    - [UC10 - Visualizzazione del carrello](#uc10---visualizzazione-del-carrello)
+      - [Scenario 10.1](#scenario-101)
+    - [UC11 - Svuotamento del carrello](#uc11---svuotamento-del-carrello)
+      - [Scenario 11.1](#scenario-111)
+    - [UC12 - Checkout del carrello](#uc12---checkout-del-carrello)
+      - [Scenario 12.1](#scenario-121)
+      - [Scenario 12.2](#scenario-122)
+    - [UC13 - Aggiungi indirizzo di spedizione](#uc13---aggiungi-indirizzo-di-spedizione)
+      - [Scenario 13.1](#scenario-131)
+    - [UC14 - Modifica indirizzo di spedizione](#uc14---modifica-indirizzo-di-spedizione)
+      - [Scenario 14.1](#scenario-141)
+    - [UC15 - Rimozione indirizzo di spedizione](#uc15---rimozione-indirizzo-di-spedizione)
+      - [Scenario 15.1](#scenario-151)
+    - [UC16 - Visualizzazione ordini passati](#uc16---visualizzazione-ordini-passati)
+      - [Scenario 16.1](#scenario-161)
+    - [UC17 - Monitoraggio ordine](#uc17---monitoraggio-ordine)
+      - [Scenario 17.1](#scenario-171)
+      - [Scenario 17.2](#scenario-172)
       - [UC11 - Registrazione nuovo prodotto](#uc11---registrazione-nuovo-prodotto)
-        - [Scenario 11.1](#scenario-111)
+        - [Scenario 11.1](#scenario-111-1)
         - [Scenario 11.2](#scenario-112)
       - [UC12 - Registrazione set di prodotti](#uc12---registrazione-set-di-prodotti)
-        - [Scenario 12.1](#scenario-121)
+        - [Scenario 12.1](#scenario-121-1)
       - [UC13 - Eliminazione di un prodotto](#uc13---eliminazione-di-un-prodotto)
-        - [Scenario 13.1](#scenario-131)
+        - [Scenario 13.1](#scenario-131-1)
         - [Scenario 13.2](#scenario-132)
       - [UC14 - Segnalazione prodotto come venduto](#uc14---segnalazione-prodotto-come-venduto)
-        - [Scenario 14.1](#scenario-141)
+        - [Scenario 14.1](#scenario-141-1)
         - [Scenario 14.2](#scenario-142)
         - [Scenario 14.3](#scenario-143)
       - [UC15 - Ricerca prodotti](#uc15---ricerca-prodotti)
-        - [Scenario 15.1](#scenario-151)
+        - [Scenario 15.1](#scenario-151-1)
         - [Scenario 15.2](#scenario-152)
         - [Scenario 15.3](#scenario-153)
         - [Scenario 15.4](#scenario-154)
         - [Scenario 15.5](#scenario-155)
       - [UC16 - Filtraggio dei prodotti](#uc16---filtraggio-dei-prodotti)
-        - [Scenario 16.1](#scenario-161)
+        - [Scenario 16.1](#scenario-161-1)
         - [Scenario 16.2](#scenario-162)
         - [Scenario 16.3](#scenario-163)
 - [Glossary](#glossary)
@@ -437,19 +447,42 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che l’utente sia loggato                     |
 | 3                | Il sistema restituisce le informazioni sul profilo dell'utente   |
 
-#### UC5 - Aggiunta di un prodotto al carrello
+### UC6 - Modifica informazioni profilo
+
+| **Actors Involved** | **Cliente, Manager, Admin**                                |
+| ------------------- | --------------------------------------------------- |
+| Precondition        | L’utente è loggato                                  |
+| Postcondition       | L’utente modifica le informazioni sul suo profilo |
+| Nominal Scenario    | Scenario 6.1                                        |
+| Variants            | Nessuna                                             |
+| Exceptions          | Nessuna                                             |
+
+#### Scenario 6.1
+
+| **Scenario 6.1** | **Utente modifica informazioni profilo**                       |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L’utente è loggato                                               |
+| Post condition   | L’utente modifica le informazioni sul suo profilo              |
+| Step#            | Description                                                      |
+| 1                | L’utente chiede al sistema di modificare le informazioni sul proprio profilo |
+| 2                | Il sistema verifica che l’utente sia loggato                     |
+| 3                | Il sistema permette all'utente di modificare le informazioni sul proprio profilo, ovvero email, nome, cognome e password |
+| 4                | Il sistema salva le modifiche apportate dall'utente |
+
+
+### UC7 - Aggiunta di un prodotto al carrello
 
 | **Actors Involved** | **Cliente**                                        |
 | ------------------- | -------------------------------------------------- |
 | Precondition        | Il cliente è loggato                               |
 | Postcondition       | Un prodotto viene aggiunto al carrello del cliente |
-| Nominal Scenario    | Scenario 5.1                                       |
+| Nominal Scenario    | Scenario 7.1                                       |
 | Variants            | Nessuna                                            |
-| Exceptions          | Scenario 5.2                                       |
+| Exceptions          | Scenario 7.2                                       |
 
-##### Scenario 5.1
+#### Scenario 7.1
 
-| **Scenario 5.1** | **Prodotto aggiunto con successo**                      |
+| **Scenario 7.1** | **Prodotto aggiunto con successo**                      |
 | ---------------- | ------------------------------------------------------- |
 | Precondition     | Il cliente è loggato                                    |
 | Post condition   | Un prodotto viene aggiunto al carrello del cliente      |
@@ -459,9 +492,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                | Il sistema verifica che il prodotto sia disponibile     |
 | 4                | Il sistema aggiunge il prodotto al carrello del cliente |
 
-##### Scenario 5.2
+#### Scenario 7.2
 
-| **Scenario 5.2** | **Prodotto non disponibile**                                                              |
+| **Scenario 7.2** | **Prodotto non disponibile**                                                              |
 | ---------------- | ----------------------------------------------------------------------------------------- |
 | Precondition     | Il cliente è loggato                                                                      |
 | Post condition   | Il prodotto non viene aggiunto al carrello                                                |
@@ -471,19 +504,19 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                | Il sistema verifica che il prodotto sia disponibile                                       |
 | 4                | Il sistema riconosce che il prodotto non è disponibile e visualizza un messaggio d’errore |
 
-#### UC6 - Rimozione di un prodotto dal carrello
+### UC8 - Rimozione di un prodotto dal carrello
 
 | **Actors Involved** | **Cliente**                                      |
 | ------------------- | ------------------------------------------------ |
 | Precondition        | Il cliente è loggato                             |
 | Postcondition       | Il prodotto X è rimosso dal carrello del cliente |
-| Nominal Scenario    | Scenario 6.1                                     |
+| Nominal Scenario    | Scenario 8.1                                     |
 | Variants            | Nessuna                                          |
-| Exceptions          | Scenario 6.2                                     |
+| Exceptions          | Scenario 8.2                                     |
 
-##### Scenario 6.1
+#### Scenario 8.1
 
-| **Scenario 6.1** | **Prodotto rimosso con successo**                                                                |
+| **Scenario 8.1** | **Prodotto rimosso con successo**                                                                |
 | ---------------- | ------------------------------------------------------------------------------------------------ |
 | Precondition     | Il cliente è loggato                                                                             |
 | Post condition   | Il prodotto X è rimosso dal carrello del cliente                                                 |
@@ -492,9 +525,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che il cliente sia loggato e che il prodotto X sia presente nel suo carrello |
 | 3                | Il sistema rimuove il prodotto X dal carrello del cliente                                        |
 
-##### Scenario 6.2
+#### Scenario 8.2
 
-| **Scenario 6.2** | **Prodotto non presente nel carrello**                                                           |
+| **Scenario 8.2** | **Prodotto non presente nel carrello**                                                           |
 | ---------------- | ------------------------------------------------------------------------------------------------ |
 | Precondition     | Il cliente è loggato                                                                             |
 | Post condition   | Il prodotto non è rimosso dal carrello del cliente                                               |
@@ -503,55 +536,55 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che il cliente sia loggato e che il prodotto X sia presente nel suo carrello |
 | 3                | Il sistema riconosce che il prodotto non si trova nel carrello e mostra un messaggio d’errore    |
 
-#### UC7 - Modifica quantità di un prodotto nel carrello
+### UC9 - Modifica quantità di un prodotto nel carrello
 
 | **Actors Involved** | **Cliente**                               |
 | ------------------- | ----------------------------------------- |
-| Precondition        | Il cliente è loggato                      |
+| Precondition        | Il cliente è loggato e possiede un prodotto nel carrello                     |
 | Postcondition       | La quantità di un prodotto nel carrello viene modificata  |
-| Nominal Scenario    | Scenario 7.1                              |
+| Nominal Scenario    | Scenario 9.1                              |
 | Variants            | Nessuna                                   |
-| Exceptions          | Scenario 7.2                                   |
+| Exceptions          | Scenario 9.2                                   |
 
-##### Scenario 7.1
+#### Scenario 9.1
 
-| **Scenario 7.1** | **Quantità modificata con successo**                               |
+| **Scenario 9.1** | **Quantità modificata con successo**                               |
 | ---------------- | -------------------------------------------------------------------- |
-| Precondition     | Il cliente è loggato e possiede un prodotto nel carrello                        |
+| Precondition     | Il cliente è loggato                                                 |
 | Postcondition |    La quantità del prodotto nel carrello viene modificata       |
 |Step#|Description|
 |1|Il cliente chiede di visualizzare il carrello|
 |2|Il sistema verifica che l'utente sia loggato e il cliente è rimandato alla pagina del carrello|
 |3|Il cliente richiede di modificare la quantità del prodotto |
 |4|Il sistema verifica che la quantità desiderata sia disponibile|
-|5| Il sistema modifica la qunatità del prodotto
+|5| Il sistema modifica la quattità del prodotto |
 
-##### Scenario 7.2
+#### Scenario 9.2
 
-| **Scenario 7.2** | **Quantità richiesta non disponibile**                               |
+| **Scenario 9.2** | **Quantità richiesta non disponibile**                               |
 | ---------------- | -------------------------------------------------------------------- |
-| Precondition     | Il cliente è loggato e possiede un prodotto nel carrello                        |
+| Precondition     | Il cliente è loggato             |
 | Postcondition |    La quantità del prodotto nel carrello non viene modificata       |
 |Step#|Description|
 |1|Il cliente chiede di visualizzare il carrello|
 |2|Il sistema verifica che l'utente sia loggato e il cliente è rimandato alla pagina del carrello|
 |3|Il cliente richiede di modificare la quantità del prodotto |
 |4|Il sistema verifica che la quantità desiderata sia disponibile|
-|5| Il sistema rileva che la qunatità richiesta non è disponibile e non permette al cliente di modificarla
+|5| Il sistema rileva che la quantità richiesta non è disponibile e non permette al cliente di modificarla
 
-#### UC8 - Visualizzazione del carrello
+### UC10 - Visualizzazione del carrello
 
 | **Actors Involved** | **Cliente**                               |
 | ------------------- | ----------------------------------------- |
 | Precondition        | Il cliente è loggato                      |
 | Postcondition       | La pagina del carrello viene visualizzata |
-| Nominal Scenario    | Scenario 8.1                              |
+| Nominal Scenario    | Scenario 10.1                              |
 | Variants            | Nessuna                                   |
 | Exceptions          | Nessuna                                   |
 
-##### Scenario 8.1
+#### Scenario 10.1
 
-| **Scenario 8.1** | **Carrello visualizzato con successo**                               |
+| **Scenario 10.1** | **Carrello visualizzato con successo**                               |
 | ---------------- | -------------------------------------------------------------------- |
 | Precondition     | Il cliente è loggato                                                 |
 | Post condition   | La pagina del carrello viene visualizzata                            |
@@ -560,19 +593,19 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che il cliente sia loggato                       |
 | 3                | Il sistema restituisce i prodotti contenuti nel carrello del cliente |
 
-#### UC9 - Svuotamento del carrello
+### UC11 - Svuotamento del carrello
 
 | **Actors Involved** | **Cliente**                                               |
 | ------------------- | --------------------------------------------------------- |
 | Precondition        | Il cliente è loggato                                      |
 | Postcondition       | Tutti i prodotti all'interno del carrello vengono rimossi |
-| Nominal Scenario    | Scenario 9.1                                              |
+| Nominal Scenario    | Scenario 11.1                                              |
 | Variants            | Nessuna                                                   |
 | Exceptions          | Nessuna                                                   |
 
-##### Scenario 9.1
+#### Scenario 11.1
 
-| **Scenario 9.1** | **Carrello svuotato**                                                 |
+| **Scenario 11.1** | **Carrello svuotato**                                                 |
 | ---------------- | --------------------------------------------------------------------- |
 | Precondition     | Il cliente è loggato                                                  |
 | Post condition   | Tutti i prodotti all'interno del carrello vengono rimossi             |
@@ -581,77 +614,167 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che il cliente sia loggato                        |
 | 3                | Il sistema rimuove tutti i prodotti presenti nel carrello del cliente |
 
-#### UC10 - Pagamento del carrello
+### UC12 - Checkout del carrello
 
-| **Actors Involved** | **Cliente**                                                                        |
-| ------------------- | ---------------------------------------------------------------------------------- |
-| Precondition        | Il cliente è loggato                                                               |
-| Postcondition       | Il carrello è vuoto e tutti i prodotti al suo interno vengono segnati come venduti |
-| Nominal Scenario    | Scenario 10.1                                                                       |
-| Variants            | Nessuna                                                                            |
-| Exceptions          | Scenari 10.2, 10.3                                                                   |
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | Il cliente effettua il pagamento del carrello             |
+| Nominal Scenario    | Scenario 12.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | 12.2                                                   |
 
-##### Scenario 10.1
+#### Scenario 12.1
 
-| **Scenario 10.1** | **Checkout completato**                                                            |
-| ---------------- | ---------------------------------------------------------------------------------- |
-| Precondition     | Il cliente è loggato                                                               |
-| Post condition   | Il carrello è vuoto e tutti i prodotti al suo interno vengono segnati come venduti |
-| Step#            | Description                                                                        |
-| 1                | Il cliente chiede al sistema di effettuare il checkout del proprio carrello        |
-| 2                | Il sistema verifica che il cliente sia loggato                                     |
-| 3                | Il sistema verifica che il carrello non sia vuoto                                  |
-| 4                | Il sistema verifica che il carrello non contenga prodotti già venduti              |
-| 5                | Il sistema calcola il totale del carrello e lo segna come pagato                   |
-| 6                | Il sistema segna tutti i prodotti contenuti nel carrello come venduti              |
-| 7                | Il sistema svuota il carrello                                                      |
-| 8                | Il sistema ritorna un messaggio di avvenuto checkout                               |
+| **Scenario 12.1** | **Pagamento effettuato con successo**                               |
+| ---------------- | ------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                               |
+| Post condition   | Il cliente effettua il pagamento del carrello                      |
+| Step#            | Description                                                        |
+| 1                | Il cliente chiede di effettuare il pagamento del carrello          |
+| 2                | Il sistema verifica che il cliente sia loggato                     |
+| 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
+| 4 | Il sistema verifica che il cliente abbia selezionato un metodo di spedizione |
+| 5 | Il sistema verifica che il cliente abbia selezionato un indirizzo di spedizione |
+| 6 | Il sistema reindirizza il cliente alla pagina di pagamento |
+| 7 | Il cliente effettua il pagamento |
+| 8 | Il sistema mostra un messaggio di conferma del pagamento |
 
-##### Scenario 10.2
+#### Scenario 12.2
 
-| **Scenario 10.2** | **Carrello vuoto**                                                               |
-| ---------------- | -------------------------------------------------------------------------------- |
-| Precondition     | Il cliente è loggato                                                             |
-| Postcondition    | Il checkout fallisce                                                             |
-| Step#            | Description                                                                      |
-| 1                | Il cliente chiede al sistema di effettuare il checkout del proprio carrello      |
-| 2                | Il sistema verifica che l’utente sia loggato                                     |
-| 3                | Il sistema verifica che il carrello non sia vuoto                                |
-| 4                | Il sistema segnala al cliente che il carrello è vuoto con un messaggio di errore |
+| **Scenario 12.2** | **Carrello vuoto o prodotti non disponibili**                                                  |
+| ---------------- | ------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                               |
+| Post condition   | Il cliente non effettua il pagamento del carrello                 |
+| Step#            | Description                                                        |
+| 1                | Il cliente chiede di effettuare il pagamento del carrello          |
+| 2                | Il sistema verifica che il cliente sia loggato                     |
+| 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
+| 4 | Il sistema rileva che il carrello è vuoto o che i prodotti non sono disponibili |
+| 5 | Il sistema restituisce un messaggio di errore |
 
-##### Scenario 10.3
+### UC13 - Aggiungi indirizzo di spedizione
 
-| **Scenario 10.3** | **Uno o più prodotti già venduti**                                                                             |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| Precondition     | Il cliente è loggato e il carrello non è vuoto                                                                 |
-| Postcondition    | Il checkout fallisce                                                                                           |
-| Step#            | Description                                                                                                    |
-| 1                | Il cliente chiede al sistema di effettuare il checkout del proprio carrello                                    |
-| 2                | Il sistema verifica che il cliente sia loggato                                                                 |
-| 3                | Il sistema verifica che il carrello non sia vuoto                                                              |
-| 4                | Il sistema verifica che il carrello non contenga prodotti già venduti                                          |
-| 5                | Il sistema segnala al cliente che il suo carrello contiene dei prodotti già venduti con un messaggio di errore |
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | L'indirizzo di spedizione viene aggiunto al profilo del cliente |
+| Nominal Scenario    | Scenario 13.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
 
-#### UC10 - Visualizzazione degli ordini passati
+#### Scenario 13.1
 
-| **Actors Involved** | **Cliente**                                              |
-| ------------------- | -------------------------------------------------------- |
-| Precondition        | Il cliente è loggato                                     |
-| Postcondition       | Il cliente visualizza lo storico degli ordini effettuati |
-| Nominal Scenario    | Scenario 10.1                                            |
-| Variants            | Nessuna                                                  |
-| Exceptions          | Nessuna                                                  |
+| **Scenario 13.1** | **Indirizzo aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | L'indirizzo di spedizione viene aggiunto al profilo del cliente  |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di aggiungere un indirizzo di spedizione al proprio profilo |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema chiede i dati relativi all'indirizzo di spedizione     |
+| 4                | Il cliente inserisce i dati richiesti                            |
+| 5                | Il sistema salva l'indirizzo di spedizione nel profilo del cliente |
 
-##### Scenario 10.1
+### UC14 - Modifica indirizzo di spedizione
 
-| **Scenario 10.1** | **Storico ordini visualizzato con successo**                        |
-| ----------------- | ------------------------------------------------------------------- |
-| Precondition      | Il cliente è loggato                                                |
-| Post condition    | Il cliente visualizza lo storico degli ordini effettuati            |
-| Step#             | Description                                                         |
-| 1                 | Il cliente richiede di visualizzare lo storico degli ordini         |
-| 2                 | Il sistema verifica che il cliente sia loggato                      |
-| 3                 | Il sistema restituisce la lista dei carrelli già pagati dal cliente |
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Postcondition       | L'indirizzo di spedizione viene modificato |
+| Nominal Scenario    | Scenario 14.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
+
+#### Scenario 14.1
+
+| **Scenario 14.1** | **Indirizzo modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Post condition   | L'indirizzo di spedizione viene modificato |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di modificare un indirizzo di spedizione al proprio profilo |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema permette al cliente di modificare l'indirizzo di spedizione  |
+| 4                | Il cliente inserisce i dati richiesti                            |
+
+### UC15 - Rimozione indirizzo di spedizione
+
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Postcondition       | L'indirizzo di spedizione viene rimosso |
+| Nominal Scenario    | Scenario 15.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
+
+#### Scenario 15.1
+
+| **Scenario 15.1** | **Indirizzo rimosso con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Post condition   | L'indirizzo di spedizione viene rimosso |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di rimuovere un indirizzo di spedizione dal proprio profilo |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema permette al cliente di rimuovere l'indirizzo di spedizione  |
+| 4                | Il cliente seleziona l'indirizzo da rimuovere                            |
+
+
+### UC16 - Visualizzazione ordini passati
+
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | Il cliente visualizza la lista degli ordini passati |
+| Nominal Scenario    | Scenario 16.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
+
+#### Scenario 16.1
+
+| **Scenario 16.1** | **Ordini visualizzati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | Il cliente visualizza la lista degli ordini passati             |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di visualizzare la lista degli ordini passati  |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema restituisce la lista degli ordini passati del cliente |
+
+### UC17 - Monitoraggio ordine
+
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | Il cliente visualizza lo stato dell'ordine |
+| Nominal Scenario    | Scenario 17.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | 17.2                                                   |
+
+#### Scenario 17.1
+
+| **Scenario 17.1** | **Ordine monitorato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | Il cliente visualizza lo stato dell'ordine             |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di monitorare lo stato di un ordine  |
+| 2                | Il sistema verifica che il cliente sia loggato e che l'ordine esista                |
+| 3                | Il sistema restituisce lo stato dell'ordine |
+
+#### Scenario 17.2
+
+| **Scenario 17.2** | **Ordine non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | Il cliente non visualizza lo stato dell'ordine             |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di monitorare lo stato di un ordine  |
+| 2                | Il sistema verifica che il cliente sia loggato e che l'ordine esista                |
+| 3                | Il sistema rileva che l'ordine non esiste e restituisce un messaggio di errore |
+
+
 
 #### UC11 - Registrazione nuovo prodotto
 

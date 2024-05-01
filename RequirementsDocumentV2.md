@@ -69,28 +69,35 @@ Version: V2 - description of EZElectronics
     - [UC17 - Monitoraggio ordine](#uc17---monitoraggio-ordine)
       - [Scenario 17.1](#scenario-171)
       - [Scenario 17.2](#scenario-172)
-      - [UC11 - Registrazione nuovo prodotto](#uc11---registrazione-nuovo-prodotto)
-        - [Scenario 11.1](#scenario-111-1)
-        - [Scenario 11.2](#scenario-112)
-      - [UC12 - Registrazione set di prodotti](#uc12---registrazione-set-di-prodotti)
-        - [Scenario 12.1](#scenario-121-1)
-      - [UC13 - Eliminazione di un prodotto](#uc13---eliminazione-di-un-prodotto)
-        - [Scenario 13.1](#scenario-131-1)
-        - [Scenario 13.2](#scenario-132)
-      - [UC14 - Segnalazione prodotto come venduto](#uc14---segnalazione-prodotto-come-venduto)
-        - [Scenario 14.1](#scenario-141-1)
-        - [Scenario 14.2](#scenario-142)
-        - [Scenario 14.3](#scenario-143)
-      - [UC15 - Ricerca prodotti](#uc15---ricerca-prodotti)
-        - [Scenario 15.1](#scenario-151-1)
-        - [Scenario 15.2](#scenario-152)
-        - [Scenario 15.3](#scenario-153)
-        - [Scenario 15.4](#scenario-154)
-        - [Scenario 15.5](#scenario-155)
-      - [UC16 - Filtraggio dei prodotti](#uc16---filtraggio-dei-prodotti)
-        - [Scenario 16.1](#scenario-161-1)
-        - [Scenario 16.2](#scenario-162)
-        - [Scenario 16.3](#scenario-163)
+    - [UC18 -  Ricerca prodotti](#uc18----ricerca-prodotti)
+      - [Scenario 18.1](#scenario-181)
+      - [Scenario 18.2](#scenario-182)
+      - [Scenario 18.3](#scenario-183)
+      - [Scenario 18.4](#scenario-184)
+      - [Scenario 18.5](#scenario-185)
+    - [UC19 - Filtraggio prodotti](#uc19---filtraggio-prodotti)
+      - [Scenario 19.1](#scenario-191)
+      - [Scenario 19.2](#scenario-192)
+      - [Scenario 19.3](#scenario-193)
+    - [UC20 - Ordinamento prodotti](#uc20---ordinamento-prodotti)
+    - [UC21 - Aggiungi modello](#uc21---aggiungi-modello)
+      - [Scenario 21.1](#scenario-211)
+    - [UC22 - Modifica modello](#uc22---modifica-modello)
+      - [Scenario 22.1](#scenario-221)
+      - [Scenario 22.2](#scenario-222)
+    - [UC23 - Registra prodotto](#uc23---registra-prodotto)
+      - [Scenario 23.1](#scenario-231)
+      - [Scenario 23.2](#scenario-232)
+    - [UC24 - Registra set di prodotti](#uc24---registra-set-di-prodotti)
+      - [Scenario 24.1](#scenario-241)
+      - [Scenario 24.2](#scenario-242)
+    - [UC25 - Eliminazione di un prodotto](#uc25---eliminazione-di-un-prodotto)
+      - [Scenario 25.1](#scenario-251)
+      - [Scenario 25.2](#scenario-252)
+    - [UC26 - Segnalazione prodotto come venduto](#uc26---segnalazione-prodotto-come-venduto)
+      - [Scenario 26.1](#scenario-261)
+      - [Scenario 26.2](#scenario-262)
+      - [Scenario 26.3](#scenario-263)
 - [Glossary](#glossary)
 - [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
@@ -774,227 +781,85 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che il cliente sia loggato e che l'ordine esista                |
 | 3                | Il sistema rileva che l'ordine non esiste e restituisce un messaggio di errore |
 
+### UC18 -  Ricerca prodotti
+
+| **Actors Involved** | **Cliente, Manager, Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'utente è loggato                                      |
+| Postcondition       | Il sistema restituisce la lista dei prodotti |
+| Nominal Scenario    | Scenario 18.1                                              |
+| Variants            | 18.2, 18.3, 18.4                                                    |
+| Exceptions          | 18.5                                                   |
+
+#### Scenario 18.1
+
+| **Scenario 18.1** | **Prodotti trovati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce la lista dei prodotti          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare la lista dei prodotti  |
+| 2                | Il sistema verifica che l'utente sia loggato             |
+| 3                | Il sistema restituisce la lista dei prodotti |
+
+#### Scenario 18.2  
+
+| **Scenario 18.2** | **Ricerca prodotto per categoria**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce la lista dei prodotti appartenenti ad una certa categoria          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare la lista dei prodotti di una certa categoria  |
+| 2                | Il sistema verifica che l'utente sia loggato             |
+| 3                | Il sistema restituisce la lista dei prodotti appartenenti ad una certa categoria |
+
+#### Scenario 18.3
+
+| **Scenario 18.3** | **Ricerca prodotto per modello**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce la lista dei prodotti con un certo modello          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare la lista dei prodotti con un certo modello  |
+| 2                | Il sistema verifica che l'utente sia loggato             |
+| 3                | Il sistema restituisce la lista dei prodotti con un certo modello |
+
+#### Scenario 18.4
+
+| **Scenario 18.4** | **Visualizzazione di un singolo prodotto**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce le informazioni di un singolo prodotto          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare le informazioni di un singolo prodotto  |
+| 2                | Il sistema verifica che l'utente sia loggato e che il prodotto esista            |
+| 3                | Il sistema restituisce le informazioni di un singolo prodotto |
+
+#### Scenario 18.5
+
+| **Scenario 18.5** | **Prodotto non trovato**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce un messaggio di errore          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare le informazioni di un prodotto  |
+| 2                | Il sistema verifica che l'utente sia loggato e che il prodotto esista            |
+| 3                | Il sistema rileva che il prodotto non esiste e restituisce un messaggio di errore |
 
 
-#### UC11 - Registrazione nuovo prodotto
+### UC19 - Filtraggio prodotti
 
-| **Actors Involved** | **Manager**                  |
-| ------------------- | ---------------------------- |
-| Precondition        | Il manager è loggato         |
-| Postcondition       | Il prodotto viene registrato |
-| Nominal Scenario    | Scenario 11.1                |
-| Variants            | Nessuna                      |
-| Exceptions          | Scenario 11.2                |
+| **Actors Involved** | **Cliente, Manager, Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'utente è loggato                                      |
+| Postcondition       | Il sistema restituisce la lista dei prodotti filtrati |
+| Nominal Scenario    | Scenario 19.1                                              |
+| Variants            | 19.2, 19.3                                                    |
+| Exceptions          | Nessuno                                                   |
 
-##### Scenario 11.1
+#### Scenario 19.1
 
-| **Scenario 11.1** | **Prodotto aggiunto con successo**                                                                          |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                                                                        |
-| Post condition    | Il prodotto viene registrato                                                                                |
-| Step#             | Description                                                                                                 |
-| 1                 | Il manager richiede di registrare un nuovo prodotto                                                         |
-| 2                 | Il sistema verifica che il manager sia loggato                                                              |
-| 3                 | Il sistema richiede i dati necessari (id, modello, categoria, prezzo di vendita, data di arrivo e dettagli) |
-| 4                 | Il sistema controlla la validità dei dati e l’univocità dell’id                                             |
-| 5                 | Il sistema registra il prodotto e mostra un messaggio di conferma                                           |
-
-##### Scenario 11.2
-
-| **Scenario 11.2** | **ID prodotto non univoco**                                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                                                                        |
-| Post condition    | Il prodotto non è aggiunto al database                                                                      |
-| Step#             | Description                                                                                                 |
-| 1                 | Il manager richiede di registrare un nuovo prodotto                                                         |
-| 2                 | Il sistema verifica che il manager sia loggato                                                              |
-| 3                 | Il sistema richiede i dati necessari (id, modello, categoria, prezzo di vendita, data di arrivo e dettagli) |
-| 4                 | Il sistema controlla la validità dei dati e l’univocità dell’id                                             |
-| 5                 | Il sistema nota che l'id fornito è associato ad un prodotto già esistente                                   |
-| 6                 | Il sistema non registra il prodotto e ritorna un messaggio di errore                                        |
-
-#### UC12 - Registrazione set di prodotti
-
-| **Actors Involved** | **Manager**                     |
-| ------------------- | ------------------------------- |
-| Precondition        | Il manager è loggato            |
-| Postcondition       | Il set di prodotti è registrato |
-| Nominal Scenario    | Scenario 12.1                   |
-| Variants            | Nessuna                         |
-| Exceptions          | Nessuna                         |
-
-##### Scenario 12.1
-
-| **Scenario 12.1** | **Set di prodotti registrato con successo**                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                                                                        |
-| Post condition    | Il set di prodotti è registrato                                                                             |
-| Step#             | Description                                                                                                 |
-| 1                 | Il manager richiede di registrare l’arrivo di un set di prodotti                                            |
-| 2                 | Il sistema verifica che il manager sia loggato                                                              |
-| 3                 | Il sistema richiede i dati necessari per il set di prodotti (quantità, categoria, data di arrivo, dettagli) |
-| 4                 | Il sistema registra il set di prodotti e mostra un messaggio di conferma                                    |
-
-#### UC13 - Eliminazione di un prodotto
-
-| **Actors Involved** | **Manager**             |
-| ------------------- | ----------------------- |
-| Precondition        | Il manager è loggato    |
-| Postcondition       | Il prodotto è eliminato |
-| Nominal Scenario    | Scenario 13.1           |
-| Variants            | Nessuna                 |
-| Exceptions          | Scenario 13.2           |
-
-##### Scenario 13.1
-
-| **Scenario 13.1** | **Prodotto eliminato con successo**                               |
-| ----------------- | ----------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                              |
-| Post condition    | Il prodotto è eliminato                                           |
-| Step#             | Description                                                       |
-| 1                 | Il manager richiede di eliminare un prodotto con un certo id      |
-| 2                 | Il sistema verifica che il manager sia loggato                    |
-| 3                 | Il sistema controlla l’esistenza del prodotto con il dato id      |
-| 4                 | Il sistema rimuove il prodotto e ritorna un messaggio di conferma |
-
-##### Scenario 13.2
-
-| **Scenario 13.2** | **ID del prodotto non esistente**                                                      |
-| ----------------- | -------------------------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                                                   |
-| Post condition    | Il prodotto non è eliminato                                                            |
-| Step#             | Description                                                                            |
-| 1                 | Il manager richiede di eliminare un prodotto con un certo id                           |
-| 2                 | Il sistema verifica che il manager sia loggato                                         |
-| 3                 | Il sistema controlla l’esistenza del prodotto con il dato id                           |
-| 4                 | Il sistema non trova un prodotto con l'id fornito e restituisce un messaggio di errore |
-
-#### UC14 - Segnalazione prodotto come venduto
-
-| **Actors Involved** | **Manager**                        |
-| ------------------- | ---------------------------------- |
-| Precondition        | Il manager è loggato               |
-| Postcondition       | Il prodotto è segnato come venduto |
-| Nominal Scenario    | Scenario 14.1                      |
-| Variants            | Nessuna                            |
-| Exceptions          | Scenario 14.2, 14.3                |
-
-##### Scenario 14.1
-
-| **Scenario 14.1** | **Prodotto segnato come venduto**                                            |
-| ----------------- | ---------------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                                         |
-| Post condition    | Il prodotto è segnato come venduto                                           |
-| Step#             | Description                                                                  |
-| 1                 | Il manager chiede di segnare un prodotto con un certo id come venduto        |
-| 2                 | Il sistema verifica che il manager sia loggato                               |
-| 3                 | Il sistema controlla l’esistenza del prodotto con il dato id                 |
-| 4                 | Il sistema segna il prodotto come venduto e ritorna un messaggio di conferma |
-
-##### Scenario 14.2
-
-| **Scenario 14.2** | **ID del prodotto non esistente**                                                      |
-| ----------------- | -------------------------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                                                   |
-| Post condition    | Il prodotto non è segnato come venduto                                                 |
-| Step#             | Description                                                                            |
-| 1                 | Il manager chiede di segnare un prodotto con un certo id come venduto                  |
-| 2                 | Il sistema verifica che il manager sia loggato                                         |
-| 3                 | Il sistema controlla l’esistenza del prodotto con il dato id                           |
-| 4                 | Il sistema non trova un prodotto con l'id fornito e resistuisce un messaggio di errore |
-
-##### Scenario 14.3
-
-| **Scenario 14.3** | **Prodotto già venduto**                                                                                   |
-| ----------------- | ---------------------------------------------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato e il prodotto è presente nel sistema                                                  |
-| Post condition    | Il prodotto non è segnato come venduto                                                                     |
-| Step#             | Description                                                                                                |
-| 1                 | Il manager chiede di segnare un prodotto con un certo id come venduto                                      |
-| 2                 | Il sistema verifica che il manager sia loggato                                                             |
-| 3                 | Il sistema controlla l’esistenza del prodotto con il dato id                                               |
-| 4                 | Il sistema nota che il prodotto indicato è gia stato segnato come venduto e ritorna un messaggio di errore |
-
-#### UC15 - Ricerca prodotti
-
-| Actors Involved  | Cliente, Manager                         |
-| :--------------: | :--------------------------------------- |
-|   Precondition   | L'utente è loggato                       |
-|  Post condition  | La lista dei prodotti viene visualizzata |
-| Nominal Scenario | Scenario 15.1                            |
-|     Variants     | Scenario 15.2, 15.3, 15.4                |
-|    Exceptions    | Scenario 15.5                            |
-
-##### Scenario 15.1
-
-| Scenario 15.1  | Ricerca prodotti                                      |
-| :------------: | :---------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                    |
-| Post condition | La lista dei prodotti viene visualizzata              |
-|     Step#      | Description                                           |
-|       1        | L'utente chiede di visualizzare la lista dei prodotti |
-|       2        | Il sistema verifica che l'utente sia loggato          |
-|       3        | Il sistema restituisce la lista dei prodotti          |
-
-##### Scenario 15.2
-
-| Scenario 15.2  | Ricerca prodotto per categoria                                                      |
-| :------------: | :---------------------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                                  |
-| Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
-|     Step#      | Description                                                                         |
-|       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
-|       2        | Il sistema verifica che l'utente sia loggato                                        |
-|       3        | Il sistema restituisce la lista dei prodotti appartenenti alla categoria C          |
-
-##### Scenario 15.3
-
-| Scenario 15.3  | Ricerca prodotto per modello                                        |
-| :------------: | :------------------------------------------------------------------ |
-|  Precondition  | L'utente è loggato                                                  |
-| Post condition | La lista dei prodotti con modello M viene visualizzata              |
-|     Step#      | Description                                                         |
-|       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M |
-|       2        | Il sistema verifica che l'utente sia loggato                        |
-|       3        | Il sistema restituisce la lista dei prodotti con modello M          |
-
-##### Scenario 15.4
-
-| Scenario 15.4  | Visualizzazione di un singolo prodotto                         |
-| :------------: | :------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                             |
-| Post condition | Le informazioni del prodotto P vengono mostrate                |
-|     Step#      | Description                                                    |
-|       1        | L'utente chiede di visualizzare le informazioni del prodotto P |
-|       2        | Il sistema verifica che l'utente sia loggato                   |
-|       3        | Il sistema verifica che il prodotto P esista                   |
-|       4        | Il sistema restituisce le informazioni del prodotto P          |
-
-##### Scenario 15.5
-
-| Scenario 15.5  | Prodotto non esistente                                                  |
-| :------------: | :---------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                      |
-| Post condition | L'operazione fallisce con un errore                                     |
-|     Step#      | Description                                                             |
-|       1        | L'utente chiede di visualizzare le informazioni del prodotto P          |
-|       2        | Il sistema verifica che l'utente sia loggato                            |
-|       3        | Il sistema verifica che il prodotto P esista                            |
-|       4        | Il sistema non trova il prodotto P e restituisce un messaggio di errore |
-
-#### UC16 - Filtraggio dei prodotti
-
-| Actors Involved  | Cliente, Manager                                                                   |
-| :--------------: | :--------------------------------------------------------------------------------- |
-|   Precondition   | L'utente è loggato                                                                 |
-|  Post condition  | La lista dei prodotti viene visualizzata con l'applicazione dei filtri selezionati |
-| Nominal Scenario | Scenario 16.1                                                                      |
-|     Variants     | Scenario 16.2, 16.3                                                                |
-|    Exceptions    | Nessuna                                                                            |
-
-##### Scenario 16.1
-
-| Scenario 16.1  | Ricerca prodotti                                                               |
+| Scenario 19.1  | Ricerca prodotti                                                               |
 | :------------: | :----------------------------------------------------------------------------- |
 |  Precondition  | L'utente è loggato                                                             |
 | Post condition | La lista dei prodotti viene visualizzata                                       |
@@ -1005,9 +870,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 |       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
 |       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
 
-##### Scenario 16.2
+#### Scenario 19.2
 
-| Scenario 16.2  | Ricerca prodotto per categoria                                                      |
+| Scenario 19.2  | Ricerca prodotto per categoria                                                      |
 | :------------: | :---------------------------------------------------------------------------------- |
 |  Precondition  | L'utente è loggato                                                                  |
 | Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
@@ -1018,9 +883,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 |       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno)      |
 |       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti      |
 
-##### Scenario 16.3
+#### Scenario 19.3
 
-| Scenario 16.3  | Ricerca prodotto per modello                                                   |
+| Scenario 19.3  | Ricerca prodotto per modello                                                   |
 | :------------: | :----------------------------------------------------------------------------- |
 |  Precondition  | L'utente è loggato                                                             |
 | Post condition | La lista dei prodotti con modello M viene visualizzata                         |
@@ -1030,6 +895,236 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 |       3        | Il sistema restituisce la lista dei prodotti con modello M                     |
 |       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
 |       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
+
+
+
+
+
+### UC20 - Ordinamento prodotti
+
+| **Actors Involved** | **Cliente, Manager, Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'utente è loggato                                      |
+| Postcondition       | Il sistema restituisce la lista dei prodotti ordinati |
+| Nominal Scenario    | Scenario 20.1                                              |
+| Variants            | 20.2, 20.3, 20.4                                                    |
+| Exceptions          | 20.5                                                   |
+
+//TODO
+
+### UC21 - Aggiungi modello
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il modello viene aggiunto al database |
+| Nominal Scenario    | Scenario 21.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                          |
+
+#### Scenario 21.1
+
+| **Scenario 21.1** | **Modello aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il modello viene aggiunto al database          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di aggiungere un modello  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al modello, ovvero nome, prezzo, dettagli, categoria e immagine     |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema salva il modello nel database |
+
+### UC22 - Modifica modello
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il modello viene modificato |
+| Nominal Scenario    | Scenario 22.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 22.2                         |
+
+#### Scenario 22.1
+
+| **Scenario 22.1** | **Modello modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il modello viene modificato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di modificare un modello  |
+| 2                | Il sistema verifica che il manager sia loggato e che il modello esista                  |
+| 3                | Il sistema permette al manager di modificare il modello, ovvero nome, prezzo, dettagli, categoria e immagine     |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema salva le modifiche apportate al modello |
+
+#### Scenario 22.2
+
+| **Scenario 22.2** | **Modello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il modello non viene modificato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di modificare un modello  |
+| 2                | Il sistema verifica che il manager sia loggato e che il modello esista                  |
+| 3                | Il sistema rileva che il modello non esiste e restituisce un messaggio di errore |
+
+### UC23 - Registra prodotto
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il prodotto viene registrato |
+| Nominal Scenario    | Scenario 23.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 23.2                         |
+
+#### Scenario 23.1
+
+| **Scenario 23.1** | **Prodotto registrato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al prodotto, ovvero modello e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema verifica che il modello esista |
+| 6                | Il sistema salva il prodotto nel database |
+
+#### Scenario 23.2
+
+| **Scenario 23.2** | **Modello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al prodotto, ovvero modello e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema rileva che il modello non esiste e restituisce un messaggio di errore |
+
+### UC24 - Registra set di prodotti
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il set di prodotti viene registrato |
+| Nominal Scenario    | Scenario 24.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 24.2                         |
+
+#### Scenario 24.1
+
+| **Scenario 24.1** | **Set di prodotti registrato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il set di prodotti viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un set di prodotti  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al set di prodotti, ovvero modello, quantità e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema verifica che il modello esista |
+| 6                | Il sistema salva il set di prodotti nel database |
+
+#### Scenario 24.2
+
+| **Scenario 24.2** | **Modello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il set di prodotti non viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un set di prodotti  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al set di prodotti, ovvero modello, quantità e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema rileva che il modello non esiste e restituisce un messaggio di errore |
+
+### UC25 - Eliminazione di un prodotto
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il prodotto è eliminato |
+| Nominal Scenario    | Scenario 25.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 25.2                         |
+
+#### Scenario 25.1
+
+| **Scenario 25.1** | **Prodotto eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto è eliminato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema rimuove il prodotto e ritorna un messaggio di conferma |
+
+#### Scenario 25.2
+
+| **Scenario 25.2** | **ID del prodotto non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema non trova un prodotto con l'id fornito e restituisce un messaggio di errore |
+
+### UC26 - Segnalazione prodotto come venduto
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il prodotto è segnato come venduto |
+| Nominal Scenario    | Scenario 26.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 26.2, 26.3                         |
+
+#### Scenario 26.1
+
+| **Scenario 26.1** | **Prodotto segnato come venduto**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto è segnato come venduto          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di segnalare un prodotto come venduto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema segna il prodotto come venduto e ritorna un messaggio di conferma |
+
+#### Scenario 26.2
+
+| **Scenario 26.2** | **ID del prodotto non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non è segnato come venduto          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di segnalare un prodotto come venduto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema non trova un prodotto con l'id fornito e resistuisce un messaggio di errore |
+
+#### Scenario 26.3
+
+| **Scenario 26.3** | **Prodotto già venduto**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non è segnato come venduto          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di segnalare un prodotto come venduto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema nota che il prodotto indicato è gia stato segnato come venduto e ritorna un messaggio di errore |
+
+
+
 
 # Glossary
 

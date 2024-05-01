@@ -25,19 +25,23 @@ Version: V2 - description of EZElectronics
   - [Non Functional Requirements](#non-functional-requirements)
 - [Use case diagram and use cases](#use-case-diagram-and-use-cases)
     - [Use case diagram](#use-case-diagram)
-    - [Use cases](#use-cases)
-      - [UC1 - Creazione account](#uc1---creazione-account)
-        - [Scenario 1.1](#scenario-11)
-        - [Scenario 1.2](#scenario-12)
-      - [UC2 - Login](#uc2---login)
-        - [Scenario 2.1](#scenario-21)
-        - [Scenario 2.2](#scenario-22)
-      - [UC3 - Logout](#uc3---logout)
-        - [Scenario 3.1](#scenario-31)
-      - [UC4 - Visualizza informazioni profilo](#uc4---visualizza-informazioni-profilo)
-        - [Scenario 4.1](#scenario-41)
+  - [Use cases](#use-cases)
+    - [UC1 - Creazione account Cliente](#uc1---creazione-account-cliente)
+      - [Scenario 1.1](#scenario-11)
+      - [Scenario 1.2](#scenario-12)
+    - [UC2 - Creazione account Manager](#uc2---creazione-account-manager)
+      - [Scenario 2.1](#scenario-21)
+      - [Scenario 2.2](#scenario-22)
+      - [Scenario 2.3](#scenario-23)
+    - [UC3 - Login](#uc3---login)
+      - [Scenario 3.1](#scenario-31)
+      - [Scenario 3.2](#scenario-32)
+    - [UC4 - Logout](#uc4---logout)
+      - [Scenario 4.1](#scenario-41)
+    - [UC5 - Visualizza informazioni profilo](#uc5---visualizza-informazioni-profilo)
+      - [Scenario 5.1](#scenario-51)
       - [UC5 - Aggiunta di un prodotto al carrello](#uc5---aggiunta-di-un-prodotto-al-carrello)
-        - [Scenario 5.1](#scenario-51)
+        - [Scenario 5.1](#scenario-51-1)
         - [Scenario 5.2](#scenario-52)
       - [UC6 - Rimozione di un prodotto dal carrello](#uc6---rimozione-di-un-prodotto-dal-carrello)
         - [Scenario 6.1](#scenario-61)
@@ -255,11 +259,11 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ![Use case diagram](Immagini/useCaseDiagramv2.png)
 
-### Use cases
+## Use cases
 
-#### UC1 - Creazione account
+### UC1 - Creazione account Cliente
 
-| **Actors Involved** | **Cliente, Manager**      |
+| **Actors Involved** | **Cliente**      |
 | ------------------- | ------------------------- |
 | Precondition        | L’utente non è registrato |
 | Post condition      | L’utente è registrato     |
@@ -267,47 +271,104 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Variants            | Nessuna                   |
 | Exceptions          | Scenario 1.2              |
 
-##### Scenario 1.1
+#### Scenario 1.1
 
 | **Scenario 1.1** | **Registrazione**                                                            |
 | ---------------- | ---------------------------------------------------------------------------- |
 | Precondition     | L’utente non è registrato                                                    |
 | Post condition   | L'utente è registrato                                                        |
 | Step#            | Description                                                                  |
-| 1                | L’utente chiede di registrarsi                                               |
-| 2                | Il sistema chiede nome, cognome, username, password e ruolo                  |
+| 1                | L’utente chiede di registrarsi come cliente                                           |
+| 2                | Il sistema chiede nome, cognome, username, email e password                   |
 | 3                | L’utente inserisce i dati richiesti                                          |
 | 4                | Il sistema acquisisce i dati inseriti                                        |
 | 5                | Il sistema controlla che l’username non sia associato a un account esistente |
 | 6                | Il sistema salva i dati e registra l’utente                                  |
 
-##### Scenario 1.2
+#### Scenario 1.2
 
 | **Scenario 1.2** | **Username già registrato**                                                    |
 | ---------------- | ------------------------------------------------------------------------------ |
 | Precondition     | L’utente non è registrato, l'username inserito è gia registrato nel sistema    |
 | Post condition   | L'utente non è registrato                                                      |
 | Step#            | Description                                                                    |
-| 1                | L’utente chiede di registrarsi                                                 |
-| 2                | Il sistema chiede nome, cognome, username, password e ruolo                    |
+| 1                | L’utente chiede di registrarsi come cliente                                                |
+| 2                | Il sistema chiede nome, cognome, username, email e password                 |
 | 3                | L’utente inserisce i dati richiesti                                            |
 | 4                | Il sistema acquisisce i dati inseriti                                          |
 | 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
 | 6                | Il nome utente è già associato a un account e il sistema restituisce un errore |
 
-#### UC2 - Login
+### UC2 - Creazione account Manager
 
-| **Actors Involved** | **Cliente, Manager**                |
+| **Actors Involved** | **Manager**      |
+| ------------------- | ------------------------- |
+| Precondition        | L’utente non è registrato |
+| Post condition      | L’utente è registrato     |
+| Nominal Scenario    | Scenario 2.1            |
+| Variants            | Nessuna                   |
+| Exceptions          | Scenario 2.2, 2.3              |
+
+#### Scenario 2.1
+
+| **Scenario 2.1** | **Registrazione**                                                            |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Precondition     | L’utente non è registrato                                                    |
+| Post condition   | L'utente è registrato                                                        |
+| Step#            | Description                                                                  |
+| 1                | L’utente chiede di registrarsi come manager                                          |
+| 2                | Il sistema chiede nome, cognome, username, email, password e negozio                   |
+| 3                | L’utente inserisce i dati richiesti                                          |
+| 4                | Il sistema acquisisce i dati inseriti                                        |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente |
+| 6                | Il sistema salva i dati e registra l’account manager                                |
+| 7                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
+| 8                | L'Admin approva la richiesta di registrazione del manager |
+| 9                | Il sistema notifica il manager dell'avvenuta registrazione |
+
+#### Scenario 2.2
+
+| **Scenario 2.2** | **Username già registrato**                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Precondition     | L’utente non è registrato, l'username inserito è gia registrato nel sistema    |
+| Post condition   | L'utente non è registrato                                                      |
+| Step#            | Description                                                                    |
+| 1                | L’utente chiede di registrarsi come manager                                                |
+| 2                | Il sistema chiede nome, cognome, username, email, password e negozio         |
+| 3                | L’utente inserisce i dati richiesti                                            |
+| 4                | Il sistema acquisisce i dati inseriti                                          |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
+| 6                | Il nome utente è già associato a un account e il sistema restituisce un errore |
+
+#### Scenario 2.3
+
+| **Scenario 2.3** | **Richiesta di registrazione non approvata**                                   |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Precondition     | L’utente ha richiesto la registrazione come manager, ma la richiesta non è stata approvata |
+| Post condition   | L'utente non è registrato                                                      |
+| Step#            | Description                                                                    |
+| 1                | L’utente chiede di registrarsi come manager                                                |
+| 2                | Il sistema chiede nome, cognome, username, email, password e negozio         |
+| 3                | L’utente inserisce i dati richiesti                                            |
+| 4                | Il sistema acquisisce i dati inseriti                                          |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
+| 6                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
+| 7                | L'Admin rifiuta la richiesta di registrazione del manager |
+| 8                | Il sistema notifica il manager dell'avvenuto rifiuto della registrazione |
+
+### UC3 - Login
+
+| **Actors Involved** | **Cliente, Manager, Admin**                |
 | ------------------- | ----------------------------------- |
 | Precondition        | L’utente è registrato e non loggato |
 | Post condition      | L’utente è loggato                  |
-| Nominal Scenario    | Scenario 2.1                        |
+| Nominal Scenario    | Scenario 3.1                        |
 | Variants            | Nessuna                             |
-| Exceptions          | Scenario 2.2, 2.3                   |
+| Exceptions          | Scenario 3.2                  |
 
-##### Scenario 2.1
+#### Scenario 3.1
 
-| **Scenario 2.1** | **Utente loggato con successo**                                                                    |
+| **Scenario 3.1** | **Utente loggato con successo**                                                                    |
 | ---------------- | -------------------------------------------------------------------------------------------------- |
 | Precondition     | L’utente è registrato e non loggato                                                                |
 | Post condition   | L’utente è loggato                                                                                 |
@@ -319,9 +380,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
 | 6                | Il sistema autentica l’utente                                                                      |
 
-##### Scenario 2.2
+#### Scenario 3.2
 
-| **Scenario 2.2** | **Credenziali errate**                                                                             |
+| **Scenario 3.2** | **Credenziali errate**                                                                             |
 | ---------------- | -------------------------------------------------------------------------------------------------- |
 | Precondition     | L’utente è registrato e non loggato                                                                |
 | Post condition   | L’utente non è loggato                                                                             |
@@ -333,19 +394,19 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
 | 6                | Il sistema vede che le credenziali sono errate e restituisce errore                                |
 
-#### UC3 - Logout
+### UC4 - Logout
 
-| **Actors Involved** | **Cliente, Manager**   |
+| **Actors Involved** | **Cliente, Manager, Admin**   |
 | ------------------- | ---------------------- |
 | Precondition        | L’utente è loggato     |
 | Postcondition       | L’utente non è loggato |
-| Nominal Scenario    | Scenario 3.1           |
+| Nominal Scenario    | Scenario 4.1           |
 | Variants            | Nessuna                |
 | Exceptions          | Nessuna                |
 
-##### Scenario 3.1
+#### Scenario 4.1
 
-| **Scenario 3.1** | **Utente disconnesso con successo**                                      |
+| **Scenario 4.1** | **Utente disconnesso con successo**                                      |
 | ---------------- | ------------------------------------------------------------------------ |
 | Precondition     | L’utente è loggato                                                       |
 | Post condition   | L’utente non è loggato                                                   |
@@ -355,19 +416,19 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                | Il sistema esegue il logout dell'utente, invalidando la sessione attuale |
 | 4                | Il sistema mostra un messaggio di conferma di avvenuta disconnessione    |
 
-#### UC4 - Visualizza informazioni profilo
+### UC5 - Visualizza informazioni profilo
 
-| **Actors Involved** | **Cliente, Manager**                                |
+| **Actors Involved** | **Cliente, Manager, Admin**                                |
 | ------------------- | --------------------------------------------------- |
 | Precondition        | L’utente è loggato                                  |
 | Postcondition       | L’utente visualizza le informazioni sul suo profilo |
-| Nominal Scenario    | Scenario 4.1                                        |
+| Nominal Scenario    | Scenario 5.1                                        |
 | Variants            | Nessuna                                             |
 | Exceptions          | Nessuna                                             |
 
-##### Scenario 4.1
+#### Scenario 5.1
 
-| **Scenario 4.1** | **Utente visualizza informazioni profilo**                       |
+| **Scenario 5.1** | **Utente visualizza informazioni profilo**                       |
 | ---------------- | ---------------------------------------------------------------- |
 | Precondition     | L’utente è loggato                                               |
 | Post condition   | L’utente visualizza le informazioni sul suo profilo              |

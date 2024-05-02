@@ -24,50 +24,109 @@ Version: V2 - description of EZElectronics
   - [Table of rights](#table-of-rights)
   - [Non Functional Requirements](#non-functional-requirements)
 - [Use case diagram and use cases](#use-case-diagram-and-use-cases)
-  - [Use case diagram](#use-case-diagram)
+    - [Use case diagram](#use-case-diagram)
   - [Use cases](#use-cases)
-    - [UC1, REGISTRAZIONE](#uc1-registrazione)
+    - [UC1 - Creazione account Cliente](#uc1---creazione-account-cliente)
       - [Scenario 1.1](#scenario-11)
       - [Scenario 1.2](#scenario-12)
-    - [UC2, LOGIN](#uc2-login)
+    - [UC2 - Creazione account Manager](#uc2---creazione-account-manager)
       - [Scenario 2.1](#scenario-21)
       - [Scenario 2.2](#scenario-22)
       - [Scenario 2.3](#scenario-23)
-    - [UC3, LOGOUT](#uc3-logout)
+    - [UC3 - Login](#uc3---login)
       - [Scenario 3.1](#scenario-31)
-    - [UC4, AGGIUNTA DI UN PRODOTTO AL CARRELLO](#uc4-aggiunta-di-un-prodotto-al-carrello)
+      - [Scenario 3.2](#scenario-32)
+    - [UC4 - Logout](#uc4---logout)
       - [Scenario 4.1](#scenario-41)
-      - [Scenario 4.2](#scenario-42)
-    - [UC5, RIMOZIONE DI UN PRODOTTO DAL CARRELLO](#uc5-rimozione-di-un-prodotto-dal-carrello)
+    - [UC5 - Visualizza informazioni profilo](#uc5---visualizza-informazioni-profilo)
       - [Scenario 5.1](#scenario-51)
-      - [Scenario 5.2](#scenario-52)
-      - [Scenario 5.3](#scenario-53)
-    - [UC6, VISUALIZZARE IL CARRELLO](#uc6-visualizzare-il-carrello)
+    - [UC6 - Modifica informazioni profilo](#uc6---modifica-informazioni-profilo)
       - [Scenario 6.1](#scenario-61)
-      - [Scenario 6.2](#scenario-62)
-    - [UC7, VISUALIZZAZIONE DEGLI ORDINI PASSATI E DEL PROFILO](#uc7-visualizzazione-degli-ordini-passati-e-del-profilo)
+    - [UC7 - Aggiunta di un prodotto al carrello](#uc7---aggiunta-di-un-prodotto-al-carrello)
       - [Scenario 7.1](#scenario-71)
       - [Scenario 7.2](#scenario-72)
-    - [UC8, REGISTRAZIONE DI UN NUOVO PRODOTTO](#uc8-registrazione-di-un-nuovo-prodotto)
+    - [UC8 - Rimozione di un prodotto dal carrello](#uc8---rimozione-di-un-prodotto-dal-carrello)
       - [Scenario 8.1](#scenario-81)
       - [Scenario 8.2](#scenario-82)
-    - [UC9, REGISTRAZIONE DELL’ARRIVO DI UN SET DI PRODOTTI](#uc9-registrazione-dellarrivo-di-un-set-di-prodotti)
+    - [UC9 - Modifica quantità di un prodotto nel carrello](#uc9---modifica-quantità-di-un-prodotto-nel-carrello)
       - [Scenario 9.1](#scenario-91)
-    - [UC10, ELIMINAZIONE DI UN PRODOTTO](#uc10-eliminazione-di-un-prodotto)
+      - [Scenario 9.2](#scenario-92)
+    - [UC10 - Visualizzazione del carrello](#uc10---visualizzazione-del-carrello)
       - [Scenario 10.1](#scenario-101)
-      - [Scenario 10.2](#scenario-102)
-    - [UC11, SEGNALAZIONE DI PRODOTTO COME VENDUTO](#uc11-segnalazione-di-prodotto-come-venduto)
+    - [UC11 - Svuotamento del carrello](#uc11---svuotamento-del-carrello)
       - [Scenario 11.1](#scenario-111)
-      - [Scenario 11.2](#scenario-112)
-      - [Scenario 11.3](#scenario-113)
-    - [UC12, CHECKOUT DEL CARRELLO](#uc12-checkout-del-carrello)
+    - [UC12 - Checkout del carrello](#uc12---checkout-del-carrello)
       - [Scenario 12.1](#scenario-121)
       - [Scenario 12.2](#scenario-122)
-      - [Scenario 12.3](#scenario-123)
-    - [UC13, VISUALIZZAZIONE DEGLI ORDINI DEL NEGOZIO](#uc13-visualizzazione-degli-ordini-del-negozio)
+    - [UC13 - Aggiungi indirizzo di spedizione](#uc13---aggiungi-indirizzo-di-spedizione)
       - [Scenario 13.1](#scenario-131)
-    - [UC14, RICERCA PRODOTTI](#uc14-ricerca-prodotti)
+    - [UC14 - Modifica indirizzo di spedizione](#uc14---modifica-indirizzo-di-spedizione)
       - [Scenario 14.1](#scenario-141)
+    - [UC15 - Rimozione indirizzo di spedizione](#uc15---rimozione-indirizzo-di-spedizione)
+      - [Scenario 15.1](#scenario-151)
+    - [UC16 - Visualizzazione ordini passati](#uc16---visualizzazione-ordini-passati)
+      - [Scenario 16.1](#scenario-161)
+    - [UC17 - Monitoraggio ordine](#uc17---monitoraggio-ordine)
+      - [Scenario 17.1](#scenario-171)
+      - [Scenario 17.2](#scenario-172)
+    - [UC18 -  Ricerca prodotti](#uc18----ricerca-prodotti)
+      - [Scenario 18.1](#scenario-181)
+      - [Scenario 18.2](#scenario-182)
+      - [Scenario 18.3](#scenario-183)
+      - [Scenario 18.4](#scenario-184)
+      - [Scenario 18.5](#scenario-185)
+    - [UC19 - Filtraggio prodotti](#uc19---filtraggio-prodotti)
+      - [Scenario 19.1](#scenario-191)
+      - [Scenario 19.2](#scenario-192)
+      - [Scenario 19.3](#scenario-193)
+    - [UC20 - Ordinamento prodotti](#uc20---ordinamento-prodotti)
+      - [Scenario 20.1](#scenario-201)
+      - [Scenario 20.2](#scenario-202)
+      - [Scenario 20.3](#scenario-203)
+    - [UC21 - Aggiungi modello](#uc21---aggiungi-modello)
+      - [Scenario 21.1](#scenario-211)
+    - [UC22 - Modifica modello](#uc22---modifica-modello)
+      - [Scenario 22.1](#scenario-221)
+      - [Scenario 22.2](#scenario-222)
+    - [UC23 - Registra prodotto](#uc23---registra-prodotto)
+      - [Scenario 23.1](#scenario-231)
+      - [Scenario 23.2](#scenario-232)
+    - [UC24 - Registra set di prodotti](#uc24---registra-set-di-prodotti)
+      - [Scenario 24.1](#scenario-241)
+      - [Scenario 24.2](#scenario-242)
+    - [UC25 - Eliminazione di un prodotto](#uc25---eliminazione-di-un-prodotto)
+      - [Scenario 25.1](#scenario-251)
+      - [Scenario 25.2](#scenario-252)
+    - [UC26 - Segnalazione prodotto come venduto](#uc26---segnalazione-prodotto-come-venduto)
+      - [Scenario 26.1](#scenario-261)
+      - [Scenario 26.2](#scenario-262)
+      - [Scenario 26.3](#scenario-263)
+    - [UC27 - Aggiungi negozio](#uc27---aggiungi-negozio)
+      - [Scenario 27.1](#scenario-271)
+    - [UC28 - Modifica negozio](#uc28---modifica-negozio)
+      - [Scenario 28.1](#scenario-281)
+      - [Scenario 28.2](#scenario-282)
+    - [UC29 - Eliminazione di un negozio](#uc29---eliminazione-di-un-negozio)
+      - [Scenario 29.1](#scenario-291)
+      - [Scenario 29.2](#scenario-292)
+    - [U30 - Approvazione di un Manager](#u30---approvazione-di-un-manager)
+      - [Scenario 30.1](#scenario-301)
+      - [Scenario 30.2](#scenario-302)
+    - [UC31 - Aggiunta di un utente](#uc31---aggiunta-di-un-utente)
+      - [Scenario 31.1](#scenario-311)
+      - [Scenario 31.2](#scenario-312)
+    - [UC32 - Modifica di un utente](#uc32---modifica-di-un-utente)
+      - [Scenario 32.1](#scenario-321)
+      - [Scenario 32.2](#scenario-322)
+    - [UC33 - Eliminazione di un utente](#uc33---eliminazione-di-un-utente)
+      - [Scenario 33.1](#scenario-331)
+      - [Scenario 33.2](#scenario-332)
+    - [UC34 - Eliminazione di un prodotto](#uc34---eliminazione-di-un-prodotto)
+      - [Scenario 34.1](#scenario-341)
+      - [Scenario 34.2](#scenario-342)
+    - [UC35 - Eliminazione di un carrello/ordine](#uc35---eliminazione-di-un-carrelloordine)
+      - [Scenario 35.1](#scenario-351)
+      - [Scenario 35.2](#scenario-352)
 - [Glossary](#glossary)
 - [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
@@ -242,15 +301,15 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 # Use case diagram and use cases
 
-## Use case diagram
+### Use case diagram
 
-![use case diagram](Immagini/useCaseDiagramv2.png)
+![Use case diagram](Immagini/useCaseDiagramv2.png)
 
 ## Use cases
 
-### UC1, REGISTRAZIONE
+### UC1 - Creazione account Cliente
 
-| **Actors Involved** | **Cliente, Manager**      |
+| **Actors Involved** | **Cliente**      |
 | ------------------- | ------------------------- |
 | Precondition        | L’utente non è registrato |
 | Post condition      | L’utente è registrato     |
@@ -263,479 +322,1175 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | **Scenario 1.1** | **Registrazione**                                                            |
 | ---------------- | ---------------------------------------------------------------------------- |
 | Precondition     | L’utente non è registrato                                                    |
-| Post condition   | Utente è registrato                                                          |
+| Post condition   | L'utente è registrato                                                        |
 | Step#            | Description                                                                  |
-| 1                | L’utente chiede di registrarsi                                               |
-| 2                | Il sistema chiede nome, cognome, username, password e ruolo                  |
+| 1                | L’utente chiede di registrarsi come cliente                                           |
+| 2                | Il sistema chiede nome, cognome, username, email e password                   |
 | 3                | L’utente inserisce i dati richiesti                                          |
-| 4                | Il sistema legge i dati richiesti                                            |
+| 4                | Il sistema acquisisce i dati inseriti                                        |
 | 5                | Il sistema controlla che l’username non sia associato a un account esistente |
 | 6                | Il sistema salva i dati e registra l’utente                                  |
 
 #### Scenario 1.2
 
-| **Scenario 1.2** | **Username già registrato**                                                  |
-| ---------------- | ---------------------------------------------------------------------------- |
-| Precondition     | L’utente non è registrato, l'username è gia registrato nel sistema           |
-| Post condition   | L'utente non è registrato                                                    |
-| Step#            | Description                                                                  |
-| 1                | L’utente chiede di registrarsi                                               |
-| 2                | Il sistema chiede nome, cognome, username, password e ruolo                  |
-| 3                | L’utente inserisce i dati richiesti                                          |
-| 4                | Il sistema legge i dati richiesti                                            |
-| 5                | Il sistema controlla che l’username non sia associato a un account esistente |
-| 6                | Il nome utente è già associato a un account, e il sistema restituisce errore |
+| **Scenario 1.2** | **Username già registrato**                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Precondition     | L’utente non è registrato, l'username inserito è gia registrato nel sistema    |
+| Post condition   | L'utente non è registrato                                                      |
+| Step#            | Description                                                                    |
+| 1                | L’utente chiede di registrarsi come cliente                                                |
+| 2                | Il sistema chiede nome, cognome, username, email e password                 |
+| 3                | L’utente inserisce i dati richiesti                                            |
+| 4                | Il sistema acquisisce i dati inseriti                                          |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
+| 6                | Il nome utente è già associato a un account e il sistema restituisce un errore |
 
-### UC2, LOGIN
+### UC2 - Creazione account Manager
 
-| **Actors Involved** | **Cliente, Manager**  |
-| ------------------- | --------------------- |
-| Precondition        | L’utente è registrato |
-| Post condition      | L’utente è loggato    |
-| Nominal Scenario    | Scenario 2.1          |
-| Variants            | Nessuna               |
-| Exceptions          | Scenario 2.2, 2.3     |
+| **Actors Involved** | **Manager**      |
+| ------------------- | ------------------------- |
+| Precondition        | L’utente non è registrato |
+| Post condition      | L’utente è registrato     |
+| Nominal Scenario    | Scenario 2.1            |
+| Variants            | Nessuna                   |
+| Exceptions          | Scenario 2.2, 2.3              |
 
 #### Scenario 2.1
 
-| **Scenario 2.1** | **Login - SUCCESS**                                                                                |
-| ---------------- | -------------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è registrato e non loggato                          |
-| Post condition   | L’utente è loggato                                                                                 |
-| Step#            | Description                                                                                        |
-| 1                | L’utente chiede di loggarsi                                                                        |
-| 2                | Il sistema chiede utente e password                                                                |
-| 3                | L’utente inserisce utente e password                                                               |
-| 4                | Il sistema legge i dati richiesti                                                                  |
-| 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
-| 6                | Il sistema logga l’utente                                                                          |
+| **Scenario 2.1** | **Registrazione**                                                            |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Precondition     | L’utente non è registrato                                                    |
+| Post condition   | L'utente è registrato                                                        |
+| Step#            | Description                                                                  |
+| 1                | L’utente chiede di registrarsi come manager                                          |
+| 2                | Il sistema chiede nome, cognome, username, email, password e negozio                   |
+| 3                | L’utente inserisce i dati richiesti                                          |
+| 4                | Il sistema acquisisce i dati inseriti                                        |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente |
+| 6                | Il sistema salva i dati e registra l’account manager                                |
+| 7                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
+| 8                | L'Admin approva la richiesta di registrazione del manager |
+| 9                | Il sistema notifica il manager dell'avvenuta registrazione |
 
 #### Scenario 2.2
 
-| **Scenario 2.2** | **Password errata**                                                                                |
-| ---------------- | -------------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è registrato e non loggato                       |
-| Post condition   | L’utente non è loggato                                                                             |
-| Step#            | Description                                                                                        |
-| 1                | L’utente chiede di loggarsi                                                                        |
-| 2                | Il sistema chiede utente e password                                                                |
-| 3                | L’utente inserisce utente e password                                                               |
-| 4                | Il sistema legge i dati richiesti                                                                  |
-| 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
-| 6                | Il sistema vede che la password è errata e restituisce errore                                      |
+| **Scenario 2.2** | **Username già registrato**                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Precondition     | L’utente non è registrato, l'username inserito è gia registrato nel sistema    |
+| Post condition   | L'utente non è registrato                                                      |
+| Step#            | Description                                                                    |
+| 1                | L’utente chiede di registrarsi come manager                                                |
+| 2                | Il sistema chiede nome, cognome, username, email, password e negozio         |
+| 3                | L’utente inserisce i dati richiesti                                            |
+| 4                | Il sistema acquisisce i dati inseriti                                          |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
+| 6                | Il nome utente è già associato a un account e il sistema restituisce un errore |
 
 #### Scenario 2.3
 
-| **Scenario 2.3** | **Utente non registrato**                                                                                |
-| ---------------- | -------------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è registrato e non loggato                       |
-| Post condition   | L’utente non è loggato                                                                             |
-| Step#            | Description                                                                                        |
-| 1                | L’utente chiede di loggarsi                                                                        |
-| 2                | Il sistema chiede utente e password                                                                |
-| 3                | L’utente inserisce utente e password                                                               |
-| 4                | Il sistema legge i dati richiesti                                                                  |
-| 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
-| 6                | Il sistema vede che l’username non è associato a nessun account e restitusce errore|
+| **Scenario 2.3** | **Richiesta di registrazione non approvata**                                   |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Precondition     | L’utente ha richiesto la registrazione come manager, ma la richiesta non è stata approvata |
+| Post condition   | L'utente non è registrato                                                      |
+| Step#            | Description                                                                    |
+| 1                | L’utente chiede di registrarsi come manager                                                |
+| 2                | Il sistema chiede nome, cognome, username, email, password e negozio         |
+| 3                | L’utente inserisce i dati richiesti                                            |
+| 4                | Il sistema acquisisce i dati inseriti                                          |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
+| 6                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
+| 7                | L'Admin rifiuta la richiesta di registrazione del manager |
+| 8                | Il sistema notifica il manager dell'avvenuto rifiuto della registrazione |
 
-### UC3, LOGOUT
+### UC3 - Login
 
-| **Actors Involved** | **Cliente, Manager**   |
-| ------------------- | ---------------------- |
-| Precondition        | L’utente è loggato     |
-| Postcondition       | L’utente non è loggato |
-| Nominal Scenario    | Scenario 3.1           |
-| Variants            | Nessuna                |
-| Exceptions          | Nessuna                |
+| **Actors Involved** | **Cliente, Manager, Admin**                |
+| ------------------- | ----------------------------------- |
+| Precondition        | L’utente è registrato e non loggato |
+| Post condition      | L’utente è loggato                  |
+| Nominal Scenario    | Scenario 3.1                        |
+| Variants            | Nessuna                             |
+| Exceptions          | Scenario 3.2                  |
 
 #### Scenario 3.1
 
-| **Scenario 3.1** | **Logout - SUCCESS**                                             |
-| ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L’utente è loggato                                               |
-| Post condition   | L’utente non è loggato                                           |
-| Step#            | Description                                                      |
-| 1                | L’utente chiede di eseguire logout                               |
-| 2                | Il sistema verifica che l’utente sia loggato                     |
-| 3                | Il sistema cancella l’autorizzazione del dispositivo dell’utente |
-| 4                | Il sistema mostra un messaggio di conferma del logout            |
+| **Scenario 3.1** | **Utente loggato con successo**                                                                    |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| Precondition     | L’utente è registrato e non loggato                                                                |
+| Post condition   | L’utente è loggato                                                                                 |
+| Step#            | Description                                                                                        |
+| 1                | L’utente chiede di loggarsi                                                                        |
+| 2                | Il sistema chiede nome utente e password                                                           |
+| 3                | L’utente inserisce nome utente e password                                                          |
+| 4                | Il sistema acquisisce i dati inseriti                                                              |
+| 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
+| 6                | Il sistema autentica l’utente                                                                      |
 
-### UC4, AGGIUNTA DI UN PRODOTTO AL CARRELLO
+#### Scenario 3.2
 
-| **Actors Involved** | **Cliente**                                    |
-| ------------------- | ---------------------------------------------- |
-| Precondition        | L’utente è loggato                             |
-| Postcondition       | Un prodotto è aggiunto al carrello dell’utente |
-| Nominal Scenario    | Scenario 4.1                                   |
-| Variants            | Nessuna                                        |
-| Exceptions          | Scenario 4.2                                   |
+| **Scenario 3.2** | **Credenziali errate**                                                                             |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| Precondition     | L’utente è registrato e non loggato                                                                |
+| Post condition   | L’utente non è loggato                                                                             |
+| Step#            | Description                                                                                        |
+| 1                | L’utente chiede di loggarsi                                                                        |
+| 2                | Il sistema chiede nome utente e password                                                           |
+| 3                | L’utente inserisce nome utente e password                                                          |
+| 4                | Il sistema acquisisce i dati inseriti                                                              |
+| 5                | Il sistema controlla che l’username sia associato a un account esistente e la password corrisponda |
+| 6                | Il sistema vede che le credenziali sono errate e restituisce errore                                |
+
+### UC4 - Logout
+
+| **Actors Involved** | **Cliente, Manager, Admin**   |
+| ------------------- | ---------------------- |
+| Precondition        | L’utente è loggato     |
+| Postcondition       | L’utente non è loggato |
+| Nominal Scenario    | Scenario 4.1           |
+| Variants            | Nessuna                |
+| Exceptions          | Nessuna                |
 
 #### Scenario 4.1
 
-| **Scenario 4.1** | **Prodotto aggiunto con successo**                      |
-| ---------------- | ------------------------------------------------------- |
-| Precondition     | L’utente è loggato e il prodotto è disponibile          |
-| Post condition   | Un prodotto è aggiunto al carrello dell’utente          |
-| Step#            | Description                                             |
-| 1                | L’utente chiede di aggiungere un prodotto al carrello   |
-| 2                | Il sistema verifica che l’utente sia loggato            |
-| 3                | Il sistema verifica che il prodotto è disponibile       |
-| 4                | Il sistema aggiunge il prodotto al carrello dell’utente |
+| **Scenario 4.1** | **Utente disconnesso con successo**                                      |
+| ---------------- | ------------------------------------------------------------------------ |
+| Precondition     | L’utente è loggato                                                       |
+| Post condition   | L’utente non è loggato                                                   |
+| Step#            | Description                                                              |
+| 1                | L’utente chiede di eseguire il logout                                    |
+| 2                | Il sistema verifica che l’utente sia loggato                             |
+| 3                | Il sistema esegue il logout dell'utente, invalidando la sessione attuale |
+| 4                | Il sistema mostra un messaggio di conferma di avvenuta disconnessione    |
 
-#### Scenario 4.2
+### UC5 - Visualizza informazioni profilo
 
-| **Scenario 4.2** | **Prodotto non disponibile**                                                              |
-| ---------------- | ----------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è loggato e il prodotto non è disponibile                                        |
-| Post condition   | Il prodotto non è aggiunto al carrello                                                    |
-| Step#            | Description                                                                               |
-| 1                | L’utente chiede di aggiungere un prodotto al carrello                                     |
-| 2                | Il sistema verifica che l’utente sia loggato                                              |
-| 3                | Il sistema verifica il prodotto sia disponibile                                           |
-| 4                | Il sistema riconosce che il prodotto non è disponibile e visualizza un messaggio d’errore |
-
-### UC5, RIMOZIONE DI UN PRODOTTO DAL CARRELLO
-
-| **Actors Involved** | **Cliente, Manager**                           |
-| ------------------- | ---------------------------------------------- |
-| Precondition        | L’utente è loggato e il prodotto X è presente nel carrello                             |
-| Postcondition       | Il prodotto X è rimosso dal carrello dell’utente |
-| Nominal Scenario    | Scenario 5.1                                   |
-| Variants            | Nessuna                                        |
-| Exceptions          | Scenario 5.2, 5.3                                   |
+| **Actors Involved** | **Cliente, Manager, Admin**                                |
+| ------------------- | --------------------------------------------------- |
+| Precondition        | L’utente è loggato                                  |
+| Postcondition       | L’utente visualizza le informazioni sul suo profilo |
+| Nominal Scenario    | Scenario 5.1                                        |
+| Variants            | Nessuna                                             |
+| Exceptions          | Nessuna                                             |
 
 #### Scenario 5.1
 
-| **Scenario 5.1** | **Prodotto rimosso con successo**                                                |
-| ---------------- | -------------------------------------------------------------------------------  |
-| Precondition     | L’utente è loggato e il prodotto è nel carrello dell’utente                      |
-| Post condition   | Il prodotto X è rimosso dal carrello dell’utente                                 |
-| Step#            | Description                                                                      |
-| 1                | L’utente chiede di rimuovere un prodotto X al carrello                           |
-| 2                | Il sistema verifica che l’utente sia loggato e il prodotto X sia nel suo carrello|
-| 3                | Il sistema rimuove il prodotto X dal carrello                                    |
+| **Scenario 5.1** | **Utente visualizza informazioni profilo**                       |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L’utente è loggato                                               |
+| Post condition   | L’utente visualizza le informazioni sul suo profilo              |
+| Step#            | Description                                                      |
+| 1                | L’utente richiede al sistema le informazioni sul proprio profilo |
+| 2                | Il sistema verifica che l’utente sia loggato                     |
+| 3                | Il sistema restituisce le informazioni sul profilo dell'utente   |
 
-#### Scenario 5.2
+### UC6 - Modifica informazioni profilo
 
-| **Scenario 5.2** | **Prodotto non presente nel carrello**                                                        |
-| ---------------- | --------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è loggato e il prodotto X non si trova nel carrello dell’utente                      |
-| Post condition   | Il prodotto non è rimosso dal carrello dell’utente                                            |
-| Step#            | Description                                                                                   |
-| 1                | L’utente chiede di rimuovere un prodotto al carrello                                          |
-| 2                | Il sistema verifica che l’utente sia loggato e il prodotto sia nel suo carrello               |
-| 3                | Il sistema riconosce che il prodotto non si trova nel carrello e mostra un messaggio d’errore |
-
-#### Scenario 5.3
-
-| **Scenario 5.3** | **Utente non loggato**                                                        |
-| ---------------- | --------------------------------------------------------------------------------------------- |
-| Precondition     | L’utente è loggato                                                                            |
-| Post condition   | Il prodotto non è rimosso dal carrello dell’utente                                            |
-| Step#            | Description                                                                                   |
-| 1                | L’utente chiede di rimuovere un prodotto al carrello                                          |
-| 2                | Il sistema verifica che l’utente sia loggato e il prodotto sia nel suo carrello               |
-| 3                | Il sistema riconosce che l’utente non è loggato e mostra un messaggio d’errore |
-
-### UC6, VISUALIZZARE IL CARRELLO
-
-| **Actors Involved** | **Cliente**                               |
-| ------------------- | ----------------------------------------- |
-| Precondition        | L’utente è loggato                        |
-| Postcondition       | La pagina del carrello viene visualizzata |
-| Nominal Scenario    | Scenario 6.1                              |
-| Variants            | Nessuna                                   |
-| Exceptions          | Scenario 6.2                                   |
+| **Actors Involved** | **Cliente, Manager, Admin**                                |
+| ------------------- | --------------------------------------------------- |
+| Precondition        | L’utente è loggato                                  |
+| Postcondition       | L’utente modifica le informazioni sul suo profilo |
+| Nominal Scenario    | Scenario 6.1                                        |
+| Variants            | Nessuna                                             |
+| Exceptions          | Nessuna                                             |
 
 #### Scenario 6.1
 
-| **Scenario 6.1** | **Carrello visualizzato con successo**                   |
-| ---------------- | -------------------------------------------------------- |
-| Precondition     | L’utente è loggato                                       |
-| Post condition   | La pagina del carrello viene visualizzata                |
-| Step#            | Description                                              |
-| 1                | L’utente richiede di visualizzare il carrello            |
-| 2                | Il sistema verifica che l’utente sia loggato             |
-| 3                | Il sistema rimanda l’utente alla pagina del suo carrello |
+| **Scenario 6.1** | **Utente modifica informazioni profilo**                       |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L’utente è loggato                                               |
+| Post condition   | L’utente modifica le informazioni sul suo profilo              |
+| Step#            | Description                                                      |
+| 1                | L’utente chiede al sistema di modificare le informazioni sul proprio profilo |
+| 2                | Il sistema verifica che l’utente sia loggato                     |
+| 3                | Il sistema permette all'utente di modificare le informazioni sul proprio profilo, ovvero email, nome, cognome e password |
+| 4                | Il sistema salva le modifiche apportate dall'utente |
 
-#### Scenario 6.2
 
-| **Scenario 6.2** | **Carrello non visualizzato**                   |
-| ---------------- | -------------------------------------------------------- |
-| Precondition     | L’utente è loggato                                       |
-| Post condition   | La pagina del carrello non viene visualizzata                |
-| Step#            | Description                                              |
-| 1                | L’utente richiede di visualizzare il carrello            |
-| 2                | Il sistema verifica che l’utente sia loggato             |
-| 3                | Il sistema rimanda l’utente alla pagina del suo carrello |
+### UC7 - Aggiunta di un prodotto al carrello
 
-### UC7, VISUALIZZAZIONE DEGLI ORDINI PASSATI E DEL PROFILO
-
-| **Actors Involved** | **Cliente**                                               |
-| ------------------- | --------------------------------------------------------- |
-| Precondition        | L’utente è loggato                                        |
-| Postcondition       | La pagina con profilo e storico ordini viene visualizzata |
-| Nominal Scenario    | Scenario 7.1                                              |
-| Variants            | Nessuna                                                   |
-| Exceptions          | Scenario 7.2                                                   |
+| **Actors Involved** | **Cliente**                                        |
+| ------------------- | -------------------------------------------------- |
+| Precondition        | Il cliente è loggato                               |
+| Postcondition       | Un prodotto viene aggiunto al carrello del cliente |
+| Nominal Scenario    | Scenario 7.1                                       |
+| Variants            | Nessuna                                            |
+| Exceptions          | Scenario 7.2                                       |
 
 #### Scenario 7.1
 
-| **Scenario 7.1** | **Storico ordini visualizzato con successo**                         |
-| ---------------- | -------------------------------------------------------------------- |
-| Precondition     | L’utente è loggato                                                   |
-| Post condition   | La pagina con profilo e storico ordini viene visualizzata            |
-| Step#            | Description                                                          |
-| 1                | L’utente richiede di visualizzare dello storico                      |
-| 2                | Il sistema verifica che l’utente sia loggato                         |
-| 3                | Il sistema rimanda l’utente alla pagina con profilo e storico ordini |
+| **Scenario 7.1** | **Prodotto aggiunto con successo**                      |
+| ---------------- | ------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                    |
+| Post condition   | Un prodotto viene aggiunto al carrello del cliente      |
+| Step#            | Description                                             |
+| 1                | Il cliente chiede di aggiungere un prodotto al carrello |
+| 2                | Il sistema verifica che il cliente sia loggato          |
+| 3                | Il sistema verifica che il prodotto sia disponibile     |
+| 4                | Il sistema aggiunge il prodotto al carrello del cliente |
 
 #### Scenario 7.2
 
-| **Scenario 7.2** | **Storico ordini non visualizzato, utente non loggato**                         |
-| ---------------- | -------------------------------------------------------------------- |
-| Precondition     | L’utente è loggato                                                   |
-| Post condition   | La pagina con profilo e storico ordini non viene visualizzata            |
-| Step#            | Description                                                          |
-| 1                | L’utente richiede di visualizzare dello storico                      |
-| 2                | Il sistema verifica che l’utente sia loggato                         |
-| 3                | Il sistema riconosce che l’utente non è loggato e restituisce un messaggio d’errore 
+| **Scenario 7.2** | **Prodotto non disponibile**                                                              |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                                                      |
+| Post condition   | Il prodotto non viene aggiunto al carrello                                                |
+| Step#            | Description                                                                               |
+| 1                | Il cliente chiede di aggiungere un prodotto al carrello                                   |
+| 2                | Il sistema verifica che il cliente sia loggato                                            |
+| 3                | Il sistema verifica che il prodotto sia disponibile                                       |
+| 4                | Il sistema riconosce che il prodotto non è disponibile e visualizza un messaggio d’errore |
 
- |
+### UC8 - Rimozione di un prodotto dal carrello
 
-### UC8, REGISTRAZIONE DI UN NUOVO PRODOTTO
-
-| **Actors Involved** | **Manager**                        |
-| ------------------- | ---------------------------------- |
-| Precondition        | Un manager è loggato e il prodotto non esiste nel database               |
-| Postcondition       | Il nuovo prodotto viene registrato |
-| Nominal Scenario    | Scenario 8.1                       |
-| Variants            | Nessuna                            |
-| Exceptions          | Scenario 8.2                       |
+| **Actors Involved** | **Cliente**                                      |
+| ------------------- | ------------------------------------------------ |
+| Precondition        | Il cliente è loggato                             |
+| Postcondition       | Il prodotto X è rimosso dal carrello del cliente |
+| Nominal Scenario    | Scenario 8.1                                     |
+| Variants            | Nessuna                                          |
+| Exceptions          | Scenario 8.2                                     |
 
 #### Scenario 8.1
 
-| **Scenario 8.1** | **Prodotto aggiunto con successo**                                                                                                                       |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Precondition     | Un manager è loggato e il prodotto non esiste nel database                                                                                               |
-| Post condition   | Il prodotto viene aggiunto al database                                                                                                                   |
-| Step#            | Description                                                                                                                                              |
-| 1                | Il manager richiede di registrare un nuovo prodotto                                                                                                      |
-| 2                | Il sistema richiede i dati necessari per un nuovo prodotto: id, modello, categoria, prezzo di vendita, data di arrivo (default oggi), eventuali dettagli |
-| 3                | Il sistema controlla la validità dei dati e l’univocità dell’id                                                                                          |
-| 4                | Il sistema registra il prodotto e mostra un messaggio di conferma                                                                                        |
+| **Scenario 8.1** | **Prodotto rimosso con successo**                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                                                             |
+| Post condition   | Il prodotto X è rimosso dal carrello del cliente                                                 |
+| Step#            | Description                                                                                      |
+| 1                | Il cliente chiede di rimuovere un prodotto X dal carrello                                        |
+| 2                | Il sistema verifica che il cliente sia loggato e che il prodotto X sia presente nel suo carrello |
+| 3                | Il sistema rimuove il prodotto X dal carrello del cliente                                        |
 
 #### Scenario 8.2
 
-| **Scenario 8.2** | **ID non univoco**                                                   |
-| ---------------- | ---------------------------------------------------------------------------------- |
-| Precondition     | Un manager è loggato e il prodotto esiste nel database                             |
-| Post condition   | Il prodotto non è aggiunto al database                                             |
-| Step#            | Description                                                                        |
-| 1                | Il manager richiede di registrare un nuovo prodotto                                |
-| 2                | Il sistema richiede i dati necessari per un nuovo prodotto                         |
-| 3                | Il sistema controlla la validità dei dati e l’univocità dell’id                    |
-| 4                | Il sistema non registra il prodotto e ritorna un messaggio di errore di “id non univoco”
+| **Scenario 8.2** | **Prodotto non presente nel carrello**                                                           |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                                                             |
+| Post condition   | Il prodotto non è rimosso dal carrello del cliente                                               |
+| Step#            | Description                                                                                      |
+| 1                | Il cliente chiede di rimuovere un prodotto al carrello                                           |
+| 2                | Il sistema verifica che il cliente sia loggato e che il prodotto X sia presente nel suo carrello |
+| 3                | Il sistema riconosce che il prodotto non si trova nel carrello e mostra un messaggio d’errore    |
 
- |
+### UC9 - Modifica quantità di un prodotto nel carrello
 
-### UC9, REGISTRAZIONE DELL’ARRIVO DI UN SET DI PRODOTTI
-
-| **Actors Involved** | **Manager**                           |
-| ------------------- | ------------------------------------- |
-| Precondition        | Un manager è loggato                  |
-| Postcondition       | Il set di nuovi prodotti è registrato |
-| Nominal Scenario    | Scenario 9.1                          |
-| Variants            | Nessuna                               |
-| Exceptions          | Nessuna                               |
+| **Actors Involved** | **Cliente**                               |
+| ------------------- | ----------------------------------------- |
+| Precondition        | Il cliente è loggato e possiede un prodotto nel carrello                     |
+| Postcondition       | La quantità di un prodotto nel carrello viene modificata  |
+| Nominal Scenario    | Scenario 9.1                              |
+| Variants            | Nessuna                                   |
+| Exceptions          | Scenario 9.2                                   |
 
 #### Scenario 9.1
 
-| **Scenario 9.1** | **Arrivo set di prodotti registrato con successo**                                                                                            |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Precondition     | Un manager è loggato                                                                                                     |
-| Post condition   | Il set di nuovi prodotti è registrato                                                                                                         |
-| Step#            | Description                                                                                                                                   |
-| 1                | Il manager richiede di registrare l’arrivo di un set di prodotti                                                                              |
-| 2                | Il sistema richiede i dati necessari per il set di prodotti: numero di prodotti, categoria, data di arrivo (default oggi), eventuali dettagli |
-| 3                | Il sistema registra il set di prodotti e mostra un messaggio di conferma                                                                      |
+| **Scenario 9.1** | **Quantità modificata con successo**                               |
+| ---------------- | -------------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                                 |
+| Postcondition |    La quantità del prodotto nel carrello viene modificata       |
+|Step#|Description|
+|1|Il cliente chiede di visualizzare il carrello|
+|2|Il sistema verifica che l'utente sia loggato e il cliente è rimandato alla pagina del carrello|
+|3|Il cliente richiede di modificare la quantità del prodotto |
+|4|Il sistema verifica che la quantità desiderata sia disponibile|
+|5| Il sistema modifica la quattità del prodotto |
 
-### UC10, ELIMINAZIONE DI UN PRODOTTO
+#### Scenario 9.2
 
-| **Actors Involved** | **Manager**                          |
-| ------------------- | ------------------------------------ |
-| Precondition        | Un manager è loggato                 |
-| Postcondition       | Il prodotto è eliminato dal database |
-| Nominal Scenario    | Scenario 10.1                        |
-| Variants            | Nessuna                              |
-| Exceptions          | Scenario 10.2                        |
+| **Scenario 9.2** | **Quantità richiesta non disponibile**                               |
+| ---------------- | -------------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato             |
+| Postcondition |    La quantità del prodotto nel carrello non viene modificata       |
+|Step#|Description|
+|1|Il cliente chiede di visualizzare il carrello|
+|2|Il sistema verifica che l'utente sia loggato e il cliente è rimandato alla pagina del carrello|
+|3|Il cliente richiede di modificare la quantità del prodotto |
+|4|Il sistema verifica che la quantità desiderata sia disponibile|
+|5| Il sistema rileva che la quantità richiesta non è disponibile e non permette al cliente di modificarla
+
+### UC10 - Visualizzazione del carrello
+
+| **Actors Involved** | **Cliente**                               |
+| ------------------- | ----------------------------------------- |
+| Precondition        | Il cliente è loggato                      |
+| Postcondition       | La pagina del carrello viene visualizzata |
+| Nominal Scenario    | Scenario 10.1                              |
+| Variants            | Nessuna                                   |
+| Exceptions          | Nessuna                                   |
 
 #### Scenario 10.1
 
-| **Scenario 10.1** | **Prodotto eliminato con successo**                                            |
-| ----------------- | ------------------------------------------------------------------------------ |
-| Precondition      | Un manager è loggato, il prodotto è nel database                               |
-| Post condition    | Il prodotto è eliminato dal database                                           |
-| Step#             | Description                                                                    |
-| 1                 | Il manager richiede di eliminare un prodotto                                   |
-| 2                 | Il sistema verifica che l’utente sia loggato e che sia un manager              |
-| 3                 | Il sistema richiede l’id per identificare il prodotto                          |
-| 4                 | Il sistema controlla l’esistenza del prodotto con il dato id                   |
-| 5                 | Il sistema rimuove il prodotto dal database e ritorna un messaggio di conferma |
+| **Scenario 10.1** | **Carrello visualizzato con successo**                               |
+| ---------------- | -------------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                                 |
+| Post condition   | La pagina del carrello viene visualizzata                            |
+| Step#            | Description                                                          |
+| 1                | Il cliente chiede di visualizzare il carrello                        |
+| 2                | Il sistema verifica che il cliente sia loggato                       |
+| 3                | Il sistema restituisce i prodotti contenuti nel carrello del cliente |
 
-#### Scenario 10.2
+### UC11 - Svuotamento del carrello
 
-| **Scenario 10.2** | **ID del prodotto non esistente**                                    |
-| ----------------- | -------------------------------------------------------------------- |
-| Precondition      | Un manager è loggato, il prodotto non è nel database                 |
-| Post condition    | Il prodotto non è eliminato dal database                             |
-| Step#             | Description                                                          |
-| 1                 | Il manager richiede di eliminare un prodotto                         |
-| 2                 | Il sistema verifica che l’utente sia loggato e che sia un manager    |
-| 3                 | Il sistema richiede l’id per identificare il prodotto                |
-| 4                 | Il sistema controlla l’esistenza del prodotto con il dato id         |
-| 5                 | Il sistema non trova prodotti con il dato ID e resistuisce un errore |
-
-### UC11, SEGNALAZIONE DI PRODOTTO COME VENDUTO
-
-| **Actors Involved** | **Manager**                        |
-| ------------------- | ---------------------------------- |
-| Precondition        | Un manager è loggato               |
-| Postcondition       | Il prodotto è segnato come venduto |
-| Nominal Scenario    | Scenario 11.1                      |
-| Variants            | Nessuna                            |
-| Exceptions          | Scenario 11.2, 11.3                |
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | Tutti i prodotti all'interno del carrello vengono rimossi |
+| Nominal Scenario    | Scenario 11.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
 
 #### Scenario 11.1
 
-| **Scenario 11.1** | **Prodotto segnato come venduto**                                              |
-| ----------------- | ------------------------------------------------------------------------------ |
-| Precondition      | Un manager è loggato, il prodotto è nel database e non è segnato come venduto  |
-| Post condition    | Il prodotto è segnato come venduto                                             |
-| Step#             | Description                                                                    |
-| 1                 | Il manager segnala un prodotto come venduto                                    |
-| 2                 | Il sistema verifica che l’utente sia loggato e che sia un manager              |
-| 3                 | Il sistema richiede l’id per identificare il prodotto                          |
-| 4                 | Il sistema controlla l’esistenza del prodotto con il dato id                   |
-| 5                 | Il sistema segnala il prodotto come venduto e ritorna un messaggio di conferma |
+| **Scenario 11.1** | **Carrello svuotato**                                                 |
+| ---------------- | --------------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                                  |
+| Post condition   | Tutti i prodotti all'interno del carrello vengono rimossi             |
+| Step#            | Description                                                           |
+| 1                | Il cliente chiede di svuotare il carrello                             |
+| 2                | Il sistema verifica che il cliente sia loggato                        |
+| 3                | Il sistema rimuove tutti i prodotti presenti nel carrello del cliente |
 
-#### Scenario 11.2
+### UC12 - Checkout del carrello
 
-| **Scenario 11.2** | **ID del prodotto non esistente**                                    |
-| ----------------- | -------------------------------------------------------------------- |
-| Precondition      | Un manager è loggato, il prodotto non è nel database                 |
-| Post condition    | Il prodotto non è segnato come venduto                               |
-| Step#             | Description                                                          |
-| 1                 | Il manager segnala un prodotto come venduto                          |
-| 2                 | Il sistema verifica che l’utente sia loggato e che sia un manager    |
-| 3                 | Il sistema richiede l’id per identificare il prodotto                |
-| 4                 | Il sistema controlla l’esistenza del prodotto con il dato id         |
-| 5                 | Il sistema non trova prodotti con il dato ID e resistuisce un errore |
-
-#### Scenario 11.3
-
-| **Scenario 11.3** | **Prodotto già venduto**                                                                                        |
-| ----------------- | --------------------------------------------------------------------------------------------------------------- |
-| Precondition      | Un manager è loggato, il prodotto è nel database ed è già stato segnato come venduto                            |
-| Post condition    | Il prodotto non è segnato come venduto                                                                          |
-| Step#             | Description                                                                                                     |
-| 1                 | Il manager segnala un prodotto come venduto                                                                     |
-| 2                 | Il sistema verifica che l’utente sia loggato e che sia un manager                                               |
-| 3                 | Il sistema richiede l’id per identificare il prodotto                                                           |
-| 4                 | Il sistema controlla l’esistenza del prodotto con il dato id                                                    |
-| 5                 | Il sistema riconosce che il prodotto indicato è gia stato segnato come venduto e ritorna un messaggio di errore |
-
-### UC12, CHECKOUT DEL CARRELLO
-
-| **Actors Involved** | **Cliente**                                                                          |
-| ------------------- | ------------------------------------------------------------------------------------ |
-| Precondition        | Un utente è loggato                                                                  |
-| Postcondition       | Il carrello è vuoto e tutti i prodotti al suo interno vengono segnalati come venduti |
-| Nominal Scenario    | Scenario 12.1                                                                        |
-| Variants            | Nessuna                                                                              |
-| Exceptions          | Scenari 12.2, 12.3                                                                   |
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | Il cliente effettua il pagamento del carrello             |
+| Nominal Scenario    | Scenario 12.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | 12.2                                                   |
 
 #### Scenario 12.1
 
-| **Scenario 12.1** | **Checkout completato**                                                                                     |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| Precondition      | L’utente è loggato, il carrello non è vuoto e tutti i prodotti al suo interno sono disponibili all’acquisto |
-| Post condition    | Il carrello è vuoto e tutti i prodotti al suo interno vengono segnalati come venduti                        |
-| Step#             | Description                                                                                                 |
-| 1                 | L’utente chiede al sistema di fare checkout del suo carrello                                                |
-| 2                 | Il sistema verifica che l’utente sia loggato                                                                |
-| 3                 | Il sistema verifica che il carrello non sia vuoto                                                           |
-| 4                 | Il sistema verifica che il carrello non contenga prodotti già venduti                                       |
-| 5                 | Il sistema svuota il carrello                                                                               |
-| 6                 | Il sistema segna tutti i prodotti come venduti                                                              |
-| 7                 | Il sistema ritorna un messaggio di successo                                                                 |
+| **Scenario 12.1** | **Pagamento effettuato con successo**                               |
+| ---------------- | ------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                               |
+| Post condition   | Il cliente effettua il pagamento del carrello                      |
+| Step#            | Description                                                        |
+| 1                | Il cliente chiede di effettuare il pagamento del carrello          |
+| 2                | Il sistema verifica che il cliente sia loggato                     |
+| 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
+| 4 | Il sistema richiede all'utente di selezionare un metodo di spedizione |
+| 5| Il cliente seleziona un metodo di spedizione|
+| 6 | Il sistema richiede al cliente di selezionare un indirizzo di spedizione |
+| 7 | Il cliente seleziona un indirizzo di spedizione |
+| 8 | Il sistema reindirizza il cliente alla pagina di pagamento |
+| 9 | Il cliente effettua il pagamento |
+| 10 | Il sistema mostra un messaggio di conferma del pagamento |
 
 #### Scenario 12.2
 
-| **Scenario 12.2** | **Carrello vuoto**                                                                   |
-| ----------------- | ------------------------------------------------------------------------------------ |
-| Precondition      | L’utente è loggato, il carrello è vuoto                                              |
-| Postcondition     | Nessun prodotto è segnato come venduto                                               |
-| Step#             | Description                                                                          |
-| 1                 | L’utente chiede al sistema di fare checkout del suo carrello                         |
-| 2                 | Il sistema verifica che l’utente sia loggato                                         |
-| 3                 | Il sistema verifica che il carrello non sia vuoto                                    |
-| 4                 | Il sistema segnala all’utente che il suo carrello è vuoto con un messaggio di errore |
+| **Scenario 12.2** | **Carrello vuoto o prodotti non disponibili**                                                  |
+| ---------------- | ------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                               |
+| Post condition   | Il cliente non effettua il pagamento del carrello                 |
+| Step#            | Description                                                        |
+| 1                | Il cliente chiede di effettuare il pagamento del carrello          |
+| 2                | Il sistema verifica che il cliente sia loggato                     |
+| 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
+| 4 | Il sistema rileva che il carrello è vuoto o che i prodotti non sono disponibili |
+| 5 | Il sistema restituisce un messaggio di errore |
 
-#### Scenario 12.3
+### UC13 - Aggiungi indirizzo di spedizione
 
-| **Scenario 12.3** | **Uno o più prodotti sono già venduti**                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------- |
-| Precondition      | L’utente è loggato, il carrello non è vuoto e uno o più prodotti del carrello sono gia stati venduti       |
-| Postcondition     | Nessun prodotto è segnato come venduto                                                                     |
-| Step#             | Description                                                                                                |
-| 1                 | L’utente chiede al sistema di fare checkout del suo carrello                                               |
-| 2                 | Il sistema verifica che l’utente sia loggato                                                               |
-| 3                 | Il sistema verifica che il carrello non sia vuoto                                                          |
-| 4                 | Il sistema verifica che il carrello non contenga prodotti già venduti                                      |
-| 5                 | Il sistema segnala all’utente che il suo carrello contiene prodotti già venduti con un messaggio di errore |
-
-### UC13, VISUALIZZAZIONE DEGLI ORDINI DEL NEGOZIO
-
-| **Actors involved** | **Manager**          |
-| ------------------- | -------------------- |
-| Precondition        | Il manager è loggato |
-| Postcondition       | Ordini visualizzati  |
-| Nominal Scenario    | Scanario 13.1        |
-| Variants            | Nessuna              |
-| Exceptions          | Nessuna              |
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | L'indirizzo di spedizione viene aggiunto al profilo del cliente |
+| Nominal Scenario    | Scenario 13.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
 
 #### Scenario 13.1
 
-| **Scenario 13.1** | **Ordini visualizzati**                                             |
-| ----------------- | ------------------------------------------------------------------- |
-| Precondition      | Il manager è loggato                                                |
-| Postcondition     | Ordini visualizzati                                                 |
-| Step#             | Description                                                         |
-| 1                 | Il manager chiede al sistema di visualizzare gli ordini del negozio |
-| 2                 | Il sistema verifica che il manager sia loggato                      |
-| 3                 | Il sistema mostra gli ordini del negozio al manager                 |
+| **Scenario 13.1** | **Indirizzo aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | L'indirizzo di spedizione viene aggiunto al profilo del cliente  |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di aggiungere un indirizzo di spedizione al proprio profilo |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema chiede i dati relativi all'indirizzo di spedizione     |
+| 4                | Il cliente inserisce i dati richiesti                            |
+| 5                | Il sistema salva l'indirizzo di spedizione nel profilo del cliente |
 
-### UC14, RICERCA PRODOTTI
+### UC14 - Modifica indirizzo di spedizione
 
-| **Actors involved** | **Cliente**                    |
-| ------------------- | ------------------------------ |
-| Precondition        | L’utente è loggato             |
-| Postcondition       | Lista di prodotti visualizzata |
-| Nominal Scenario    | Scenario 14.1                  |
-| Variants            | Nessuna                        |
-| Exceptions          | Nessuna                        |
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Postcondition       | L'indirizzo di spedizione viene modificato |
+| Nominal Scenario    | Scenario 14.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
 
 #### Scenario 14.1
 
-| **Scenario 14.1** | **Lista di prodotti visualizzata**                                     |
-| ----------------- | ---------------------------------------------------------------------- |
-| Precondition      | L’utente è loggato                                                     |
-| Postcondition     | Lista di prodotti visualizzata                                         |
-| Step#             | Description                                                            |
-| 1                 | L’utente chiede una lista di prodotti che rispecchino specifici filtri |
-| 2                 | Il sistema verifica che l’utente sia loggato                           |
-| 3                 | Il sistema elabora i filtri e mostra solo i prodotto corrispondenti    |
+| **Scenario 14.1** | **Indirizzo modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Post condition   | L'indirizzo di spedizione viene modificato |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di modificare un indirizzo di spedizione al proprio profilo |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema permette al cliente di modificare l'indirizzo di spedizione  |
+| 4                | Il cliente inserisce i dati richiesti                            |
+
+### UC15 - Rimozione indirizzo di spedizione
+
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Postcondition       | L'indirizzo di spedizione viene rimosso |
+| Nominal Scenario    | Scenario 15.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
+
+#### Scenario 15.1
+
+| **Scenario 15.1** | **Indirizzo rimosso con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Post condition   | L'indirizzo di spedizione viene rimosso |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di rimuovere un indirizzo di spedizione dal proprio profilo |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema permette al cliente di rimuovere l'indirizzo di spedizione  |
+| 4                | Il cliente seleziona l'indirizzo da rimuovere                            |
+
+
+### UC16 - Visualizzazione ordini passati
+
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | Il cliente visualizza la lista degli ordini passati |
+| Nominal Scenario    | Scenario 16.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                                                   |
+
+#### Scenario 16.1
+
+| **Scenario 16.1** | **Ordini visualizzati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | Il cliente visualizza la lista degli ordini passati             |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di visualizzare la lista degli ordini passati  |
+| 2                | Il sistema verifica che il cliente sia loggato                   |
+| 3                | Il sistema restituisce la lista degli ordini passati del cliente |
+
+### UC17 - Monitoraggio ordine
+
+| **Actors Involved** | **Cliente**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il cliente è loggato                                      |
+| Postcondition       | Il cliente visualizza lo stato dell'ordine |
+| Nominal Scenario    | Scenario 17.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | 17.2                                                   |
+
+#### Scenario 17.1
+
+| **Scenario 17.1** | **Ordine monitorato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | Il cliente visualizza lo stato dell'ordine             |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di monitorare lo stato di un ordine  |
+| 2                | Il sistema verifica che il cliente sia loggato e che l'ordine esista                |
+| 3                | Il sistema restituisce lo stato dell'ordine |
+
+#### Scenario 17.2
+
+| **Scenario 17.2** | **Ordine non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il cliente è loggato                                             |
+| Post condition   | Il cliente non visualizza lo stato dell'ordine             |
+| Step#            | Description                                                      |
+| 1                | Il cliente chiede di monitorare lo stato di un ordine  |
+| 2                | Il sistema verifica che il cliente sia loggato e che l'ordine esista                |
+| 3                | Il sistema rileva che l'ordine non esiste e restituisce un messaggio di errore |
+
+### UC18 -  Ricerca prodotti
+
+| **Actors Involved** | **Cliente, Manager, Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'utente è loggato                                      |
+| Postcondition       | Il sistema restituisce la lista dei prodotti |
+| Nominal Scenario    | Scenario 18.1                                              |
+| Variants            | 18.2, 18.3, 18.4                                                    |
+| Exceptions          | 18.5                                                   |
+
+#### Scenario 18.1
+
+| **Scenario 18.1** | **Prodotti trovati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce la lista dei prodotti          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare la lista dei prodotti  |
+| 2                | Il sistema verifica che l'utente sia loggato             |
+| 3                | Il sistema restituisce la lista dei prodotti |
+
+#### Scenario 18.2  
+
+| **Scenario 18.2** | **Ricerca prodotto per categoria**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce la lista dei prodotti appartenenti ad una certa categoria          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare la lista dei prodotti di una certa categoria  |
+| 2                | Il sistema verifica che l'utente sia loggato             |
+| 3                | Il sistema restituisce la lista dei prodotti appartenenti ad una certa categoria |
+
+#### Scenario 18.3
+
+| **Scenario 18.3** | **Ricerca prodotto per modello**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce la lista dei prodotti con un certo modello          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare la lista dei prodotti con un certo modello  |
+| 2                | Il sistema verifica che l'utente sia loggato             |
+| 3                | Il sistema restituisce la lista dei prodotti con un certo modello |
+
+#### Scenario 18.4
+
+| **Scenario 18.4** | **Visualizzazione di un singolo prodotto**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce le informazioni di un singolo prodotto          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare le informazioni di un singolo prodotto  |
+| 2                | Il sistema verifica che l'utente sia loggato e che il prodotto esista            |
+| 3                | Il sistema restituisce le informazioni di un singolo prodotto |
+
+#### Scenario 18.5
+
+| **Scenario 18.5** | **Prodotto non trovato**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'utente è loggato                                             |
+| Post condition   | Il sistema restituisce un messaggio di errore          |
+| Step#            | Description                                                      |
+| 1                | L'utente chiede di visualizzare le informazioni di un prodotto  |
+| 2                | Il sistema verifica che l'utente sia loggato e che il prodotto esista            |
+| 3                | Il sistema rileva che il prodotto non esiste e restituisce un messaggio di errore |
+
+
+### UC19 - Filtraggio prodotti
+
+| **Actors Involved** | **Cliente, Manager, Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'utente è loggato                                      |
+| Postcondition       | Il sistema restituisce la lista dei prodotti filtrati |
+| Nominal Scenario    | Scenario 19.1                                              |
+| Variants            | 19.2, 19.3                                                    |
+| Exceptions          | Nessuno                                                   |
+
+#### Scenario 19.1
+
+| Scenario 19.1  | Ricerca prodotti                                                               |
+| :------------: | :----------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                             |
+| Post condition | La lista dei prodotti viene visualizzata                                       |
+|     Step#      | Description                                                                    |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti                          |
+|       2        | Il sistema verifica che l'utente sia loggato                                   |
+|       3        | Il sistema restituisce la lista dei prodotti                                   |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
+|       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
+
+#### Scenario 19.2
+
+| Scenario 19.2  | Ricerca prodotto per categoria                                                      |
+| :------------: | :---------------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                                  |
+| Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
+|     Step#      | Description                                                                         |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
+|       2        | Il sistema verifica che l'utente sia loggato                                        |
+|       3        | Il sistema restituisce la lista dei prodotti appartenenti alla categoria C          |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno)      |
+|       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti      |
+
+#### Scenario 19.3
+
+| Scenario 19.3  | Ricerca prodotto per modello                                                   |
+| :------------: | :----------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                             |
+| Post condition | La lista dei prodotti con modello M viene visualizzata                         |
+|     Step#      | Description                                                                    |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M            |
+|       2        | Il sistema verifica che l'utente sia loggato                                   |
+|       3        | Il sistema restituisce la lista dei prodotti con modello M                     |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
+|       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
+
+
+
+
+
+### UC20 - Ordinamento prodotti
+
+| **Actors Involved** | **Cliente, Manager, Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'utente è loggato                                      |
+| Postcondition       | Il sistema restituisce la lista dei prodotti ordinati |
+| Nominal Scenario    | Scenario 20.1                                              |
+| Variants            | 20.2, 20.3, 20.4                                                    |
+| Exceptions          | 20.5                                                   |
+
+#### Scenario 20.1
+
+| Scenario 20.1  | Ricerca prodotti                                                               |
+| :------------: | :----------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                             |
+| Post condition | La lista dei prodotti viene visualizzata                                       |
+|     Step#      | Description                                                                    |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti                          |
+|       2        | Il sistema verifica che l'utente sia loggato                                   |
+|       3        | Il sistema restituisce la lista dei prodotti                                   |
+|       4        | L'utente seleziona un criterio di ordinamento (prezzo crescente / decrescente) |
+|       5        | Il sistema restituisce la lista dei prodotti ordinata in base ai criteri scelti |
+
+#### Scenario 20.2
+
+| Scenario 20.2  | Ricerca prodotto per categoria                                                      |
+| :------------: | :---------------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                                  |
+| Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
+|     Step#      | Description                                                                         |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
+|       2        | Il sistema verifica che l'utente sia loggato                                        |
+|       3        | Il sistema restituisce la lista dei prodotti appartenenti alla categoria C          |
+|       4        | L'utente seleziona un criterio di ordinamento (prezzo crescente / decrescente) |
+|       5        | Il sistema restituisce la lista dei prodotti ordinata in base ai criteri scelti      |
+
+#### Scenario 20.3
+
+| Scenario 20.3  | Ricerca prodotto per modello                                                   |
+| :------------: | :----------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                             |
+| Post condition | La lista dei prodotti con modello M viene visualizzata                         |
+|     Step#      | Description                                                                    |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M            |
+|       2        | Il sistema verifica che l'utente sia loggato                                   |
+|       3        | Il sistema restituisce la lista dei prodotti con modello M                     |
+|       4        | L'utente seleziona un criterio di ordinamento (prezzo crescente / decrescente) |
+|       5        | Il sistema restituisce la lista dei prodotti ordinata in base ai criteri scelti |
+
+### UC21 - Aggiungi modello
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il modello viene aggiunto al database |
+| Nominal Scenario    | Scenario 21.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                          |
+
+#### Scenario 21.1
+
+| **Scenario 21.1** | **Modello aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il modello viene aggiunto al database          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di aggiungere un modello  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al modello, ovvero nome, prezzo, dettagli, categoria e immagine     |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema salva il modello nel database |
+
+### UC22 - Modifica modello
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il modello viene modificato |
+| Nominal Scenario    | Scenario 22.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 22.2                         |
+
+#### Scenario 22.1
+
+| **Scenario 22.1** | **Modello modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il modello viene modificato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di modificare un modello  |
+| 2                | Il sistema verifica che il manager sia loggato e che il modello esista                  |
+| 3                | Il sistema permette al manager di modificare il modello, ovvero nome, prezzo, dettagli, categoria e immagine     |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema salva le modifiche apportate al modello |
+
+#### Scenario 22.2
+
+| **Scenario 22.2** | **Modello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il modello non viene modificato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di modificare un modello  |
+| 2                | Il sistema verifica che il manager sia loggato e che il modello esista                  |
+| 3                | Il sistema rileva che il modello non esiste e restituisce un messaggio di errore |
+
+### UC23 - Registra prodotto
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il prodotto viene registrato |
+| Nominal Scenario    | Scenario 23.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 23.2                         |
+
+#### Scenario 23.1
+
+| **Scenario 23.1** | **Prodotto registrato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al prodotto, ovvero modello e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema verifica che il modello esista |
+| 6                | Il sistema salva il prodotto nel database |
+
+#### Scenario 23.2
+
+| **Scenario 23.2** | **Modello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al prodotto, ovvero modello e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema rileva che il modello non esiste e restituisce un messaggio di errore |
+
+### UC24 - Registra set di prodotti
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il set di prodotti viene registrato |
+| Nominal Scenario    | Scenario 24.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 24.2                         |
+
+#### Scenario 24.1
+
+| **Scenario 24.1** | **Set di prodotti registrato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il set di prodotti viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un set di prodotti  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al set di prodotti, ovvero modello, quantità e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema verifica che il modello esista |
+| 6                | Il sistema salva il set di prodotti nel database |
+
+#### Scenario 24.2
+
+| **Scenario 24.2** | **Modello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il set di prodotti non viene registrato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di registrare un set di prodotti  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al set di prodotti, ovvero modello, quantità e data di arrivo      |
+| 4                | Il manager inserisce i dati richiesti                            |
+| 5                | Il sistema rileva che il modello non esiste e restituisce un messaggio di errore |
+
+### UC25 - Eliminazione di un prodotto
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il prodotto è eliminato |
+| Nominal Scenario    | Scenario 25.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 25.2                         |
+
+#### Scenario 25.1
+
+| **Scenario 25.1** | **Prodotto eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto è eliminato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema rimuove il prodotto e ritorna un messaggio di conferma |
+
+#### Scenario 25.2
+
+| **Scenario 25.2** | **ID del prodotto non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema non trova un prodotto con l'id fornito e restituisce un messaggio di errore |
+
+### UC26 - Segnalazione prodotto come venduto
+
+| **Actors Involved** | **Manager**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | Il manager è loggato                                      |
+| Postcondition       | Il prodotto è segnato come venduto |
+| Nominal Scenario    | Scenario 26.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 26.2, 26.3                         |
+
+#### Scenario 26.1
+
+| **Scenario 26.1** | **Prodotto segnato come venduto**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto è segnato come venduto          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di segnalare un prodotto come venduto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema segna il prodotto come venduto e ritorna un messaggio di conferma |
+
+#### Scenario 26.2
+
+| **Scenario 26.2** | **ID del prodotto non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non è segnato come venduto          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di segnalare un prodotto come venduto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema non trova un prodotto con l'id fornito e resistuisce un messaggio di errore |
+
+#### Scenario 26.3
+
+| **Scenario 26.3** | **Prodotto già venduto**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | Il manager è loggato                                             |
+| Post condition   | Il prodotto non è segnato come venduto          |
+| Step#            | Description                                                      |
+| 1                | Il manager chiede di segnalare un prodotto come venduto  |
+| 2                | Il sistema verifica che il manager sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema nota che il prodotto indicato è gia stato segnato come venduto e ritorna un messaggio di errore |
+
+### UC27 - Aggiungi negozio
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il negozio viene aggiunto |
+| Nominal Scenario    | Scenario 27.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                         |
+
+#### Scenario 27.1
+
+| **Scenario 27.1** | **Negozio aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio viene aggiunto          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di aggiungere un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema chiede i dati relativi al negozio, ovvero nome, indirizzo e partita IVA      |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva il negozio nel database |
+
+### UC28 - Modifica negozio
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il negozio viene modificato |
+| Nominal Scenario    | Scenario 28.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 28.2                         |
+
+#### Scenario 28.1
+
+| **Scenario 28.1** | **Negozio modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio viene modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato e che il negozio esista                 |
+| 3                | Il sistema permette all'admin di modificare il negozio, ovvero nome, indirizzo e partita IVA     |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva le modifiche apportate al negozio |
+
+#### Scenario 28.2
+
+| **Scenario 28.2** | **Negozio non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio non viene modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato e che il negozio esista                 |
+| 3                | Il sistema rileva che il negozio non esiste e restituisce un messaggio di errore |
+
+### UC29 - Eliminazione di un negozio
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il negozio è eliminato |
+| Nominal Scenario    | Scenario 29.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 29.2                         |
+
+#### Scenario 29.1
+
+| **Scenario 29.1** | **Negozio eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del negozio con il dato id      |
+| 4                | Il sistema rimuove il negozio e ritorna un messaggio di conferma |
+
+#### Scenario 29.2
+
+| **Scenario 29.2** | **ID del negozio non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il negozio non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un negozio  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del negozio con il dato id      |
+| 4                | Il sistema non trova un negozio con l'id fornito e restituisce un messaggio di errore |
+
+### U30 - Approvazione di un Manager
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato e possiede delle richieste di approvazione in sospeso                                    |
+| Postcondition       | Il manager è approvato |
+| Nominal Scenario    | Scenario 30.1                                              |
+| Variants            |Nessuna                                                   |
+| Exceptions          | Scenario 30.2                    |
+
+#### Scenario 30.1
+
+| **Scenario 30.1** | **Manager approvato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il manager è approvato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di approvare un manager  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del manager con il dato id      |
+| 4                | Il sistema approva il manager e ritorna un messaggio di conferma |
+
+#### Scenario 30.2
+
+| **Scenario 30.2** | **Manager già approvato**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il manager è approvato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di approvare un manager  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del manager con il dato id      |
+| 4                | Il sistema nota che il manager indicato è gia stato approvato e ritorna un messaggio di errore |
+
+### UC31 - Aggiunta di un utente
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | L'utente è aggiunto |
+| Nominal Scenario    | Scenario 31.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 31.2                         |
+
+#### Scenario 31.1
+
+| **Scenario 31.1** | **Utente aggiunto con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente è aggiunto          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di aggiungere un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema chiede i dati relativi all'utente, ovvero nome, cognome, email e password e ruolo      |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva l'utente nel database |
+
+#### Scenario 31.2
+
+| **Scenario 31.2** | **Username dell'utente già esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente non è aggiunto          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di aggiungere un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema chiede i dati relativi all'utente, ovvero nome, cognome, email e password e ruolo      |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema rileva che l'utente con lo stesso username esiste già e restituisce un messaggio di errore |
+
+### UC32 - Modifica di un utente
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | L'utente è modificato |
+| Nominal Scenario    | Scenario 32.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 32.2                         |
+
+#### Scenario 32.1
+
+| **Scenario 32.1** | **Utente modificato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente è modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato e che l'utente esista                 |
+| 3                | Il sistema permette all'admin di modificare l'utente, ovvero nome, cognome, email e password e ruolo     |
+| 4                | L'admin inserisce i dati richiesti                            |
+| 5                | Il sistema salva le modifiche apportate all'utente |
+
+#### Scenario 32.2
+
+| **Scenario 32.2** | **Utente non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente non è modificato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di modificare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato e che l'utente esista                 |
+| 3                | Il sistema rileva che l'utente non esiste e restituisce un messaggio di errore |
+
+### UC33 - Eliminazione di un utente
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | L'utente è eliminato |
+| Nominal Scenario    | Scenario 33.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 33.2                         |
+
+#### Scenario 33.1
+
+| **Scenario 33.1** | **Utente eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza dell'utente con il dato id      |
+| 4                | Il sistema rimuove l'utente e ritorna un messaggio di conferma |
+
+#### Scenario 33.2
+
+| **Scenario 33.2** | **ID dell'utente non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | L'utente non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un utente  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza dell'utente con il dato id      |
+| 4                | Il sistema non trova un utente con l'id fornito e restituisce un messaggio di errore |
+
+### UC34 - Eliminazione di un prodotto
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il prodotto è eliminato |
+| Nominal Scenario    | Scenario 34.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 34.2                         |
+
+#### Scenario 34.1
+
+| **Scenario 34.1** | **Prodotto eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il prodotto è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema rimuove il prodotto e ritorna un messaggio di conferma |
+
+#### Scenario 34.2
+
+| **Scenario 34.2** | **ID del prodotto non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il prodotto non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un prodotto  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del prodotto con il dato id      |
+| 4                | Il sistema non trova un prodotto con l'id fornito e restituisce un messaggio di errore |
+
+### UC35 - Eliminazione di un carrello/ordine
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | Il carrello è eliminato |
+| Nominal Scenario    | Scenario 35.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Scenario 35.2                         |
+
+#### Scenario 35.1
+
+| **Scenario 35.1** | **Carrello eliminato con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il carrello è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un carrello  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del carrello con il dato id      |
+| 4                | Il sistema rimuove il carrello e ritorna un messaggio di conferma |
+
+#### Scenario 35.2
+
+| **Scenario 35.2** | **ID del carrello non esistente**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | Il carrello non è eliminato          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di eliminare un carrello  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema controlla l’esistenza del carrello con il dato id      |
+| 4                | Il sistema non trova un carrello con l'id fornito e restituisce un messaggio di errore |
+
+
+
+
 
 # Glossary
 

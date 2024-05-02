@@ -670,11 +670,13 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 1                | Il cliente chiede di effettuare il pagamento del carrello          |
 | 2                | Il sistema verifica che il cliente sia loggato                     |
 | 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
-| 4 | Il sistema verifica che il cliente abbia selezionato un metodo di spedizione |
-| 5 | Il sistema verifica che il cliente abbia selezionato un indirizzo di spedizione |
-| 6 | Il sistema reindirizza il cliente alla pagina di pagamento |
-| 7 | Il cliente effettua il pagamento |
-| 8 | Il sistema mostra un messaggio di conferma del pagamento |
+| 4 | Il sistema richiede all'utente di selezionare un metodo di spedizione |
+| 5| Il cliente seleziona un metodo di spedizione|
+| 6 | Il sistema richiede al cliente di selezionare un indirizzo di spedizione |
+| 7 | Il cliente seleziona un indirizzo di spedizione |
+| 8 | Il sistema reindirizza il cliente alla pagina di pagamento |
+| 9 | Il cliente effettua il pagamento |
+| 10 | Il sistema mostra un messaggio di conferma del pagamento |
 
 #### Scenario 12.2
 

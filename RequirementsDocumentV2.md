@@ -80,6 +80,9 @@ Version: V2 - description of EZElectronics
       - [Scenario 19.2](#scenario-192)
       - [Scenario 19.3](#scenario-193)
     - [UC20 - Ordinamento prodotti](#uc20---ordinamento-prodotti)
+      - [Scenario 20.1](#scenario-201)
+      - [Scenario 20.2](#scenario-202)
+      - [Scenario 20.3](#scenario-203)
     - [UC21 - Aggiungi modello](#uc21---aggiungi-modello)
       - [Scenario 21.1](#scenario-211)
     - [UC22 - Modifica modello](#uc22---modifica-modello)
@@ -936,7 +939,44 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Variants            | 20.2, 20.3, 20.4                                                    |
 | Exceptions          | 20.5                                                   |
 
-//TODO
+#### Scenario 20.1
+
+| Scenario 20.1  | Ricerca prodotti                                                               |
+| :------------: | :----------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                             |
+| Post condition | La lista dei prodotti viene visualizzata                                       |
+|     Step#      | Description                                                                    |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti                          |
+|       2        | Il sistema verifica che l'utente sia loggato                                   |
+|       3        | Il sistema restituisce la lista dei prodotti                                   |
+|       4        | L'utente seleziona un criterio di ordinamento (prezzo crescente / decrescente) |
+|       5        | Il sistema restituisce la lista dei prodotti ordinata in base ai criteri scelti |
+
+#### Scenario 20.2
+
+| Scenario 20.2  | Ricerca prodotto per categoria                                                      |
+| :------------: | :---------------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                                  |
+| Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
+|     Step#      | Description                                                                         |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
+|       2        | Il sistema verifica che l'utente sia loggato                                        |
+|       3        | Il sistema restituisce la lista dei prodotti appartenenti alla categoria C          |
+|       4        | L'utente seleziona un criterio di ordinamento (prezzo crescente / decrescente) |
+|       5        | Il sistema restituisce la lista dei prodotti ordinata in base ai criteri scelti      |
+
+#### Scenario 20.3
+
+| Scenario 20.3  | Ricerca prodotto per modello                                                   |
+| :------------: | :----------------------------------------------------------------------------- |
+|  Precondition  | L'utente è loggato                                                             |
+| Post condition | La lista dei prodotti con modello M viene visualizzata                         |
+|     Step#      | Description                                                                    |
+|       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M            |
+|       2        | Il sistema verifica che l'utente sia loggato                                   |
+|       3        | Il sistema restituisce la lista dei prodotti con modello M                     |
+|       4        | L'utente seleziona un criterio di ordinamento (prezzo crescente / decrescente) |
+|       5        | Il sistema restituisce la lista dei prodotti ordinata in base ai criteri scelti |
 
 ### UC21 - Aggiungi modello
 

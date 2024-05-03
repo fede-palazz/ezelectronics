@@ -17,14 +17,22 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 | C = Estimated cost, in euro (here use 1 person hour cost = 30 euro) | 4500 | 
 | Estimated calendar time, in calendar weeks (Assume team of 4 people, 8 hours per day, 5 days per week ) |      1              |               
 
+#### Spiegazione delle stime di Estimate by size
+Le classi che devono essere sviluppate sono solo quelle del controller e del DAO. Nelle classi del controller, abbiamo solo le firme dei metodi, mentre nelle classi DAO, abbiamo solo il nome della classe. La media di 250 LOC per classe è basata sul fatto che di solito un metodo ha 10/20 righe. Questa media considera anche le classi DAO che, essendo in media più lunghe, hanno contribuito ad aumentarla di una certa percentuale.
+
+Basandoci poi sulla GUI sviluppata, una stima ottimale delle righe necessarie per svilupparla sono 4000(400phr), che portano il costo del lavoro a 16500 euro.
+
+Considerando invece la documentazione sviluppata nel progetto invece si hanno 1070 righe di markdown, che equivalgono a 107hr e che portano il costo del progetto a 19710 euro.
+
+
 # Estimate by product decomposition
 ### 
 |         component name    | Estimated effort (person hours)   |             
 | ----------- | ------------------------------- | 
-|requirement document    | 40 |
+| requirement document   | 40 |
 | GUI prototype |20|
-|design document |0|
-|code |150|
+| design document |0|
+| code |550|
 | unit tests | 35 |
 | api tests | 50 |
 | management documents  | 10|
@@ -47,7 +55,7 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 | Scelta del tool da utilizzare | 1 |
 | Scelta del design system | 1 |
 | Traduzione di use case in UI | 13 |
-| **Code** |150|
+| **Code backend** |150|
 | --Analisi dei metodi forniti in UserController| 10|
 | --Creazione e completamento dei metodi nel UserDAO| 20|
 | --Completamento dei metodi in UserController| 20|
@@ -57,25 +65,34 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 | --Analisi dei metodi forniti in ProductController| 10|
 | --Creazione e completamento dei metodi nel ProductDAO| 20|
 | --Completamento dei metodi in ProductController| 20 |
+| **Code frontend**|440|
+| --Progettazione dell'architettura| 40|
+| --Setup dell'ambiente di sviluppo| 15|
+| --Sviluppo dei componenti React| 200 |
+| --Integrazione con il backend (PHP)| 50 |
+| --Styling e design| 30 |
+| --Testing| 15 |
+| --Debugging e ottimizzazione: Variabile, ma considerando un 15% del tempo totale | 60 |
+| --Deploy| 10 |
 | **Unit tests** | 35 |
 | --Identificazione dei metodi da testare|5|
 | --Creazione dei test necessari|25|0
 | --Verifica del corretto funzionamento dei test|5|
-| api tests | 50 |
+| **api tests** | 50 |
 | --Identificazione dei metodi da testare|5|
 | --Creazione dei test necessari|40|
 | --Verifica del corretto funzionamento dei test|5|
 | **Management documents**  | 10 |
 ###
-Insert here Gantt chart with above activities
+![alt text](Immagini/gantt.png)
 
 # Summary
 
 Report here the results of the three estimation approaches. The  estimates may differ. Discuss here the possible reasons for the difference
 
-|             | Estimated effort                        |   Estimated duration(settimane) |          
+|             | Estimated effort                        |   Estimated duration(settimane di lavoro del team di 4 persone, considerando 8h al giorno, per 5 giorni) |          
 | ----------- | ------------------------------- | ---------------|
-| estimate by size |150|1|
-| estimate by product decomposition |305|2|
-| estimate by activity decomposition |305|2|
+| estimate by size |657|4.1|
+| estimate by product decomposition |705|4.4|
+| estimate by activity decomposition |745|4.8|
 

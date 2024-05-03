@@ -58,6 +58,8 @@ Version: V2 - description of EZElectronics
     - [UC12 - Checkout del carrello](#uc12---checkout-del-carrello)
       - [Scenario 12.1](#scenario-121)
       - [Scenario 12.2](#scenario-122)
+      - [Scenario 12.3](#scenario-123)
+      - [Scenario 12.4](#scenario-124)
     - [UC13 - Aggiungi indirizzo di spedizione](#uc13---aggiungi-indirizzo-di-spedizione)
       - [Scenario 13.1](#scenario-131)
     - [UC14 - Modifica indirizzo di spedizione](#uc14---modifica-indirizzo-di-spedizione)
@@ -131,6 +133,10 @@ Version: V2 - description of EZElectronics
       - [Scenario 36.1](#scenario-361)
     - [UC37 - Visualizzazione degli utenti](#uc37---visualizzazione-degli-utenti)
       - [Scenario 37.1](#scenario-371)
+    - [UC 38 - Visualizzazione dei prodotti](#uc-38---visualizzazione-dei-prodotti)
+      - [Scenario 38.1](#scenario-381)
+    - [UC39 - Visualizzazione dei carrelli/ordini](#uc39---visualizzazione-dei-carrelliordini)
+      - [Scenario 39.1](#scenario-391)
 - [Glossary](#glossary)
 - [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
@@ -209,8 +215,8 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | **FR3**  | Gestione dei prodotti                                                    |
 | FR3.1 | Un Manager deve essere in grado di registrare uno o più nuovi prodotti  |
 | FR3.2 | Un Manager deve essere in grado di aggiungere e modificare i modelli     |
-| FR3.3 | Un Manager deve essere in grado di cancellare uno o più prodotti esistenti |
-| FR3.4 | Il Manager deve poter contrassegnare i prodotti come venduti              |
+| FR3.3 | Un Manager deve essere in grado di cancellare un prodotto esistente |
+| FR3.4 | Il Manager deve poter contrassegnare un prodotto come venduto              |
 | **FR4**  | Visualizzazione dei prodotti                                             |
 | FR4.1 | Un utente deve essere in grado di visualizzare la lista di tutti i prodotti |
 | FR4.2 | Un utente deve essere in grado di visualizzare tutti i prodotti appartenenti ad una specifica categoria |
@@ -223,15 +229,15 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | FR5.2 | Il cliente deve essere informato dell’avvenuto pagamento del suo carrello |
 | **FR6**  | Gestione spedizione prodotti                                             |
 | FR6.1 | Un cliente deve poter selezionare un metodo di spedizione fra quelli proposti |
-| FR6.2 | Un cliente deve essere in grado di memorizzare nuovi indirizzi, modificare o eliminare quelli esistenti |
+| FR6.2 | Un cliente deve essere in grado di memorizzare un indirizzo e modificarlo |
 | FR6.3 | Il cliente deve poter visualizzare il prezzo finale compreso di costo prodotti e costi di spedizione |
-| FR6.4 | Il cliente deve poter monitorare lo stato dell'ordine |
+| FR6.4 | Il cliente deve poter monitorare lo stato dell'ordine fino alla spedizione |
 | **FR7**  | Funzioni amministratore                                                  |
 | FR7.1 | Un Admin deve essere in grado di visualizzare, registrare, modificare ed eliminare un negozio |
 | FR7.2 | Un Admin deve essere in grado di approvare le registrazioni dei manager dei negozi |
-| FR7.3 | Un Admin deve essere in grado di visualizzare, aggiungere, modificare ed eliminare tutti gli utenti (testing) |
-| FR7.4 | Un Admin deve essere in grado di eliminare tutti i prodotti (testing) |
-| FR7.5 | Un Admin deve essere in grado di visualizzare ed eliminare tutti i carrelli degli utenti (testing) |
+| FR7.3 | Un Admin deve essere in grado di visualizzare, aggiungere, modificare ed eliminare tutti gli utenti |
+| FR7.4 | Un Admin deve essere in grado di visualizzare eliminare tutti i prodotti di un negozio |
+| FR7.5 | Un Admin deve essere in grado di visualizzare ed eliminare tutti i carrelli degli utenti |
 
 
 
@@ -370,7 +376,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema chiede nome, cognome, username, email, password e negozio                   |
 | 3                | L’utente inserisce i dati richiesti                                          |
 | 4                | Il sistema acquisisce i dati inseriti                                        |
-| 5                | Il sistema controlla che l’username non sia associato a un account esistente |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente e che il negozio esista |
 | 6                | Il sistema salva i dati e registra l’account manager                                |
 | 7                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
 | 8                | L'Admin approva la richiesta di registrazione del manager |
@@ -387,24 +393,23 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema chiede nome, cognome, username, email, password e negozio         |
 | 3                | L’utente inserisce i dati richiesti                                            |
 | 4                | Il sistema acquisisce i dati inseriti                                          |
-| 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente e che il negozio esista   |
 | 6                | Il nome utente è già associato a un account e il sistema restituisce un errore |
 
 #### Scenario 2.3
 
 | **Scenario 2.3** | **Richiesta di registrazione non approvata**                                   |
 | ---------------- | ------------------------------------------------------------------------------ |
-| Precondition     | L’utente ha richiesto la registrazione come manager, ma la richiesta non è stata approvata |
-| Post condition   | L'utente non è registrato                                                      |
+| Precondition     | L’utente ha richiesto la registrazione come manager |
+| Post condition   | L'account del manager non è attivo                                                     |
 | Step#            | Description                                                                    |
 | 1                | L’utente chiede di registrarsi come manager                                                |
 | 2                | Il sistema chiede nome, cognome, username, email, password e negozio         |
 | 3                | L’utente inserisce i dati richiesti                                            |
 | 4                | Il sistema acquisisce i dati inseriti                                          |
-| 5                | Il sistema controlla che l’username non sia associato a un account esistente   |
+| 5                | Il sistema controlla che l’username non sia associato a un account esistente e che il negozio esista   |
 | 6                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
 | 7                | L'Admin rifiuta la richiesta di registrazione del manager |
-| 8                | Il sistema notifica il manager dell'avvenuto rifiuto della registrazione |
 
 ### UC3 - Login
 
@@ -597,7 +602,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 |2|Il sistema verifica che l'utente sia loggato e il cliente è rimandato alla pagina del carrello|
 |3|Il cliente richiede di modificare la quantità del prodotto |
 |4|Il sistema verifica che la quantità desiderata sia disponibile|
-|5| Il sistema modifica la quattità del prodotto |
+|5| Il sistema modifica la quantità del prodotto |
 
 #### Scenario 9.2
 
@@ -659,17 +664,17 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | **Actors Involved** | **Cliente**                                               |
 | ------------------- | --------------------------------------------------------- |
 | Precondition        | Il cliente è loggato                                      |
-| Postcondition       | Il cliente effettua il pagamento del carrello             |
+| Postcondition       | Il sistema svuota il carrello, lo segna come pagato e segna i prodotti come venduti             |
 | Nominal Scenario    | Scenario 12.1                                              |
 | Variants            | Nessuna                                                   |
-| Exceptions          | 12.2                                                   |
+| Exceptions          | 12.2, 12.3, 12.4                                                  |
 
 #### Scenario 12.1
 
 | **Scenario 12.1** | **Pagamento effettuato con successo**                               |
 | ---------------- | ------------------------------------------------------------------ |
 | Precondition     | Il cliente è loggato                                               |
-| Post condition   | Il cliente effettua il pagamento del carrello                      |
+| Post condition   | Il sistema svuota il carrello, lo segna come pagato e segna i prodotti come venduti                      |
 | Step#            | Description                                                        |
 | 1                | Il cliente chiede di effettuare il pagamento del carrello          |
 | 2                | Il sistema verifica che il cliente sia loggato                     |
@@ -687,13 +692,46 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | **Scenario 12.2** | **Carrello vuoto o prodotti non disponibili**                                                  |
 | ---------------- | ------------------------------------------------------------------ |
 | Precondition     | Il cliente è loggato                                               |
-| Post condition   | Il cliente non effettua il pagamento del carrello                 |
+| Post condition   | Il carrello non viene pagato                |
 | Step#            | Description                                                        |
 | 1                | Il cliente chiede di effettuare il pagamento del carrello          |
 | 2                | Il sistema verifica che il cliente sia loggato                     |
 | 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
 | 4 | Il sistema rileva che il carrello è vuoto o che i prodotti non sono disponibili |
 | 5 | Il sistema restituisce un messaggio di errore |
+
+#### Scenario 12.3
+
+| **Scenario 12.3** | **Indirizzo non registrato**                                                  |
+| ---------------- | ------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                               |
+| Post condition   | Il carrello non viene pagato               |
+| Step#            | Description                                                        |
+| 1                | Il cliente chiede di effettuare il pagamento del carrello          |
+| 2                | Il sistema verifica che il cliente sia loggato                     |
+| 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
+| 4 | Il sistema richiede all'utente di selezionare un metodo di spedizione |
+| 5| Il cliente seleziona un metodo di spedizione|
+| 6 | Il sistema rileva che l'utente non ha un indirizzo di spedizione registrato |
+| 7 | Il sistema restituisce un messaggio di errore |
+
+#### Scenario 12.4
+
+| **Scenario 12.4** | **Pagamento non effettuato**                                                  |
+| ---------------- | ------------------------------------------------------------------ |
+| Precondition     | Il cliente è loggato                                               |
+| Post condition   | Il carrello non viene pagato               |
+| Step#            | Description                                                        |
+| 1                | Il cliente chiede di effettuare il pagamento del carrello          |
+| 2                | Il sistema verifica che il cliente sia loggato                     |
+| 3                | Il sistema verifica che il carrello non sia vuoto e che i prodotti siano disponibili                |
+| 4 | Il sistema richiede all'utente di selezionare un metodo di spedizione |
+| 5| Il cliente seleziona un metodo di spedizione|
+| 6 | Il sistema richiede al cliente di selezionare un indirizzo di spedizione |
+| 7 | Il cliente seleziona un indirizzo di spedizione |
+| 8 | Il sistema reindirizza il cliente alla pagina di pagamento |
+| 9 | Il cliente non effettua il pagamento |
+| 10 | Il carrello rimane non pagato |
 
 ### UC13 - Aggiungi indirizzo di spedizione
 
@@ -722,7 +760,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Cliente**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Precondition        | Il cliente è loggato e ha un indirizzo di spedizione registrato |
 | Postcondition       | L'indirizzo di spedizione viene modificato |
 | Nominal Scenario    | Scenario 14.1                                              |
 | Variants            | Nessuna                                                   |
@@ -732,19 +770,20 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 14.1** | **Indirizzo modificato con successo**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Precondition     | Il cliente è loggato e ha un indirizzo di spedizione registrato |
 | Post condition   | L'indirizzo di spedizione viene modificato |
 | Step#            | Description                                                      |
-| 1                | Il cliente chiede di modificare un indirizzo di spedizione al proprio profilo |
+| 1                | Il cliente chiede di modificare l'indirizzo di spedizione assoicato al proprio profilo |
 | 2                | Il sistema verifica che il cliente sia loggato                   |
 | 3                | Il sistema permette al cliente di modificare l'indirizzo di spedizione  |
 | 4                | Il cliente inserisce i dati richiesti                            |
+| 5                | Il sistema salva l'indirizzo di spedizione modificato nel profilo del cliente |
 
 ### UC15 - Rimozione indirizzo di spedizione
 
 | **Actors Involved** | **Cliente**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Precondition        | Il cliente è loggato e ha  un indirizzo di spedizione registrato |
 | Postcondition       | L'indirizzo di spedizione viene rimosso |
 | Nominal Scenario    | Scenario 15.1                                              |
 | Variants            | Nessuna                                                   |
@@ -754,18 +793,18 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 15.1** | **Indirizzo rimosso con successo**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | Il cliente è loggato e ha almeno un indirizzo di spedizione registrato |
+| Precondition     | Il cliente è loggato e ha  un indirizzo di spedizione registrato |
 | Post condition   | L'indirizzo di spedizione viene rimosso |
 | Step#            | Description                                                      |
 | 1                | Il cliente chiede di rimuovere un indirizzo di spedizione dal proprio profilo |
 | 2                | Il sistema verifica che il cliente sia loggato                   |
 | 3                | Il sistema permette al cliente di rimuovere l'indirizzo di spedizione  |
-| 4                | Il cliente seleziona l'indirizzo da rimuovere                            |
+| 4                | L'indirizzo di speziozione viene rimosso          |
 
 
 ### UC16 - Visualizzazione ordini passati
 
-| **Actors Involved** | **Cliente, Admin**                                               |
+| **Actors Involved** | **Cliente**                                               |
 | ------------------- | --------------------------------------------------------- |
 | Precondition        | Il cliente è loggato                                      |
 | Postcondition       | Il cliente visualizza la lista degli ordini passati |
@@ -820,7 +859,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Cliente, Manager, Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | L'utente ha accesso a internet                                   |
+| Precondition        | L'utente è loggato                                   |
 | Postcondition       | Il sistema restituisce la lista dei prodotti |
 | Nominal Scenario    | Scenario 18.1                                              |
 | Variants            | 18.2, 18.3, 18.4                                                    |
@@ -830,7 +869,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.1** | **Prodotti trovati con successo**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente ha accesso a internet                                          |
+| Precondition     | L'utente è loggato                                          |
 | Post condition   | Il sistema restituisce la lista dei prodotti          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare la lista dei prodotti  |
@@ -841,7 +880,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.2** | **Ricerca prodotto per categoria**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente ha accesso a internet                                          |
+| Precondition     | L'utente è loggato                                          |
 | Post condition   | Il sistema restituisce la lista dei prodotti appartenenti ad una certa categoria          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare la lista dei prodotti di una certa categoria  |
@@ -852,7 +891,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.3** | **Ricerca prodotto per modello**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente ha accesso a internet                                          |
+| Precondition     | L'utente è loggato                                          |
 | Post condition   | Il sistema restituisce la lista dei prodotti con un certo modello          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare la lista dei prodotti con un certo modello  |
@@ -863,7 +902,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.4** | **Visualizzazione di un singolo prodotto**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente ha accesso a internet                                          |
+| Precondition     | L'utente è loggato                                          |
 | Post condition   | Il sistema restituisce le informazioni di un singolo prodotto          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare le informazioni di un singolo prodotto  |
@@ -874,7 +913,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.5** | **Prodotto non trovato**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente ha accesso a internet                                          |
+| Precondition     | L'utente è loggato                                          |
 | Post condition   | Il sistema restituisce un messaggio di errore          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare le informazioni di un prodotto  |
@@ -886,51 +925,50 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Cliente, Manager, Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | L'utente ha accesso a internet                                      |
+| Precondition        | L'utente è loggato                                      |
 | Postcondition       | Il sistema restituisce la lista dei prodotti filtrati |
 | Nominal Scenario    | Scenario 19.1                                              |
-| Variants            | 19.2, 19.3                                                    |
+| Variants            | 19.2, 19.3                                         |
 | Exceptions          | Nessuno                                                   |
 
 #### Scenario 19.1
 
 | Scenario 19.1  | Ricerca prodotti                                                               |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente ha accesso a internet                                                             |
+|  Precondition  | L'utente è loggato                                                             |
 | Post condition | La lista dei prodotti viene visualizzata                                       |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti                          |
 |       2        | Il sistema verifica che l'utente sia loggato                                   |
 |       3        | Il sistema restituisce la lista dei prodotti                                   |
-|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno  / range di prezzo) |
 |       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
 
 #### Scenario 19.2
 
 | Scenario 19.2  | Ricerca prodotto per categoria                                                      |
 | :------------: | :---------------------------------------------------------------------------------- |
-|  Precondition  | L'utente ha accesso a internet                                                                  |
+|  Precondition  | L'utente è loggato                                                                  |
 | Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
 |     Step#      | Description                                                                         |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
 |       2        | Il sistema verifica che l'utente sia loggato                                        |
 |       3        | Il sistema restituisce la lista dei prodotti appartenenti alla categoria C          |
-|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno)      |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno  / range di prezzo)      |
 |       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti      |
 
 #### Scenario 19.3
 
 | Scenario 19.3  | Ricerca prodotto per modello                                                   |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente ha accesso a internet                                                             |
+|  Precondition  | L'utente è loggato                                                             |
 | Post condition | La lista dei prodotti con modello M viene visualizzata                         |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M            |
 |       2        | Il sistema verifica che l'utente sia loggato                                   |
 |       3        | Il sistema restituisce la lista dei prodotti con modello M                     |
-|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno) |
+|       4        | L'utente seleziona un criterio di filtraggio (venduto / non venduto / nessuno / range di prezzo) |
 |       5        | Il sistema restituisce la lista dei prodotti che corrisponde ai criteri scelti |
-
 
 
 
@@ -939,17 +977,17 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Cliente, Manager, Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | L'utente ha accesso a internet                                      |
+| Precondition        | L'utente è loggato                                      |
 | Postcondition       | Il sistema restituisce la lista dei prodotti ordinati |
 | Nominal Scenario    | Scenario 20.1                                              |
 | Variants            | 20.2, 20.3, 20.4                                                    |
-| Exceptions          | 20.5                                                   |
+| Exceptions          | Nessuna                                                   |
 
 #### Scenario 20.1
 
 | Scenario 20.1  | Ricerca prodotti                                                               |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente ha accesso a internet                                                             |
+|  Precondition  | L'utente è loggato                                                             |
 | Post condition | La lista dei prodotti viene visualizzata                                       |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti                          |
@@ -962,7 +1000,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 20.2  | Ricerca prodotto per categoria                                                      |
 | :------------: | :---------------------------------------------------------------------------------- |
-|  Precondition  | L'utente ha accesso a internet                                                                  |
+|  Precondition  | L'utente è loggato                                                                  |
 | Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
 |     Step#      | Description                                                                         |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
@@ -975,7 +1013,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 20.3  | Ricerca prodotto per modello                                                   |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente ha accesso a internet                                                             |
+|  Precondition  | L'utente è loggato                                                             |
 | Post condition | La lista dei prodotti con modello M viene visualizzata                         |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M            |
@@ -1216,7 +1254,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che l'admin sia loggato                   |
 | 3                | Il sistema chiede i dati relativi al negozio, ovvero nome, indirizzo e partita IVA      |
 | 4                | L'admin inserisce i dati richiesti                            |
-| 5                | Il sistema salva il negozio nel database |
+| 5                | Il sistema salva le informazioni del negozio |
 
 ### UC28 - Modifica negozio
 
@@ -1290,7 +1328,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | L'admin è loggato e possiede delle richieste di approvazione in sospeso                                    |
+| Precondition        | L'admin è loggato                                  |
 | Postcondition       | Il manager è approvato |
 | Nominal Scenario    | Scenario 30.1                                              |
 | Variants            |Nessuna                                                   |
@@ -1341,7 +1379,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che l'admin sia loggato                   |
 | 3                | Il sistema chiede i dati relativi all'utente, ovvero nome, cognome, email e password e ruolo      |
 | 4                | L'admin inserisce i dati richiesti                            |
-| 5                | Il sistema salva l'utente nel database |
+| 5                | Il sistema salva le informazioni dell'utente |
 
 #### Scenario 31.2
 
@@ -1375,7 +1413,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Step#            | Description                                                      |
 | 1                | L'admin chiede di modificare un utente  |
 | 2                | Il sistema verifica che l'admin sia loggato e che l'utente esista                 |
-| 3                | Il sistema permette all'admin di modificare l'utente, ovvero nome, cognome, email e password e ruolo     |
+| 3                | Il sistema permette all'admin di modificare l'utente, ovvero nome, cognome, email e password     |
 | 4                | L'admin inserisce i dati richiesti                            |
 | 5                | Il sistema salva le modifiche apportate all'utente |
 
@@ -1534,7 +1572,47 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che l'admin sia loggato                   |
 | 3                | Il sistema restituisce la lista degli utenti |
 
+### UC 38 - Visualizzazione dei prodotti
 
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | La lista dei prodotti viene visualizzata |
+| Nominal Scenario    | Scenario 38.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                         |
+
+#### Scenario 38.1
+
+| **Scenario 38.1** | **Prodotti visualizzati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | La lista dei prodotti viene visualizzata          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di visualizzare la lista dei prodotti  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema restituisce la lista dei prodotti |
+
+### UC39 - Visualizzazione dei carrelli/ordini
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | La lista dei carrelli/ordini viene visualizzata |
+| Nominal Scenario    | Scenario 39.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                         |
+
+#### Scenario 39.1
+
+| **Scenario 39.1** | **Carrelli/ordini visualizzati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | La lista dei carrelli/ordini viene visualizzata          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di visualizzare la lista dei carrelli/ordini di tutti gli utenti |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema restituisce la lista dei carrelli/ordini |
 
 
 

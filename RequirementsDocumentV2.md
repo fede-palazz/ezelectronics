@@ -127,6 +127,10 @@ Version: V2 - description of EZElectronics
     - [UC35 - Eliminazione di un carrello/ordine](#uc35---eliminazione-di-un-carrelloordine)
       - [Scenario 35.1](#scenario-351)
       - [Scenario 35.2](#scenario-352)
+    - [UC36 - Visualizzazione dei negozi](#uc36---visualizzazione-dei-negozi)
+      - [Scenario 36.1](#scenario-361)
+    - [UC37 - Visualizzazione degli utenti](#uc37---visualizzazione-degli-utenti)
+      - [Scenario 37.1](#scenario-371)
 - [Glossary](#glossary)
 - [System Design](#system-design)
 - [Deployment Diagram](#deployment-diagram)
@@ -223,11 +227,11 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | FR6.3 | Il cliente deve poter visualizzare il prezzo finale compreso di costo prodotti e costi di spedizione |
 | FR6.4 | Il cliente deve poter monitorare lo stato dell'ordine |
 | **FR7**  | Funzioni amministratore                                                  |
-| FR7.1 | Un Admin deve essere in grado di registrare, modificare ed eliminare un negozio |
+| FR7.1 | Un Admin deve essere in grado di visualizzare, registrare, modificare ed eliminare un negozio |
 | FR7.2 | Un Admin deve essere in grado di approvare le registrazioni dei manager dei negozi |
 | FR7.3 | Un Admin deve essere in grado di visualizzare, aggiungere, modificare ed eliminare tutti gli utenti (testing) |
-| FR7.4 | Un Admin deve essere in grado di visualizzare, aggiungere, modificare ed eliminare tutti i prodotti (testing) |
-| FR7.5 | Un Admin deve essere in grado di visualizzare, modificare ed eliminare tutti i carrelli degli utenti (testing) |
+| FR7.4 | Un Admin deve essere in grado di eliminare tutti i prodotti (testing) |
+| FR7.5 | Un Admin deve essere in grado di visualizzare ed eliminare tutti i carrelli degli utenti (testing) |
 
 
 
@@ -761,7 +765,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ### UC16 - Visualizzazione ordini passati
 
-| **Actors Involved** | **Cliente**                                               |
+| **Actors Involved** | **Cliente, Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
 | Precondition        | Il cliente è loggato                                      |
 | Postcondition       | Il cliente visualizza la lista degli ordini passati |
@@ -816,7 +820,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Cliente, Manager, Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | L'utente è loggato                                      |
+| Precondition        | L'utente ha accesso a internet                                   |
 | Postcondition       | Il sistema restituisce la lista dei prodotti |
 | Nominal Scenario    | Scenario 18.1                                              |
 | Variants            | 18.2, 18.3, 18.4                                                    |
@@ -826,7 +830,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.1** | **Prodotti trovati con successo**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente è loggato                                             |
+| Precondition     | L'utente ha accesso a internet                                          |
 | Post condition   | Il sistema restituisce la lista dei prodotti          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare la lista dei prodotti  |
@@ -837,7 +841,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.2** | **Ricerca prodotto per categoria**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente è loggato                                             |
+| Precondition     | L'utente ha accesso a internet                                          |
 | Post condition   | Il sistema restituisce la lista dei prodotti appartenenti ad una certa categoria          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare la lista dei prodotti di una certa categoria  |
@@ -848,7 +852,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.3** | **Ricerca prodotto per modello**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente è loggato                                             |
+| Precondition     | L'utente ha accesso a internet                                          |
 | Post condition   | Il sistema restituisce la lista dei prodotti con un certo modello          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare la lista dei prodotti con un certo modello  |
@@ -859,7 +863,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.4** | **Visualizzazione di un singolo prodotto**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente è loggato                                             |
+| Precondition     | L'utente ha accesso a internet                                          |
 | Post condition   | Il sistema restituisce le informazioni di un singolo prodotto          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare le informazioni di un singolo prodotto  |
@@ -870,7 +874,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Scenario 18.5** | **Prodotto non trovato**                               |
 | ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L'utente è loggato                                             |
+| Precondition     | L'utente ha accesso a internet                                          |
 | Post condition   | Il sistema restituisce un messaggio di errore          |
 | Step#            | Description                                                      |
 | 1                | L'utente chiede di visualizzare le informazioni di un prodotto  |
@@ -882,7 +886,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Cliente, Manager, Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | L'utente è loggato                                      |
+| Precondition        | L'utente ha accesso a internet                                      |
 | Postcondition       | Il sistema restituisce la lista dei prodotti filtrati |
 | Nominal Scenario    | Scenario 19.1                                              |
 | Variants            | 19.2, 19.3                                                    |
@@ -892,7 +896,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 19.1  | Ricerca prodotti                                                               |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                             |
+|  Precondition  | L'utente ha accesso a internet                                                             |
 | Post condition | La lista dei prodotti viene visualizzata                                       |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti                          |
@@ -905,7 +909,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 19.2  | Ricerca prodotto per categoria                                                      |
 | :------------: | :---------------------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                                  |
+|  Precondition  | L'utente ha accesso a internet                                                                  |
 | Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
 |     Step#      | Description                                                                         |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
@@ -918,7 +922,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 19.3  | Ricerca prodotto per modello                                                   |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                             |
+|  Precondition  | L'utente ha accesso a internet                                                             |
 | Post condition | La lista dei prodotti con modello M viene visualizzata                         |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M            |
@@ -935,7 +939,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | **Actors Involved** | **Cliente, Manager, Admin**                                               |
 | ------------------- | --------------------------------------------------------- |
-| Precondition        | L'utente è loggato                                      |
+| Precondition        | L'utente ha accesso a internet                                      |
 | Postcondition       | Il sistema restituisce la lista dei prodotti ordinati |
 | Nominal Scenario    | Scenario 20.1                                              |
 | Variants            | 20.2, 20.3, 20.4                                                    |
@@ -945,7 +949,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 20.1  | Ricerca prodotti                                                               |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                             |
+|  Precondition  | L'utente ha accesso a internet                                                             |
 | Post condition | La lista dei prodotti viene visualizzata                                       |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti                          |
@@ -958,7 +962,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 20.2  | Ricerca prodotto per categoria                                                      |
 | :------------: | :---------------------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                                  |
+|  Precondition  | L'utente ha accesso a internet                                                                  |
 | Post condition | La lista dei prodotti appartenenti ad una categoria C viene visualizzata            |
 |     Step#      | Description                                                                         |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti appartenenti alla categoria C |
@@ -971,7 +975,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 | Scenario 20.3  | Ricerca prodotto per modello                                                   |
 | :------------: | :----------------------------------------------------------------------------- |
-|  Precondition  | L'utente è loggato                                                             |
+|  Precondition  | L'utente ha accesso a internet                                                             |
 | Post condition | La lista dei prodotti con modello M viene visualizzata                         |
 |     Step#      | Description                                                                    |
 |       1        | L'utente chiede di visualizzare la lista dei prodotti con modello M            |
@@ -1487,6 +1491,49 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 2                | Il sistema verifica che l'admin sia loggato                   |
 | 3                | Il sistema controlla l’esistenza del carrello con il dato id      |
 | 4                | Il sistema non trova un carrello con l'id fornito e restituisce un messaggio di errore |
+
+### UC36 - Visualizzazione dei negozi
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | La lista dei negozi viene visualizzata |
+| Nominal Scenario    | Scenario 36.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                         |
+
+#### Scenario 36.1
+
+| **Scenario 36.1** | **Negozi visualizzati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | La lista dei negozi viene visualizzata          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di visualizzare la lista dei negozi  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema restituisce la lista dei negozi |
+
+### UC37 - Visualizzazione degli utenti
+
+| **Actors Involved** | **Admin**                                               |
+| ------------------- | --------------------------------------------------------- |
+| Precondition        | L'admin è loggato                                      |
+| Postcondition       | La lista degli utenti viene visualizzata |
+| Nominal Scenario    | Scenario 37.1                                              |
+| Variants            | Nessuna                                                   |
+| Exceptions          | Nessuna                         |
+
+#### Scenario 37.1
+
+| **Scenario 37.1** | **Utenti visualizzati con successo**                               |
+| ---------------- | ---------------------------------------------------------------- |
+| Precondition     | L'admin è loggato                                             |
+| Post condition   | La lista degli utenti viene visualizzata          |
+| Step#            | Description                                                      |
+| 1                | L'admin chiede di visualizzare la lista degli utenti  |
+| 2                | Il sistema verifica che l'admin sia loggato                   |
+| 3                | Il sistema restituisce la lista degli utenti |
+
 
 
 

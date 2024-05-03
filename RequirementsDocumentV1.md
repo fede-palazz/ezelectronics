@@ -292,15 +292,14 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ##### Scenario 3.1
 
-| **Scenario 3.1** | **Utente disconnesso con successo**                                      |
-| ---------------- | ------------------------------------------------------------------------ |
-| Precondition     | L’utente è loggato                                                       |
-| Post condition   | L’utente non è loggato                                                   |
-| Step#            | Description                                                              |
-| 1                | L’utente chiede di eseguire il logout                                    |
-| 2                | Il sistema verifica che l’utente sia loggato                             |
+| **Scenario 3.1** | **Utente disconnesso con successo**                          |
+| ---------------- | ------------------------------------------------------------ |
+| Precondition     | L’utente è loggato                                           |
+| Post condition   | L’utente non è loggato                                       |
+| Step#            | Description                                                  |
+| 1                | L’utente chiede di eseguire il logout                        |
+| 2                | Il sistema verifica che l’utente sia loggato                 |
 | 3                | Il sistema esegue il logout dell'utente, invalidando la sessione attuale |
-| 4                | Il sistema mostra un messaggio di conferma di avvenuta disconnessione    |
 
 #### UC4 - Visualizza informazioni profilo
 

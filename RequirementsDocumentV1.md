@@ -216,17 +216,17 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ##### Scenario 1.1
 
-| **Scenario 1.1** | **Registrazione**                                                            |
-| ---------------- | ---------------------------------------------------------------------------- |
-| Precondition     | L’utente non è registrato                                                    |
-| Post condition   | L'utente è registrato                                                        |
-| Step#            | Description                                                                  |
-| 1                | L’utente chiede di registrarsi                                               |
-| 2                | Il sistema chiede nome, cognome, username, password e ruolo                  |
-| 3                | L’utente inserisce i dati richiesti                                          |
-| 4                | Il sistema acquisisce i dati inseriti                                        |
+| **Scenario 1.1** | **Registrazione completata**                                 |
+| ---------------- | ------------------------------------------------------------ |
+| Precondition     | L’utente non è registrato                                    |
+| Post condition   | L'utente è registrato                                        |
+| Step#            | Description                                                  |
+| 1                | L’utente chiede di registrarsi                               |
+| 2                | Il sistema chiede nome, cognome, username, password e ruolo  |
+| 3                | L’utente inserisce i dati richiesti                          |
+| 4                | Il sistema acquisisce i dati inseriti                        |
 | 5                | Il sistema controlla che l’username non sia associato a un account esistente |
-| 6                | Il sistema salva i dati e registra l’utente                                  |
+| 6                | Il sistema salva i dati e registra l’utente                  |
 
 ##### Scenario 1.2
 

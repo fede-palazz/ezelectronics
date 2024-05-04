@@ -313,14 +313,14 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 
 ##### Scenario 4.1
 
-| **Scenario 4.1** | **Utente visualizza informazioni profilo**                       |
-| ---------------- | ---------------------------------------------------------------- |
-| Precondition     | L’utente è loggato                                               |
-| Post condition   | L’utente visualizza le informazioni sul suo profilo              |
-| Step#            | Description                                                      |
+| **Scenario 4.1** | **Visualizza informazioni profilo**                          |
+| ---------------- | ------------------------------------------------------------ |
+| Precondition     | L’utente è loggato                                           |
+| Post condition   | L’utente visualizza le informazioni sul suo profilo          |
+| Step#            | Description                                                  |
 | 1                | L’utente richiede al sistema le informazioni sul proprio profilo |
-| 2                | Il sistema verifica che l’utente sia loggato                     |
-| 3                | Il sistema restituisce le informazioni sul profilo dell'utente   |
+| 2                | Il sistema verifica che l’utente sia loggato                 |
+| 3                | Il sistema restituisce le informazioni sul profilo dell'utente |
 
 #### UC5 - Aggiunta di un prodotto al carrello
 

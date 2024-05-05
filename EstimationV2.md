@@ -3,11 +3,12 @@ Date:
 
 Version: V2
 
+## Estimation approach
 
-# Estimation approach
 Consider the EZElectronics  project in FUTURE version (as proposed by your team in requirements V2), assume that you are going to develop the project INDEPENDENT of the deadlines of the course, and from scratch (not from V1)
-# Estimate by size
-### 
+
+## Estimate by size
+
 |             | Estimate                        |             
 | ----------- | ------------------------------- |  
 | NC =  Estimated number of classes to be developed   |             9                |             
@@ -17,7 +18,7 @@ Consider the EZElectronics  project in FUTURE version (as proposed by your team 
 | C = Estimated cost, in euro (here use 1 person hour cost = 30 euro) | 5400 | 
 | Estimated calendar time, in calendar weeks (Assume team of 4 people, 8 hours per day, 5 days per week ) |      1              |                  
 
-#### Spiegazione delle stime di Estimated by size
+### Spiegazione delle stime di Estimated by size
 
 Le classi che devono essere sviluppate sono solo quelle del negozio, dell'indirizzo e modello. La media di 200 LOC per classe è basata sul fatto che di solito un metodo ha 10/20 righe.
 
@@ -25,9 +26,8 @@ Basandoci poi sulla GUI sviluppata, una stima ottimale delle righe necessarie pe
 
 Considerando invece la documentazione sviluppata nel progetto invece si hanno 1870 righe di markdown, che equivalgono a 187hr e che portano il costo del progetto a 28110 euro.
 
+## Estimate by product decomposition
 
-# Estimate by product decomposition
-### 
 |         component name    | Estimated effort (person hours)   |             
 | ----------- | ------------------------------- | 
 | requirement document   | 60 |
@@ -38,12 +38,10 @@ Considerando invece la documentazione sviluppata nel progetto invece si hanno 18
 | api tests | 60 |
 | management documents  | 13|
 
+## Estimate by activity decomposition
 
-
-# Estimate by activity decomposition
-### 
-|         Activity name    | Estimated effort (person hours)   |             
-| ---------------------------- | -------------------------------: | 
+|         Activity name    | Estimated effort (person hours)   |
+| ---------------------------- | -------------------------------: |
 |**Requirement document**    | **52** |
 | --Review del sistema attuale| 5 |
 | --Definizione stakeholders e context diagram| 10 |
@@ -84,10 +82,10 @@ Considerando invece la documentazione sviluppata nel progetto invece si hanno 18
 | --Creazione dei test necessari|40|
 | --Verifica del corretto funzionamento dei test|10|
 | **Management documents**  | **13** |
-###
-![alt text](Immagini/gantt2.png)
 
-# Summary
+![](Immagini/gantt2.png)
+
+## Summary
 
 Report here the results of the three estimation approaches. The  estimates may differ. Discuss here the possible reasons for the difference
 
@@ -99,5 +97,4 @@ Report here the results of the three estimation approaches. The  estimates may d
 
 Diverse metodologie di stima possono portare a risultati diversi a seconda di cosa viene considerato nel processo di valutazione, infatti l'approccio tra la prima sezione e le altre e' totalmente diverso.
 Inoltre il livello di dettaglio porta a risultati simili, infatti by product e by activity sono simili, ma considerare le task nell'insieme puo' portare a una generalizzazione e quindi una riduzione delle ore.
-
 

@@ -3,11 +3,12 @@ Date:
 
 Version: V1
 
+## Estimation approach
 
-# Estimation approach
 Consider the EZElectronics  project in CURRENT version (as given by the teachers), assume that you are going to develop the project INDEPENDENT of the deadlines of the course, and from scratch
-# Estimate by size
-### 
+
+## Estimate by size
+
 |             | Estimate                        |             
 | ----------- | ------------------------------- |  
 | NC =  Estimated number of classes to be developed   |             6                |             
@@ -17,16 +18,16 @@ Consider the EZElectronics  project in CURRENT version (as given by the teachers
 | C = Estimated cost, in euro (here use 1 person hour cost = 30 euro) | 4500 | 
 | Estimated calendar time, in calendar weeks (Assume team of 4 people, 8 hours per day, 5 days per week ) |      1              |               
 
-#### Spiegazione delle stime di Estimate by size
+### Spiegazione delle stime di Estimate by size
+
 Le classi che devono essere sviluppate sono solo quelle del controller e del DAO. Nelle classi del controller, abbiamo solo le firme dei metodi, mentre nelle classi DAO, abbiamo solo il nome della classe. La media di 250 LOC per classe è basata sul fatto che di solito un metodo ha 10/20 righe. Questa media considera anche le classi DAO che, essendo in media più lunghe, hanno contribuito ad aumentarla di una certa percentuale.
 
 Basandoci poi sulla GUI sviluppata, una stima ottimale delle righe necessarie per svilupparla sono 4000(400phr), che portano il costo del lavoro a 16500 euro.
 
 Considerando invece la documentazione sviluppata nel progetto invece si hanno 1070 righe di markdown, che equivalgono a 107hr e che portano il costo del progetto a 19710 euro.
 
+## Estimate by product decomposition
 
-# Estimate by product decomposition
-### 
 |         component name    | Estimated effort (person hours)   |             
 | ----------- | ------------------------------- | 
 | requirement document   | 40 |
@@ -37,12 +38,10 @@ Considerando invece la documentazione sviluppata nel progetto invece si hanno 10
 | api tests | 50 |
 | management documents  | 10|
 
+## Estimate by activity decomposition
 
-
-# Estimate by activity decomposition
-### 
-|         Activity name    | Estimated effort (person hours)   |             
-| ---------------------------- | -------------------------------: | 
+|         Activity name    | Estimated effort (person hours)   |
+| ---------------------------- | -------------------------------: |
 |**Requirement document**    | **40** |
 | --Review del sistema attuale| 5 |
 | --Definizione stakeholders e context diagram| 6 |
@@ -76,17 +75,17 @@ Considerando invece la documentazione sviluppata nel progetto invece si hanno 10
 | --Deploy| 10 |
 | **Unit tests** | 35 |
 | --Identificazione dei metodi da testare|5|
-| --Creazione dei test necessari|25|0
+| --Creazione dei test necessari|25|
 | --Verifica del corretto funzionamento dei test|5|
 | **api tests** | 50 |
 | --Identificazione dei metodi da testare|5|
 | --Creazione dei test necessari|40|
 | --Verifica del corretto funzionamento dei test|5|
 | **Management documents**  | 10 |
-###
-![alt text](Immagini/gantt.png)
 
-# Summary
+![](Immagini/gantt.png)
+
+## Summary
 
 Report here the results of the three estimation approaches. The  estimates may differ. Discuss here the possible reasons for the difference
 

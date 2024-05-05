@@ -10,11 +10,11 @@ Version: 1.0
 
 ### Utente non loggato
 
-![#0 - Homepage ospiti](Immagini/gui_v2/#0 - Homepage ospiti.png)
+![](Immagini/gui_v2/#0_Homepage_ospiti.png)
 
 ### Utente loggato
 
-![#0 - Homepage utenti](Immagini/gui_v2/#0 - Homepage utenti.png)
+![](Immagini/gui_v2/#0_Homepage_utenti.png)
 
 ## UC1 - Creazione account
 

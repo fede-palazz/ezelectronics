@@ -344,10 +344,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 3                | L’utente inserisce i dati richiesti                          |
 | 4                | Il sistema acquisisce i dati inseriti                        |
 | 5                | Il sistema controlla che l’username non sia associato a un account esistente e che il negozio esista |
-| 6                | Il sistema salva i dati e registra l’account manager         |
-| 7                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
-| 8                | L'Admin approva la richiesta di registrazione del manager    |
-| 9                | Il sistema notifica il manager dell'avvenuta registrazione   |
+| 6                | Il sistema salva i dati ed invia una richiesta di approvazione account all'amministratore di sistema |
 
 ##### Scenario 1.3
 
@@ -362,21 +359,6 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | 4                | Il sistema acquisisce i dati inseriti                        |
 | 5                | Il sistema controlla che l’username non sia associato a un account esistente |
 | 6                | Il nome utente è già associato a un account e il sistema restituisce un errore |
-
-##### Scenario 1.4
-
-| **Scenario 1.4** | **Richiesta di registrazione non approvata**                 |
-| ---------------- | ------------------------------------------------------------ |
-| Precondition     | L’utente ha richiesto la registrazione come Manager          |
-| Post condition   | L'account del manager non è attivo                           |
-| Step#            | Description                                                  |
-| 1                | L’utente chiede di registrarsi come manager                  |
-| 2                | Il sistema chiede nome, cognome, username, email, password e negozio |
-| 3                | L’utente inserisce i dati richiesti                          |
-| 4                | Il sistema acquisisce i dati inseriti                        |
-| 5                | Il sistema controlla che l’username non sia associato a un account esistente e che il negozio esista |
-| 6                | Il sistema invia una richiesta di registrazione all'Admin per l'approvazione del manager |
-| 7                | L'Admin rifiuta la richiesta di registrazione del manager    |
 
 #### UC2 - Login
 
@@ -478,7 +460,7 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Step#            | Description                                                  |
 | 1                | L’utente chiede al sistema di modificare le informazioni sul proprio profilo |
 | 2                | Il sistema verifica che l’utente sia loggato                 |
-| 3                | Il sistema permette all'utente di modificare le informazioni sul proprio profilo, ovvero email, nome, cognome e password |
+| 3                | Il sistema permette all'utente di modificare le informazioni sul proprio profilo, ovvero email, username, nome e cognome e password |
 | 4                | Il sistema salva le modifiche apportate dall'utente          |
 
 #### UC6 - Aggiunta di un prodotto al carrello
@@ -762,10 +744,9 @@ Martina ha bisogno di acquistare un nuovo laptop per suo figlio, che inizia a fr
 | Precondition     | Il cliente è loggato e ha  un indirizzo di spedizione registrato |
 | Post condition   | L'indirizzo di spedizione viene rimosso |
 | Step#            | Description                                                      |
-| 1                | Il cliente chiede di rimuovere un indirizzo di spedizione dal proprio profilo |
+| 1                | Il cliente chiede di rimuovere l'indirizzo di spedizione dal proprio profilo |
 | 2                | Il sistema verifica che il cliente sia loggato                   |
-| 3                | Il sistema permette al cliente di rimuovere l'indirizzo di spedizione  |
-| 4                | L'indirizzo di speziozione viene rimosso          |
+| 3              | L'indirizzo di spedizione viene rimosso        |
 
 #### UC15 - Visualizzazione ordini passati
 

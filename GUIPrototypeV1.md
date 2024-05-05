@@ -10,130 +10,130 @@ Version: 1.0
 
 ### Utente non loggato
 
-![#0 - Homepage ospiti](Immagini/gui_v1/#0 - Homepage ospiti.png)
+![](Immagini/gui_v1/0_Homepage_ospiti.png)
 
 ### Utente loggato
 
-![#0 - Homepage utenti](Immagini/gui_v1/#0 - Homepage utenti.png)
+![](Immagini/gui_v1/0_Homepage_utenti.png)
 
 ## UC1 - Creazione account
 
-![#1 - Registrazione](Immagini/gui_v1/#1 - Registrazione.png)
+![](Immagini/gui_v1/1_Registrazione.png)
 
 ### Scenario 1.1 - Registrazione completata
 
-![#1.1 - Registrazione riuscita](Immagini/gui_v1/#1.1 - Registrazione riuscita.png)
+![](Immagini/gui_v1/1.1_Registrazione_riuscita.png)
 
 ### Scenario 1.2 - Username già registrato
 
-![#1.2 - Registrazione fallita](Immagini/gui_v1/#1.2 - Registrazione fallita.png)
+![](Immagini/gui_v1/1.2_Registrazione_fallita.png)
 
 ## UC2 - Login
 
-![#2 - Login](Immagini/gui_v1/#2 - Login.png)
+![](Immagini/gui_v1/2_Login.png)
 
 ### Scenario 2.1 - Utente loggato con successo
 
-![#2.1 - Login riuscito](Immagini/gui_v1/#2.1 - Login riuscito.png)
+![](Immagini/gui_v1/2.1_Login_riuscito.png)
 
 ### Scenario 2.2 - Credenziali errate
 
-![#2.2 - Login fallito](Immagini/gui_v1/#2.2 - Login fallito.png)
+![](Immagini/gui_v1/2.2_Login_fallito.png)
 
 ## UC3 - Logout
 
-![#3 - Logout](Immagini/gui_v1/#3 - Logout.png)
+![](Immagini/gui_v1/3_Logout.png)
 
 ## UC4 - Informazioni profilo
 
-![#4 - Profilo](Immagini/gui_v1/#4 - Profilo.png)
+![](Immagini/gui_v1/4_Profilo.png)
 
 ### Scenario 4.1 - Visualizza informazioni profilo
 
-![#4.1 - Profilo - visualizza informazioni](Immagini/gui_v1/#4.1 - Profilo - visualizza informazioni.png)
+![](Immagini/gui_v1/4.1_Profilo_visualizza_informazioni.png)
 
 ## UC5 - Aggiunta prodotto al carrello
 
-![#5 - Carrello - aggiunta prodotto](Immagini/gui_v1/#5 - Carrello - aggiunta prodotto.png)
+![](Immagini/gui_v1/5_Carrello_aggiunta_prodotto.png)
 
 ## UC6_UC7 - Rimozione prodotto dal carrello && Visualizzazione carrello
 
-![#6-7 - Carrello - rimozione prodotto](Immagini/gui_v1/#6-7 - Carrello - rimozione prodotto.png)
+![](Immagini/gui_v1/6-7_Carrello_rimozione_prodotto.png)
 
 ## UC8 - Svuotamento carrello
 
-![#8 - Carrello - svuotamento carrello](Immagini/gui_v1/#8 - Carrello - svuotamento carrello.png)
+![](Immagini/gui_v1/8_Carrello_svuotamento_carrello.png)
 
 ## UC9 - Checkout carrello
 
-![#9 - Carrello - checkout](Immagini/gui_v1/#9 - Carrello - checkout.png)
+![](Immagini/gui_v1/9_Carrello_checkout.png)
 
 ## Scenario 9.1 - Checkout completato
 
-![#9.1 - Carrello - checkout riuscito](Immagini/gui_v1/#9.1 - Carrello - checkout riuscito.png)
+![](Immagini/gui_v1/9.1_Carrello_checkout_riuscito.png)
 
 ## UC10 - Visualizzazione ordini passati
 
-![#10 - Profilo - visualizza ordini passati](Immagini/gui_v1/#10 - Profilo - visualizza ordini passati.png)
+![](Immagini/gui_v1/10_Profilo_visualizza_ordini_passati.png)
 
 ## UC11 - Registrazione nuovo prodotto
 
-![#11 - Catalogo - aggiunta prodotto](Immagini/gui_v1/#11 - Catalogo - aggiunta prodotto.png)
+![](Immagini/gui_v1/11_Catalogo_aggiunta_prodotto.png)
 
 ### Scenario 11.1 - Prodotto aggiunto con successo
 
-![#11.1 - Catalogo - aggiunta prodotto riuscita](Immagini/gui_v1/#11.1 - Catalogo - aggiunta prodotto riuscita.png)
+![](Immagini/gui_v1/11.1_Catalogo_aggiunta_prodotto_riuscita.png)
 
 ### Scenario 11.2 - Codice prodotto non univoco
 
-![#11.2 - Catalogo - aggiunta prodotto fallita](Immagini/gui_v1/#11.2 - Catalogo - aggiunta prodotto fallita.png)
+![](Immagini/gui_v1/11.2_Catalogo_aggiunta_prodotto_fallita.png)
 
 ## UC12 - Registrazione set di prodotti
 
-![#12 - Catalogo - aggiungi set di prodotti](Immagini/gui_v1/#12 - Catalogo - aggiungi set di prodotti.png)
+![](Immagini/gui_v1/12_Catalogo_aggiungi_set_di_prodotti.png)
 
 ### Scenario 12.1 - Set di prodotti registrato con successo
 
-![#12.1 - Catalogo - aggiungi set di prodotti riuscita](Immagini/gui_v1/#12.1 - Catalogo - aggiungi set di prodotti riuscita.png)
+![](Immagini/gui_v1/12.1_Catalogo_aggiungi_set_di_prodotti_riuscita.png)
 
 ## UC13 - Eliminazione prodotto
 
-![#13 - Catalogo - rimuovi prodotto](Immagini/gui_v1/#13 - Catalogo - rimuovi prodotto.png)
+![](Immagini/gui_v1/13_Catalogo_rimuovi_prodotto.png)
 
 ### Scenario 13.1 - Prodotto eliminato con successo
 
-![#13.1 - Catalogo - rimuovi prodotto riuscito](Immagini/gui_v1/#13.1 - Catalogo - rimuovi prodotto riuscito.png)
+![](Immagini/gui_v1/13.1_Catalogo_rimuovi_prodotto_riuscito.png)
 
 ### Scenario 13.2 - Codice prodotto non esistente
 
-![#13.2 - Catalogo - rimuovi prodotto fallito](Immagini/gui_v1/#13.2 - Catalogo - rimuovi prodotto fallito.png)
+![](Immagini/gui_v1/13.2_Catalogo_rimuovi_prodotto_fallito.png)
 
 ## UC14 - Segnalazione prodotto come venduto
 
-![#14 - Catalogo - segna prodotto come venduto](Immagini/gui_v1/#14 - Catalogo - segna prodotto come venduto.png)
+![](Immagini/gui_v1/14_Catalogo_segna_prodotto_come_venduto.png)
 
 ### Scenario 14.1 - Prodotto segnato come venduto
 
-![#14.1 - Catalogo - segna prodotto come venduto](Immagini/gui_v1/#14.1 - Catalogo - segna prodotto come venduto.png)
+![](Immagini/gui_v1/14.1_Catalogo_segna_prodotto_come_venduto.png)
 
 ## UC15 - Ricerca prodotti
 
 ### Scenario 15.1 - Visualizzazione catalogo prodotti
 
-![#15_15.1 - Ricerca - lista prodotti](Immagini/gui_v1/#15_15.1 - Ricerca - lista prodotti.png)
+![](Immagini/gui_v1/15_15.1_Ricerca_lista_prodotti.png)
 
 ### Scenario 15.2 - Ricerca prodotto per categoria
 
-![#15.2 - Ricerca - categoria](Immagini/gui_v1/#15.2 - Ricerca - categoria.png)
+![](Immagini/gui_v1/15.2_Ricerca_categoria.png)
 
 ### Scenario 15.3 - Ricerca prodotto per modello
 
-![#15.3 - Ricerca - modello](Immagini/gui_v1/#15.3 - Ricerca - modello.png)
+![](Immagini/gui_v1/15.3_Ricerca_modello.png)
 
 ### Scenario 15.4 - Ricerca singolo prodotto
 
-![#15.4 - Ricerca - singolo prodotto](Immagini/gui_v1/#15.4 - Ricerca - singolo prodotto.png)
+![](Immagini/gui_v1/15.4_Ricerca_singolo_prodotto.png)
 
 ## UC16 - Filtraggio prodotti
 
-![#16 - Filtri](Immagini/gui_v1/#16 - Filtri.png)
+![](Immagini/gui_v1/16_Filtri.png)

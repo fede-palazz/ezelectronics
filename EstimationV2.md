@@ -97,6 +97,7 @@ Report here the results of the three estimation approaches. The  estimates may d
 | estimate by product decomposition |940|5.9|
 | estimate by activity decomposition |910|5.7|
 
-
+Diverse metodologie di stima possono portare a risultati diversi a seconda di cosa viene considerato nel processo di valutazione, infatti l'approccio tra la prima sezione e le altre e' totalmente diverso.
+Inoltre il livello di dettaglio porta a risultati simili, infatti by product e by activity sono simili, ma considerare le task nell'insieme puo' portare a una generalizzazione e quindi una riduzione delle ore.
 
 

@@ -85,7 +85,7 @@ Considerando invece la documentazione sviluppata nel progetto invece si hanno 18
 | --Verifica del corretto funzionamento dei test|10|
 | **Management documents**  | **13** |
 ###
-![alt text](Immagini/gantt.png)
+![alt text](Immagini/gantt2.png)
 
 # Summary
 

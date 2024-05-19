@@ -1,3 +1,4 @@
+import { ExistingReviewError, NoReviewProductError } from "../errors/reviewError";
 import { User } from "../components/user";
 import ReviewDAO from "../dao/reviewDAO";
 
@@ -21,14 +22,25 @@ class ReviewController {
     user: User,
     score: number,
     comment: string
-  ) /**:Promise<void> */ {}
+  ) /**:Promise<void> */ {
+    const existingReview = await this.dao.getReview(model, user);
+    if (existingReview) {
+      throw new ExistingReviewError();
+    }
+
+    throw new Error("Method not implemented. Add check for existing model");
+
+    return this.dao.addReview(model, user, score, comment);
+  }
 
   /**
    * Returns all reviews for a product
    * @param model The model of the product to get reviews from
    * @returns A Promise that resolves to an array of ProductReview objects
    */
-  async getProductReviews(model: string) /**:Promise<ProductReview[]> */ {}
+  async getProductReviews(model: string) /**:Promise<ProductReview[]> */ {
+    return this.dao.getProductReviews(model);
+  }
 
   /**
    * Deletes the review made by a user for a product
@@ -36,20 +48,35 @@ class ReviewController {
    * @param user The user who made the review to delete
    * @returns A Promise that resolves to nothing
    */
-  async deleteReview(model: string, user: User) /**:Promise<void> */ {}
+  async deleteReview(model: string, user: User) /**:Promise<void> */ {
+    const existingReview = await this.dao.getReview(model, user);
+    if (!existingReview) {
+      throw new NoReviewProductError();
+    }
+
+    throw new Error("Method not implemented. Add check for existing model");
+
+    return this.dao.deleteReview(model, user);
+  }
 
   /**
    * Deletes all reviews for a product
    * @param model The model of the product to delete the reviews from
    * @returns A Promise that resolves to nothing
    */
-  async deleteReviewsOfProduct(model: string) /**:Promise<void> */ {}
+  async deleteReviewsOfProduct(model: string) /**:Promise<void> */ {
+    throw new Error("Method not implemented. Add check for existing model");
+
+    return this.dao.deleteReviewsOfProduct(model);
+  }
 
   /**
    * Deletes all reviews of all products
    * @returns A Promise that resolves to nothing
    */
-  async deleteAllReviews() /**:Promise<void> */ {}
+  async deleteAllReviews() /**:Promise<void> */ {
+    return this.dao.deleteAllReviews();
+  }
 }
 
 export default ReviewController;

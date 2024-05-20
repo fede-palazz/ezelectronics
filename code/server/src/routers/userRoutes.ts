@@ -53,7 +53,14 @@ class UserRoutes {
      * - role: string (one of "Manager", "Customer", "Admin")
      * It returns a 200 status code.
      */
-    this.router.post("/", (req: any, res: any, next: any) =>
+    this.router.post("/",
+      body("username").isString().isLength({ min: 1 }), //the request body must contain an attribute named "username", the attribute must be a non-empty string
+      body("surname").isString().isLength({ min: 1 }), //the request body must contain an attribute named "surname", the attribute must be a non-empty string
+      body("name").isString().isLength({ min: 1 }), //the request body must contain an attribute named "name", the attribute must be a non-empty string
+      body("password").isString().isLength({ min: 1 }), //the request body must contain an attribute named "password", the attribute must be a non-empty string
+      body("role").isString().isIn(["Manager", "Customer"]),
+      this.errorHandler.validateRequest,
+    (req: any, res: any, next: any) =>
       this.controller
         .createUser(
           req.body.username,
@@ -73,7 +80,10 @@ class UserRoutes {
      * It requires the user to be logged in and to be an admin.
      * It returns an array of users.
      */
-    this.router.get("/", (req: any, res: any, next: any) =>
+    this.router.get("/",
+      this.authService.isAdmin,
+      this.errorHandler.validateRequest,
+    (req: any, res: any, next: any) =>
       this.controller
         .getUsers()
         .then((users: any /**User[] */) => res.status(200).json(users))
@@ -86,7 +96,12 @@ class UserRoutes {
      * It expects the role of the users in the request parameters: the role must be one of ("Manager", "Customer", "Admin").
      * It returns an array of users.
      */
-    this.router.get("/roles/:role", (req: any, res: any, next: any) =>
+    this.router.get("/roles/:role", 
+      param("role").isString().isIn(["Manager", "Customer", "Admin"]),
+      this.errorHandler.validateRequest,
+      this.authService.isLoggedIn,
+      this.authService.isAdmin,
+    (req: any, res: any, next: any) =>
       this.controller
         .getUsersByRole(req.params.role)
         .then((users: any /**User[] */) => res.status(200).json(users))
@@ -99,7 +114,11 @@ class UserRoutes {
      * It expects the username of the user in the request parameters: the username must represent an existing user.
      * It returns the user.
      */
-    this.router.get("/:username", (req: any, res: any, next: any) =>
+    this.router.get("/:username",
+      param("username").isString().isLength({ min: 1 }),
+      this.authService.isLoggedIn,
+      this.errorHandler.validateRequest,
+     (req: any, res: any, next: any) =>
       this.controller
         .getUserByUsername(req.user, req.params.username)
         .then((user: any /**User */) => res.status(200).json(user))
@@ -112,7 +131,11 @@ class UserRoutes {
      * It expects the username of the user in the request parameters: the username must represent an existing user.
      * It returns a 200 status code.
      */
-    this.router.delete("/:username", (req: any, res: any, next: any) =>
+    this.router.delete("/:username",
+      param("username").isString().isLength({ min: 1 }), 
+      this.authService.isLoggedIn,
+      this.errorHandler.validateRequest,
+    (req: any, res: any, next: any) =>
       this.controller
         .deleteUser(req.user, req.params.username)
         .then(() => res.status(200).end())
@@ -124,7 +147,10 @@ class UserRoutes {
      * It requires the user to be logged in and to be an admin.
      * It returns a 200 status code.
      */
-    this.router.delete("/", (req: any, res: any, next: any) =>
+    this.router.delete("/", 
+    this.authService.isAdmin,
+    this.errorHandler.validateRequest,
+    (req: any, res: any, next: any) =>
       this.controller
         .deleteAll()
         .then(() => res.status(200).end())
@@ -142,7 +168,15 @@ class UserRoutes {
      * - birthdate: date. It cannot be empty, it must be a valid date in format YYYY-MM-DD, and it cannot be after the current date
      * It returns the updated user.
      */
-    this.router.patch("/:username", (req: any, res: any, next: any) =>
+    this.router.patch("/:username", 
+      this.authService.isLoggedIn,
+      param("username").isString().isLength({ min: 1 }),
+      body("name").isString().isLength({ min: 1 }),
+      body("surname").isString().isLength({ min: 1 }),
+      body("address").isString().isLength({ min: 1 }),
+      body("birthdate").isDate().isBefore(new Date().toISOString().split("T")[0]),
+      this.errorHandler.validateRequest,
+    (req: any, res: any, next: any) =>
       this.controller
         .updateUserInfo(
           req.user,
@@ -198,7 +232,8 @@ class AuthRoutes {
      * It returns an error if the username represents a non-existing user or if the password is incorrect.
      * It returns the logged in user.
      */
-    this.router.post("/", (req, res, next) =>
+    this.router.post("/", 
+    (req, res, next) =>
       this.authService
         .login(req, res, next)
         .then((user: User) => res.status(200).json(user))
@@ -212,7 +247,10 @@ class AuthRoutes {
      * It expects the user to be logged in.
      * It returns a 200 status code.
      */
-    this.router.delete("/current", (req, res, next) =>
+    this.router.delete("/current", 
+      this.authService.isLoggedIn,
+      this.errorHandler.validateRequest,
+    (req, res, next) =>
       this.authService
         .logout(req, res, next)
         .then(() => res.status(200).end())
@@ -224,7 +262,10 @@ class AuthRoutes {
      * It expects the user to be logged in.
      * It returns the logged in user.
      */
-    this.router.get("/current", (req: any, res: any) =>
+    this.router.get("/current",
+      this.authService.isLoggedIn,
+      this.errorHandler.validateRequest,
+    (req: any, res: any) =>
       res.status(200).json(req.user)
     );
   }

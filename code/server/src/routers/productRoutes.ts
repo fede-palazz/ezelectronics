@@ -155,13 +155,13 @@ class ProductRoutes {
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) => {
         const { grouping, category, model } = req.query;
-        let error = "The parameters are not formatted properly\n\n";
+        let error = "The parameters are not formatted properly";
         if (!grouping && (category || model))
-          return res.status(422).send('Errore 422: I parametri non sono formattati correttamente');
+          return res.status(422).json({ Error: error });
         if (grouping === 'category' && (!category || model))
-          return res.status(422).send('Errore 422: I parametri non sono formattati correttamente');
+          return res.status(422).json({ Error: error });
         if (grouping === 'model' && (!model || category))
-          return res.status(422).send('Errore 422: I parametri non sono formattati correttamente');
+          return res.status(422).json({ Error: error });
         next();
       },
       (req: any, res: any, next: any) =>
@@ -192,13 +192,13 @@ class ProductRoutes {
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) => {
         const { grouping, category, model } = req.query;
-        let error = "The parameters are not formatted properly\n\n";
+        let error = "The parameters are not formatted properly";
         if (!grouping && (category || model))
-          return res.status(422).send('Errore 422: I parametri non sono formattati correttamente');
+          return res.status(422).json({ Error: error });
         if (grouping === 'category' && (!category || model))
-          return res.status(422).send('Errore 422: I parametri non sono formattati correttamente');
+          return res.status(422).json({ Error: error });
         if (grouping === 'model' && (!model || category))
-          return res.status(422).send('Errore 422: I parametri non sono formattati correttamente');
+          return res.status(422).json({ Error: error });
         next();
       },
       (req: any, res: any, next: any) =>

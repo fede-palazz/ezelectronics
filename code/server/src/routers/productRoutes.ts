@@ -45,7 +45,7 @@ class ProductRoutes {
   initRoutes() {
     /**
      * Route for registering the arrival of a set of products.
-     * It requires the user to be logged in and to be a manager.
+     * It requires the user to be logged in and to be either a Manager or Admin.
      * It requires the following parameters:
      * - model: string. It cannot be empty and it cannot be repeated in the database.
      * - category: string (one of "Smartphone", "Laptop", "Appliance")
@@ -55,80 +55,154 @@ class ProductRoutes {
      * - arrivalDate: string. It can be omitted. If present, it must be a valid date in the format YYYY-MM-DD that is not after the current date
      * It returns a 200 status code if the arrival was registered successfully.
      */
-    this.router.post("/", (req: any, res: any, next: any) =>
-      this.controller
-        .registerProducts(
-          req.body.model,
-          req.body.category,
-          req.body.quantity,
-          req.body.details,
-          req.body.sellingPrice,
-          req.body.arrivalDate
-        )
-        .then(() => res.status(200).end())
-        .catch((err) => next(err))
+
+    this.router.post(
+      "/",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isAdminOrManager,
+      body("model").isString().notEmpty().withMessage("Field 'model' is required"),
+      body("category")
+        .isString()
+        .isIn(["Smartphone", "Laptop", "Appliance"])
+        .withMessage("Field 'category' possible values are 'Smartphone', 'Laptop', 'Appliance'"),
+      body("quantity").isInt({ gt: 0 }).withMessage("Field 'quantity' must be greater than 0"),
+      body("details")
+        .optional({ checkFalsy: true })
+        .isString()
+        .withMessage("Field 'details' needs to be a valid string"),
+      body("sellingPrice")
+        .isFloat({ gt: 0 })
+        .withMessage("Field 'sellingPrice' must be a positive decimal number"),
+      body("arrivalDate")
+        .optional({ checkFalsy: true })
+        .isDate({ format: "YYYY-MM-DD", delimiters: ["-"], strictMode: true })
+        .withMessage("Field 'arrivalDate' must be a string in the format 'YYYY-MM-DD'"),
+      this.errorHandler.validateRequest,
+      (req: any, res: any, next: any) =>
+        this.controller
+          .registerProducts(
+            req.body.model,
+            req.body.category,
+            req.body.quantity,
+            req.body.details,
+            req.body.sellingPrice,
+            req.body.arrivalDate
+          )
+          .then(() => res.status(200).end())
+          .catch((err) => next(err))
     );
 
     /**
      * Route for registering the increase in quantity of a product.
-     * It requires the user to be logged in and to be a manager.
+     * It requires the user to be logged in and to be either a Manager or an Admin.
      * It requires the product model as a request parameter. The model must be a string and cannot be empty, and it must represent an existing product.
      * It requires the following body parameters:
      * - quantity: number. It must be greater than 0. This number represents the increase in quantity, to be added to the existing quantity.
      * - changeDate: string. It can be omitted. If present, it must be a valid date in the format YYYY-MM-DD that is not after the current date and is after the arrival date of the product.
      * It returns the new quantity of the product.
      */
-    this.router.patch("/:model", (req: any, res: any, next: any) =>
-      this.controller
-        .changeProductQuantity(
-          req.params.model,
-          req.body.quantity,
-          req.body.changeDate
-        )
-        .then((quantity: any /**number */) =>
-          res.status(200).json({ quantity: quantity })
-        )
-        .catch((err) => next(err))
+    this.router.patch(
+      "/:model",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isAdminOrManager,
+      param("model").isString().notEmpty().withMessage("Parameter 'model' is required"),
+      body("quantity").isInt({ gt: 0 }).withMessage("Field 'quantity' must be greater than 0"),
+      body("changeDate")
+        .optional({ checkFalsy: true })
+        .isDate({ format: "YYYY-MM-DD", delimiters: ["-"], strictMode: true })
+        .withMessage("Field 'changeDate' must be a string in the format 'YYYY-MM-DD'"),
+      this.errorHandler.validateRequest,
+      (req: any, res: any, next: any) =>
+        this.controller
+          .changeProductQuantity(req.params.model, req.body.quantity, req.body.changeDate)
+          .then((quantity: number) => res.status(200).json({ quantity: quantity }))
+          .catch((err) => next(err))
     );
 
     /**
      * Route for selling a product.
-     * It requires the user to be logged in and to be a manager.
+     * It requires the user to be logged in and to be either a Manager or an Admin.
      * It requires the product model as a request parameter. The model must be a string and cannot be empty, and it must represent an existing product.
      * It requires the following body parameters:
      * - quantity: number. It must be greater than 0. This number represents the quantity of units sold. It must be less than or equal to the available quantity of the product.
      * - sellingDate: string. It can be omitted. If present, it must be a valid date in the format YYYY-MM-DD that is not after the current date and is after the arrival date of the product.
      * It returns the new quantity of the product.
      */
-    this.router.patch("/:model/sell", (req: any, res: any, next: any) =>
-      this.controller
-        .sellProduct(req.params.model, req.body.quantity, req.body.sellingDate)
-        .then((quantity: any /**number */) =>
-          res.status(200).json({ quantity: quantity })
-        )
-        .catch((err) => {
-          console.log(err);
-          next(err);
-        })
+    this.router.patch(
+      "/:model/sell",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isAdminOrManager,
+      param("model").isString().notEmpty().withMessage("Parameter 'model' is required"),
+      body("quantity").isInt({ gt: 0 }).withMessage("Field 'quantity' must be greater than 0"),
+      body("sellingDate")
+        .optional({ checkFalsy: true })
+        .isDate({ format: "YYYY-MM-DD", delimiters: ["-"], strictMode: true })
+        .withMessage("Field 'sellingDate' must be a string in the format 'YYYY-MM-DD'"),
+      this.errorHandler.validateRequest,
+      (req: any, res: any, next: any) =>
+        this.controller
+          .sellProduct(req.params.model, req.body.quantity, req.body.sellingDate)
+          .then((quantity: number) => res.status(200).json({ quantity: quantity }))
+          .catch((err) => {
+            console.log(err);
+            next(err);
+          })
     );
 
     /**
      * Route for retrieving all products.
-     * It requires the user to be logged in and to be either an admin or a manager
+     * It requires the user to be logged in and to be either a Manager or an Admin.
      * It can have the following optional query parameters:
      * - grouping: string. It can be either "category" or "model". If absent, then all products are returned and the other query parameters must also be absent.
      * - category: string. It can only be present if grouping is equal to "category" (in which case it must be present) and, when present, it must be one of "Smartphone", "Laptop", "Appliance".
      * - model: string. It can only be present if grouping is equal to "model" (in which case it must be present and not empty).
      * It returns an array of Product objects.
      */
-    this.router.get("/", (req: any, res: any, next: any) =>
-      this.controller
-        .getProducts(req.query.grouping, req.query.category, req.query.model)
-        .then((products: any /*Product[]*/) => res.status(200).json(products))
-        .catch((err) => {
-          console.log(err);
-          next(err);
-        })
+    this.router.get(
+      "/",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isAdminOrManager,
+      query("grouping")
+        .optional({ checkFalsy: true })
+        .isIn(["category", "model"])
+        .withMessage("Parameter 'grouping' possible values are 'category', 'model'"),
+      query("category")
+        .optional({ checkFalsy: true })
+        .isIn(["Smartphone", "Laptop", "Appliance"])
+        .withMessage(
+          "Parameter 'category' possible values are 'Smartphone', 'Laptop', 'Appliance'"
+        ),
+      query("model")
+        .optional({ checkFalsy: true })
+        .isString()
+        .notEmpty()
+        .withMessage("Parameter 'model' can't be empty"),
+      this.errorHandler.validateRequest,
+      (req: any, res: any, next: any) => {
+        const { grouping, category, model } = req.query;
+
+        if (!grouping && (category || model))
+          return res
+            .status(422)
+            .json({ error: "Parameter 'category' or 'model' cannot be null if 'grouping' is set" });
+
+        if (grouping === "category" && (!category || model))
+          return res.status(422).json({
+            error: "Parameter 'category' cannot be null if 'grouping' is set to category",
+          });
+
+        if (grouping === "model" && (!model || category))
+          return res
+            .status(422)
+            .json({ error: "Parameter 'model' cannot be null if 'grouping' is set to model" });
+
+        this.controller
+          .getProducts(grouping, category, model)
+          .then((products: Product[]) => res.status(200).json(products))
+          .catch((err) => {
+            next(err);
+          });
+      }
     );
 
     /**
@@ -140,15 +214,48 @@ class ProductRoutes {
      * - model: string. It can only be present if grouping is equal to "model" (in which case it must be present and not empty).
      * It returns an array of Product objects.
      */
-    this.router.get("/available", (req: any, res: any, next: any) =>
-      this.controller
-        .getAvailableProducts(
-          req.query.grouping,
-          req.query.category,
-          req.query.model
-        )
-        .then((products: any /*Product[]*/) => res.status(200).json(products))
-        .catch((err) => next(err))
+    this.router.get(
+      "/available",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isCustomer,
+      query("grouping")
+        .optional({ checkFalsy: true })
+        .isIn(["category", "model"])
+        .withMessage("Parameter 'grouping' possible values are 'category', 'model'"),
+      query("category")
+        .optional({ checkFalsy: true })
+        .isIn(["Smartphone", "Laptop", "Appliance"])
+        .withMessage(
+          "Parameter 'category' possible values are 'Smartphone', 'Laptop', 'Appliance'"
+        ),
+      query("model")
+        .optional({ checkFalsy: true })
+        .isString()
+        .notEmpty()
+        .withMessage("Parameter 'model' can't be empty"),
+      this.errorHandler.validateRequest,
+      (req: any, res: any, next: any) => {
+        const { grouping, category, model } = req.query;
+
+        if (!grouping && (category || model))
+          return res
+            .status(422)
+            .json({ error: "Parameter 'category' or 'model' cannot be null if 'grouping' is set" });
+
+        if (grouping === "category" && (!category || model))
+          return res.status(422).json({
+            error: "Parameter 'category' cannot be null if 'grouping' is set to category",
+          });
+
+        if (grouping === "model" && (!model || category))
+          return res
+            .status(422)
+            .json({ error: "Parameter 'model' cannot be null if 'grouping' is set to model" });
+        this.controller
+          .getAvailableProducts(grouping, category, model)
+          .then((products: Product[]) => res.status(200).json(products))
+          .catch((err) => next(err));
+      }
     );
 
     /**
@@ -156,11 +263,15 @@ class ProductRoutes {
      * It requires the user to be logged in and to be either an admin or a manager.
      * It returns a 200 status code.
      */
-    this.router.delete("/", (req: any, res: any, next: any) =>
-      this.controller
-        .deleteAllProducts()
-        .then(() => res.status(200).end())
-        .catch((err: any) => next(err))
+    this.router.delete(
+      "/",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isAdminOrManager,
+      (req: any, res: any, next: any) =>
+        this.controller
+          .deleteAllProducts()
+          .then(() => res.status(200).end())
+          .catch((err: any) => next(err))
     );
 
     /**
@@ -169,11 +280,17 @@ class ProductRoutes {
      * It requires the product model as a request parameter. The model must be a string and cannot be empty, and it must represent an existing product.
      * It returns a 200 status code.
      */
-    this.router.delete("/:model", (req: any, res: any, next: any) =>
-      this.controller
-        .deleteProduct(req.params.model)
-        .then(() => res.status(200).end())
-        .catch((err: any) => next(err))
+    this.router.delete(
+      "/:model",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isAdminOrManager,
+      param("model").isString().notEmpty().withMessage("Parameter 'model' is required"),
+      (req: any, res: any, next: any) => {
+        this.controller
+          .deleteProduct(req.params.model)
+          .then(() => res.status(200).end())
+          .catch((err: any) => next(err));
+      }
     );
   }
 }

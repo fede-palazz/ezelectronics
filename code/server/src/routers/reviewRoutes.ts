@@ -33,12 +33,17 @@ class ReviewRoutes {
      * - comment: string. It cannot be empty.
      * It returns a 200 status code.
      */
-    this.router.post("/:model",
+    this.router.post(
+      "/:model",
       this.authenticator.isLoggedIn,
-      body("score").isInt({ min: 1, max: 5 }),
-      body("comment").isString().notEmpty(),
-      body("role").isString().equals("Customer"),
-      body("model").isString().notEmpty(),
+      this.authenticator.isCustomer,
+      param("model").isString().notEmpty().withMessage("Route parameter 'model' is required"),
+      body("score")
+        .notEmpty()
+        .withMessage("Body field 'score' is required")
+        .isInt({ min: 1, max: 5 })
+        .withMessage("Body field 'score' must be an integer between 1 and 5"),
+      body("comment").isString().notEmpty().withMessage("Body field 'comment' is required"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) =>
         this.controller
@@ -56,16 +61,15 @@ class ReviewRoutes {
      * It expects a product model as a route parameter. This parameter must be a non-empty string and the product must exist.
      * It returns an array of reviews
      */
-    this.router.get("/:model",
+    this.router.get(
+      "/:model",
       this.authenticator.isLoggedIn,
-      param("model").isString().notEmpty(),
+      param("model").isString().notEmpty().withMessage("Route parameter 'model' is required"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) =>
         this.controller
           .getProductReviews(req.params.model)
-          .then((reviews: any /*ProductReview[]*/) =>
-            res.status(200).json(reviews)
-          )
+          .then((reviews: ProductReview[]) => res.status(200).json(reviews))
           .catch((err: Error) => next(err))
     );
 
@@ -75,9 +79,11 @@ class ReviewRoutes {
      * It expects a product model as a route parameter. This parameter must be a non-empty string and the product must exist. The user must also have made a review for the product
      * It returns a 200 status code.
      */
-    this.router.delete("/:model",
+    this.router.delete(
+      "/:model",
       this.authenticator.isLoggedIn,
-      param("role").isString().equals("Customer"),
+      this.authenticator.isCustomer,
+      param("model").isString().notEmpty().withMessage("Route parameter 'model' is required"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) =>
         this.controller
@@ -95,9 +101,11 @@ class ReviewRoutes {
      * It expects a product model as a route parameter. This parameter must be a non-empty string and the product must exist.
      * It returns a 200 status code.
      */
-    this.router.delete("/:model/all",
+    this.router.delete(
+      "/:model/all",
       this.authenticator.isLoggedIn,
-      param("role").isString().isIn(["Admin", "Manager"]),
+      this.authenticator.isAdminOrManager,
+      param("model").isString().notEmpty().withMessage("Route parameter 'model' is required"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) =>
         this.controller
@@ -111,10 +119,10 @@ class ReviewRoutes {
      * It requires the user to be authenticated and to be either an admin or a manager
      * It returns a 200 status code.
      */
-    this.router.delete("/",
+    this.router.delete(
+      "/",
       this.authenticator.isLoggedIn,
-      param("role").isString().isIn(["Admin", "Manager"]),
-      this.errorHandler.validateRequest,
+      this.authenticator.isAdminOrManager,
       (req: any, res: any, next: any) =>
         this.controller
           .deleteAllReviews()

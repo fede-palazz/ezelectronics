@@ -207,7 +207,7 @@ class ProductRoutes {
 
     /**
      * Route for retrieving all available products.
-     * It requires the user to be logged in and to be a customer.
+     * It requires the user to be logged in.
      * It can have the following optional query parameters:
      * - grouping: string. It can be either "category" or "model". If absent, then all products are returned and the other query parameters must also be absent.
      * - category: string. It can only be present if grouping is equal to "category" (in which case it must be present) and, when present, it must be one of "Smartphone", "Laptop", "Appliance".
@@ -217,7 +217,6 @@ class ProductRoutes {
     this.router.get(
       "/available",
       this.authenticator.isLoggedIn,
-      this.authenticator.isCustomer,
       query("grouping")
         .optional({ checkFalsy: true })
         .isIn(["category", "model"])

@@ -64,7 +64,7 @@ class UserController {
    * @returns A Promise that resolves to the user with the specified username.
    */
   async getUserByUsername(user: User, username: string): Promise<User> {
-    if (!Utility.isAdmin(user) || user.username !== username) {
+    if (!Utility.isAdmin(user) && user.username !== username) {
       return Promise.reject(new UnauthorizedUserError());
     }
     return this.dao.getUserByUsername(username);
@@ -86,7 +86,7 @@ class UserController {
     if (Utility.isAdmin(existingUser)) {
       return Promise.reject(new UserIsAdminError());
     }
-    if (!Utility.isAdmin(user) || user.username !== username) {
+    if (!Utility.isAdmin(user) && user.username !== username) {
       return Promise.reject(new UnauthorizedUserError());
     }
     return this.dao.deleteUser(username);

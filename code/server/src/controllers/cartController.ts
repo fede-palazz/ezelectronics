@@ -20,7 +20,8 @@ class CartController {
    * @param productId - The model of the product to add.
    * @returns A Promise that resolves to `true` if the product was successfully added.
    */
-  async addToCart(user: User, product: string) /*: Promise<Boolean>*/ {}
+  async addToCart(user: User, product: string) /*: Promise<Boolean>*/ {
+  }
 
   /**
    * Retrieves the current cart for a specific user.

@@ -1,6 +1,12 @@
+import { Product } from "../components/product";
 import ProductDAO from "../dao/productDAO";
-import dayjs from "dayjs";
-import { ProductNotFoundError, ProductAlreadyExistsError, ProductSoldError, EmptyProductStockError, LowProductStockError } from "../errors/productError"
+import {
+  ProductNotFoundError,
+  ProductAlreadyExistsError,
+  ProductSoldError,
+  EmptyProductStockError,
+  LowProductStockError,
+} from "../errors/productError";
 import { DateError } from "../utilities";
 
 /**
@@ -9,7 +15,6 @@ import { DateError } from "../utilities";
  */
 class ProductController {
   private dao: ProductDAO;
-
 
   constructor() {
     this.dao = new ProductDAO();
@@ -32,23 +37,16 @@ class ProductController {
     details: string | null,
     sellingPrice: number,
     arrivalDate: string | null
-  ) /**:Promise<void> */ {
-    if (arrivalDate && !/^\d{4}-\d{2}-\d{2}$/.test(arrivalDate)) {
-      throw new DateError();
+  ): Promise<void> {
+    if (arrivalDate && new Date(arrivalDate) > new Date()) {
+      // Check if arrivalDate is a future date
+      return Promise.reject(new DateError());
     }
-
-    if (arrivalDate && dayjs(arrivalDate).isAfter(dayjs())) {
-      throw new DateError();
+    if (!arrivalDate) {
+      arrivalDate = new Date().toISOString().split("T")[0];
     }
-
-    const product = await this.dao.getProduct(model);
-    if (!product) {
-      return this.dao.registerProduct(model, category, quantity, details, sellingPrice, arrivalDate);
-    } else {
-      throw new ProductAlreadyExistsError();
-    }
+    return this.dao.registerProduct(model, category, quantity, details, sellingPrice, arrivalDate);
   }
-
 
   /**
    * Modifies the quantity of a product in the database.
@@ -57,26 +55,22 @@ class ProductController {
    * @param changeDate The optional date when the change occurred.
    * @returns A Promise that resolves when the product quantity has been successfully updated.
    */
-  async changeProductQuantity(model: string, newQuantity: number, changeDate: string | null) {
+  async changeProductQuantity(
+    model: string,
+    newQuantity: number,
+    changeDate: string | null
+  ): Promise<number> {
     const product = await this.dao.getProduct(model);
-    if (!product) {
-      throw new ProductNotFoundError();
-    } else {
-      if (changeDate && !/^\d{4}-\d{2}-\d{2}$/.test(changeDate)) {
-        throw new DateError();
-      }
-
-      if (changeDate && dayjs(changeDate).isAfter(dayjs())) {
-        throw new DateError();
-      }
-
-      if (changeDate && dayjs(changeDate).isBefore(dayjs(product.arrivalDate))) {
-        throw new DateError();
-      }
-      return this.dao.changeProductQuantity(model, newQuantity);
+    // Validate changeDate
+    if (
+      changeDate &&
+      (new Date(changeDate) > new Date() || new Date(changeDate) < new Date(product.arrivalDate))
+    ) {
+      return Promise.reject(new DateError());
     }
+    newQuantity = newQuantity + product.quantity;
+    return this.dao.changeProductQuantity(model, newQuantity);
   }
-
 
   /**
    * Decreases the available quantity of a product through the sale of units.
@@ -86,37 +80,25 @@ class ProductController {
    * @returns A Promise that resolves to the new available quantity of the product.
    */
 
-  async sellProduct(model: string, quantity: number, sellingDate: string | null) {
+  async sellProduct(model: string, quantity: number, sellingDate: string | null): Promise<number> {
     const product = await this.dao.getProduct(model);
-    if (!product) {
-      throw new ProductNotFoundError();
-    } else {
-
-      if (sellingDate && !/^\d{4}-\d{2}-\d{2}$/.test(sellingDate)) {
-        throw new DateError();
-      }
-
-      if (sellingDate && dayjs(sellingDate).isAfter(dayjs())) {
-        throw new DateError();
-      }
-
-      if (sellingDate && dayjs(sellingDate).isBefore(dayjs(product.arrivalDate))) {
-        throw new DateError();
-      }
-
-      if (product.quantity == 0) {
-        throw new EmptyProductStockError();
-      }
-
-      if (product.quantity < quantity) {
-        throw new LowProductStockError();
-      }
-
-      return this.dao.sellProduct(model, quantity);
+    // Validate sellingDate
+    if (
+      sellingDate &&
+      (new Date(sellingDate) > new Date() || new Date(sellingDate) < new Date(product.arrivalDate))
+    ) {
+      return Promise.reject(new DateError());
     }
+    // Check quantity in stock
+    if (product.quantity === 0) {
+      return Promise.reject(new EmptyProductStockError());
+    }
+    if (quantity > product.quantity) {
+      return Promise.reject(new LowProductStockError());
+    }
+    const newQuantity = product.quantity - quantity;
+    return this.dao.changeProductQuantity(model, newQuantity);
   }
-
-
 
   /**
    * Returns all products in the database, with the option to filter them by category or model.
@@ -129,16 +111,16 @@ class ProductController {
     grouping: string | null,
     category: string | null,
     model: string | null
-  ) /**Promise<Product[]> */ {
-    if (grouping === 'model') {
-      const product = await this.dao.getProduct(model);
-      if (!product) {
-        throw new Error('ERROR 404: Product not found');
-      }
+  ): Promise<Product[]> {
+    switch (grouping) {
+      case "model":
+        return this.dao.getProduct(model).then((product) => [product]);
+      case "category":
+        return this.dao.getProductsByCategory(category);
+      default:
+        return this.dao.getProducts();
     }
-    return this.dao.getProducts(grouping, category, model);
   }
-
 
   /**
    * Returns all available products (with a quantity above 0) in the database, with the option to filter them by category or model.
@@ -151,21 +133,24 @@ class ProductController {
     grouping: string | null,
     category: string | null,
     model: string | null
-  ) /**:Promise<Product[]> */ {
-    if (grouping === 'model') {
-      const product = await this.dao.getProduct(model);
-      if (!product) {
-        throw new Error('ERROR 404: Product not found');
-      }
+  ): Promise<Product[]> {
+    switch (grouping) {
+      case "model":
+        return this.dao
+          .getProduct(model)
+          .then((product) => (product.quantity > 0 ? [product] : []));
+      case "category":
+        return this.dao.getAvailableProductsByCategory(category);
+      default:
+        return this.dao.getAvailableProducts();
     }
-    return this.dao.getAvailableProducts(grouping, category, model);
   }
 
   /**
-   * Deletes all products.
+   * Deletes all products from the database.
    * @returns A Promise that resolves to `true` if all products have been successfully deleted.
    */
-  async deleteAllProducts() /**:Promise <Boolean> */ {
+  async deleteAllProducts(): Promise<boolean> {
     return this.dao.deleteAllProducts();
   }
 
@@ -174,12 +159,7 @@ class ProductController {
    * @param model The model of the product to delete
    * @returns A Promise that resolves to `true` if the product has been successfully deleted.
    */
-  async deleteProduct(model: string) /**:Promise <Boolean> */ {
-    console.log(model);
-    const product = await this.dao.getProduct(model);
-    if (!product) {
-      throw new ProductNotFoundError();
-    }
+  async deleteProduct(model: string): Promise<boolean> {
     return this.dao.deleteProduct(model);
   }
 }

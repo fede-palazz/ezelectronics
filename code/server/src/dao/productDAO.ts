@@ -89,27 +89,21 @@ class ProductDAO {
   sellProduct(model: string, quantity: number) {
     return new Promise<number>((resolve, reject) => {
       try {
-        db.run(
-          "UPDATE products SET quantity = quantity - ? WHERE model = ?",
-          [quantity, model],
-          (err) => {
-            if (err) {
-              reject(err);
-            } else {
-              db.get(
-                "SELECT quantity FROM products WHERE model = ?",
-                model,
-                (err, row: { quantity: number }) => {
-                  if (err) {
-                    reject(err);
-                  } else {
-                    resolve(row.quantity);
-                  }
-                }
-              );
-            }
+        let sql = "UPDATE products SET quantity = quantity - ? WHERE model = ?";
+        db.run(sql, [quantity, model], function (err: Error | null) {
+          if (err) {
+            reject(err);
+          } else {
+            sql = "SELECT quantity FROM products WHERE model = ?";
+            db.get(sql, model, (err: Error | null, row: any) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(row.quantity);
+              }
+            });
           }
-        );
+        });
       } catch (error) {
         reject(error);
       }
@@ -261,37 +255,30 @@ class ProductDAO {
    */
   getProduct(model: string): Promise<Product> {
     return new Promise<Product>((resolve, reject) => {
-      db.get(
-        "SELECT * FROM products WHERE model = ?",
-        [model],
-        (
-          err,
-          row: {
-            model: string;
-            category: Category;
-            quantity: number;
-            details: string | null;
-            sellingPrice: number;
-            arrivalDate: string | null;
-          }
-        ) => {
+      try {
+        const sql = "SELECT * FROM products WHERE model = ?";
+        db.get(sql, [model], (err: Error | null, row: any) => {
           if (err) {
             reject(err);
-          } else if (!row) {
-            resolve(null);
-          } else {
-            const product = new Product(
-              row.sellingPrice,
-              row.model,
-              row.category,
-              row.arrivalDate,
-              row.details,
-              row.quantity
-            );
-            resolve(product);
+            return;
           }
-        }
-      );
+          if (!row) {
+            reject(new ProductNotFoundError());
+            return;
+          }
+          const product = new Product(
+            row.sellingPrice,
+            row.model,
+            row.category,
+            row.arrivalDate,
+            row.details,
+            row.quantity
+          );
+          resolve(product);
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 
@@ -332,13 +319,20 @@ class ProductDAO {
   deleteAllProducts(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       try {
-        const sql = "DELETE FROM products";
+        let sql = "DELETE FROM productsInCarts";
         db.run(sql, function (err: Error | null) {
           if (err) {
             reject(err);
             return;
           }
-          resolve(true);
+          sql = "DELETE FROM products";
+          db.run(sql, function (err: Error | null) {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(true);
+          });
         });
       } catch (error) {
         reject(error);

@@ -62,7 +62,6 @@ class ProductRoutes {
       this.authenticator.isAdminOrManager,
       body("model").isString().notEmpty().withMessage("Field 'model' is required"),
       body("category")
-        .isString()
         .isIn(["Smartphone", "Laptop", "Appliance"])
         .withMessage("Field 'category' possible values are 'Smartphone', 'Laptop', 'Appliance'"),
       body("quantity").isInt({ gt: 0 }).withMessage("Field 'quantity' must be greater than 0"),
@@ -144,7 +143,6 @@ class ProductRoutes {
           .sellProduct(req.params.model, req.body.quantity, req.body.sellingDate)
           .then((quantity: number) => res.status(200).json({ quantity: quantity }))
           .catch((err) => {
-            console.log(err);
             next(err);
           })
     );
@@ -176,7 +174,7 @@ class ProductRoutes {
         .optional({ checkFalsy: true })
         .isString()
         .notEmpty()
-        .withMessage("Parameter 'model' can't be empty"),
+        .withMessage("Parameter 'model' can't be empty if grouping is set to 'model'"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) => {
         const { grouping, category, model } = req.query;
@@ -207,7 +205,7 @@ class ProductRoutes {
 
     /**
      * Route for retrieving all available products.
-     * It requires the user to be logged in and to be a customer.
+     * It requires the user to be logged in.
      * It can have the following optional query parameters:
      * - grouping: string. It can be either "category" or "model". If absent, then all products are returned and the other query parameters must also be absent.
      * - category: string. It can only be present if grouping is equal to "category" (in which case it must be present) and, when present, it must be one of "Smartphone", "Laptop", "Appliance".
@@ -217,7 +215,6 @@ class ProductRoutes {
     this.router.get(
       "/available",
       this.authenticator.isLoggedIn,
-      this.authenticator.isCustomer,
       query("grouping")
         .optional({ checkFalsy: true })
         .isIn(["category", "model"])

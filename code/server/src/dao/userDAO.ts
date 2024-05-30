@@ -65,9 +65,12 @@ class UserDAO {
           "INSERT INTO users(username, name, surname, role, password, salt) VALUES(?, ?, ?, ?, ?, ?)";
         db.run(sql, [username, name, surname, role, hashedPassword, salt], (err: Error | null) => {
           if (err) {
-            if (err.message.includes("UNIQUE constraint failed: users.username"))
+            if (err.message.includes("UNIQUE constraint failed: users.username")) {
               reject(new UserAlreadyExistsError());
+              return;
+            }
             reject(err);
+            return;
           }
           resolve(true);
         });

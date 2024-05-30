@@ -47,15 +47,19 @@ class CartRoutes {
      * It requires the user to be logged in and to be a customer.
      * It returns the cart of the logged in customer.
      */
-    this.router.get("/", this.authenticator.isCustomer, (req: any, res: any, next: any) =>
-      this.controller
-        .getCart(req.user)
-        .then((cart: Cart) => {
-          res.status(200).json(cart);
-        })
-        .catch((err) => {
-          next(err);
-        })
+    this.router.get(
+      "/",
+      this.authenticator.isLoggedIn,
+      this.authenticator.isCustomer,
+      (req: any, res: any, next: any) =>
+        this.controller
+          .getCart(req.user)
+          .then((cart: Cart) => {
+            res.status(200).json(cart);
+          })
+          .catch((err) => {
+            next(err);
+          })
     );
 
     /**
@@ -69,7 +73,7 @@ class CartRoutes {
       "/",
       this.authenticator.isLoggedIn,
       this.authenticator.isCustomer,
-      body("model").isString().notEmpty(),
+      body("model").isString().notEmpty().withMessage("Field 'model' is required"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) =>
         this.controller
@@ -125,7 +129,7 @@ class CartRoutes {
       "/products/:model",
       this.authenticator.isLoggedIn,
       this.authenticator.isCustomer,
-      param("model").isString().notEmpty(),
+      param("model").isString().notEmpty().withMessage("Field 'model' is required"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) =>
         this.controller

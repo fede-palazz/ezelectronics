@@ -37,11 +37,7 @@ class ReviewController {
    * @param user The user who made the review to delete
    * @returns A Promise that resolves to nothing
    */
-  async deleteReview(model: string, user: User): Promise<void> {
-    const existingReview = await this.dao.getReview(model, user);
-    if (!existingReview) {
-      return Promise.reject(new NoReviewProductError());
-    }
+  async deleteReview(model: string, user: User): Promise<null> {
     return this.dao.deleteReview(model, user.username);
   }
 
@@ -50,7 +46,7 @@ class ReviewController {
    * @param model The model of the product to delete the reviews from
    * @returns A Promise that resolves to nothing
    */
-  async deleteReviewsOfProduct(model: string): Promise<void> {
+  async deleteReviewsOfProduct(model: string): Promise<null> {
     return this.dao.deleteReviewsOfProduct(model);
   }
 
@@ -58,7 +54,7 @@ class ReviewController {
    * Deletes all reviews of all products
    * @returns A Promise that resolves to nothing
    */
-  async deleteAllReviews(): Promise<void> {
+  async deleteAllReviews(): Promise<null> {
     return this.dao.deleteAllReviews();
   }
 }

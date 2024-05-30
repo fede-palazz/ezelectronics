@@ -62,7 +62,6 @@ class ProductRoutes {
       this.authenticator.isAdminOrManager,
       body("model").isString().notEmpty().withMessage("Field 'model' is required"),
       body("category")
-        .isString()
         .isIn(["Smartphone", "Laptop", "Appliance"])
         .withMessage("Field 'category' possible values are 'Smartphone', 'Laptop', 'Appliance'"),
       body("quantity").isInt({ gt: 0 }).withMessage("Field 'quantity' must be greater than 0"),
@@ -144,7 +143,6 @@ class ProductRoutes {
           .sellProduct(req.params.model, req.body.quantity, req.body.sellingDate)
           .then((quantity: number) => res.status(200).json({ quantity: quantity }))
           .catch((err) => {
-            console.log(err);
             next(err);
           })
     );
@@ -176,7 +174,7 @@ class ProductRoutes {
         .optional({ checkFalsy: true })
         .isString()
         .notEmpty()
-        .withMessage("Parameter 'model' can't be empty"),
+        .withMessage("Parameter 'model' can't be empty if grouping is set to 'model'"),
       this.errorHandler.validateRequest,
       (req: any, res: any, next: any) => {
         const { grouping, category, model } = req.query;

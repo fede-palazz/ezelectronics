@@ -1,4 +1,4 @@
-import { ExistingReviewError } from "../errors/reviewError";
+import { ExistingReviewError, NoReviewProductError } from "../errors/reviewError";
 import { User } from "../components/user";
 import db from "../db/db";
 import { ProductNotFoundError } from "../errors/productError";
@@ -9,28 +9,6 @@ import { ProductReview } from "../components/review";
  * You are free to implement any method you need here, as long as the requirements are satisfied.
  */
 class ReviewDAO {
-  /**
-   * Retrieves a review for a specific model and user.
-   * @param model - The model of the product.
-   * @param user - The user object containing the username.
-   * @returns A promise that resolves with the review object if found, or rejects with an error.
-   */
-  getReview(model: string, user: User) {
-    return new Promise((resolve, reject) => {
-      db.get(
-        "SELECT * FROM reviews WHERE model = ? AND user = ?",
-        [model, user.username],
-        (err, row) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(row);
-          }
-        }
-      );
-    });
-  }
-
   /**
    * Adds a review to the database.
    *
@@ -50,11 +28,13 @@ class ReviewDAO {
           if (err) {
             if (err.message.includes("UNIQUE constraint failed: reviews.user, reviews.product")) {
               // Review already existing in db
-              return Promise.reject(new ExistingReviewError());
+              reject(new ExistingReviewError());
+              return;
             }
             if (err.message.includes("FOREIGN KEY constraint failed")) {
               // Product not found
-              return Promise.reject(new ProductNotFoundError());
+              reject(new ProductNotFoundError());
+              return;
             }
             reject(err);
             return;
@@ -63,7 +43,6 @@ class ReviewDAO {
         });
       } catch (error) {
         reject(error);
-        return;
       }
     });
   }
@@ -76,17 +55,21 @@ class ReviewDAO {
    */
   getProductReviews(model: string): Promise<ProductReview[]> {
     return new Promise<ProductReview[]>((resolve, reject) => {
-      const sql = "SELECT * FROM reviews WHERE product=?";
-      db.all(sql, [model], (err: Error | null, rows: any) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        const reviews = rows.map(
-          (row: any) => new ProductReview(row.product, row.user, row.score, row.date, row.comment)
-        );
-        resolve(reviews);
-      });
+      try {
+        const sql = "SELECT * FROM reviews WHERE product=?";
+        db.all(sql, [model], (err: Error | null, rows: any) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          const reviews = rows.map(
+            (row: any) => new ProductReview(row.product, row.user, row.score, row.date, row.comment)
+          );
+          resolve(reviews);
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 
@@ -99,65 +82,90 @@ class ReviewDAO {
    */
   deleteReview(model: string, username: string): Promise<null> {
     return new Promise<null>((resolve, reject) => {
-      const sql = "DELETE FROM reviews WHERE product=? AND user=?";
-      db.run(sql, [model, username], function (err: Error | null) {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (this.changes === 0) {
-          reject(new ProductNotFoundError());
-          return;
-        }
-        resolve(null);
-      });
+      try {
+        let sql = "SELECT * FROM products WHERE model=?";
+        db.get(sql, [model], (err: Error | null, row: any) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          if (!row) {
+            reject(new ProductNotFoundError());
+            return;
+          }
+          sql = "DELETE FROM reviews WHERE product=? AND user=?";
+          db.run(sql, [model, username], function (err: Error | null) {
+            if (err) {
+              reject(err);
+              return;
+            }
+            if (this.changes === 0) {
+              reject(new ProductNotFoundError());
+              return;
+            }
+            resolve(null);
+          });
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 
   /**
    * Deletes all reviews of a given product model from the database.
+   *
    * @param model - The model of the product.
    * @returns A promise that resolves when the reviews are successfully deleted, or rejects with an error if an error occurs.
    */
   deleteReviewsOfProduct(model: string): Promise<null> {
     return new Promise<null>((resolve, reject) => {
-      // Check whether product exists
-      let sql = "SELECT * FROM products WHERE model=?";
-      db.get(sql, [model], (err: Error | null, row: any) => {
-        if (!row) {
-          reject(new ProductNotFoundError());
-          return;
-        }
-        if (err) {
-          reject(err);
-          return;
-        }
-        sql = "DELETE FROM reviews WHERE product=?";
-        db.run(sql, [model], (err: Error | null) => {
+      try {
+        // Check whether product exists
+        let sql = "SELECT * FROM products WHERE model=?";
+        db.get(sql, [model], (err: Error | null, row: any) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          if (!row) {
+            reject(new ProductNotFoundError());
+            return;
+          }
+          sql = "DELETE FROM reviews WHERE product=?";
+          db.run(sql, [model], (err: Error | null) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(null);
+          });
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * Deletes all reviews from the database.
+   *
+   * @returns A promise that resolves when the deletion is successful, or rejects with an error if it fails.
+   */
+  deleteAllReviews(): Promise<null> {
+    return new Promise<null>((resolve, reject) => {
+      try {
+        const sql = "DELETE FROM reviews";
+        db.run(sql, [], function (err: Error | null) {
           if (err) {
             reject(err);
             return;
           }
           resolve(null);
         });
-      });
-    });
-  }
-
-  /**
-   * Deletes all reviews from the database.
-   * @returns A promise that resolves when the deletion is successful, or rejects with an error if it fails.
-   */
-  deleteAllReviews(): Promise<null> {
-    return new Promise<null>((resolve, reject) => {
-      const sql = "DELETE FROM reviews";
-      db.run(sql, [], function (err: Error | null) {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(null);
-      });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 }

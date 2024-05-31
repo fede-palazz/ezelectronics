@@ -331,7 +331,7 @@ class CartDAO {
           // Create cart objects
           for (const row of rows) {
             if (currentCartId !== row.id) {
-              cart = new Cart(row.customer, row.paid, row.paymentDate, row.total, []);
+              cart = new Cart(row.customer, !!row.paid, row.paymentDate, row.total, []);
               carts.push(cart);
               currentCartId = row.id;
             }

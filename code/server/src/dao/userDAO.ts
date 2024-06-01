@@ -233,7 +233,6 @@ class UserDAO {
    * @param username The username of the user to update
    * @returns A Promise that resolves to true if the information has been updated
    */
-
   updateUserInfo(
     name: string,
     surname: string,

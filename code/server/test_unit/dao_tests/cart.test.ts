@@ -5,7 +5,7 @@ import { Cart, ProductInCart } from "../../src/components/cart"
 import db from "../../src/db/db"
 import { Category } from "../../src/components/product"
 import { LowProductStockError, ProductNotFoundError } from "../../src/errors/productError"
-import { after } from "node:test"
+import { ProductNotInCartError } from "../../src/errors/cartError"
 
 jest.mock("../../src/db/db.ts")
 
@@ -248,7 +248,7 @@ describe("Remove product from cart", () => {
         });
     
         const mockDBrun = jest.spyOn(db, "run").mockImplementation((sql, params, callback) => {
-            callback(null);
+            callback.call({ changes: 1 }, null);
             return {} as Database;
           });
           
@@ -285,13 +285,12 @@ describe("Remove product from cart", () => {
         });
     
         const mockDBrun = jest.spyOn(db, "run").mockImplementation(( sql, params, callback) => {
-            callback(null, {changes: 0});
+            callback.call({ changes: 0 }, null);
             return {} as Database;
         });
 
     
-        const result = await cartDAO.removeProductFromCart(1, "iPhone 13");
-        expect(result).toBe(false);
+        await expect(cartDAO.modifyProductQuantity("iPhone 13", 1, 5)).rejects.toEqual(new ProductNotFoundError());
         expect(mockDBget).toHaveBeenCalledTimes(1);
         expect(mockDBrun).toHaveBeenCalledTimes(1);
     });
@@ -361,7 +360,7 @@ describe("Modify product quantity in cart", () => {
         });
     
         const mockDBrun = jest.spyOn(db, "run").mockImplementation((sql, params, callback) => {
-            callback(null, {changes: 1});
+            callback.call({ changes: 1 }, null);
             return {} as Database;
         });
     
@@ -397,7 +396,7 @@ describe("Modify product quantity in cart", () => {
         });
     
         const mockDBrun = jest.spyOn(db, "run").mockImplementation((sql, params, callback) =>{
-            callback(null, {changes : 0});
+            callback.call({ changes: 0 }, null);
             return {} as Database;
         });
     
@@ -441,6 +440,26 @@ describe("Modify product quantity in cart", () => {
         expect(mockDBrun).toHaveBeenCalledTimes(1);
     });
 
+
+    test("Modify product quantity: Low stock", async () => {
+        const mockProductRow = {
+            model: "iPhone 13",
+            category: Category.SMARTPHONE,
+            sellingPrice: 3.4,
+            arrivalDate: "2022-01-01",
+            details: "256GB",
+            quantity: 1
+        };
+    
+        const mockDBget = jest.spyOn(db, "get").mockImplementation((sql, params, callback) => {
+            callback(null, mockProductRow);
+            return {} as Database
+        });
+    
+    
+        await expect(cartDAO.modifyProductQuantity("iPhone 13", 1, 5)).rejects.toEqual(new LowProductStockError());
+        expect(mockDBget).toHaveBeenCalledTimes(1);
+    });
 });
 
 describe("Get paid carts", () => {

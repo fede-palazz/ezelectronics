@@ -1,32 +1,156 @@
-import { test, expect, jest } from "@jest/globals"
-import UserController from "../../src/controllers/userController"
-import UserDAO from "../../src/dao/userDAO"
+import { test, expect, jest } from "@jest/globals";
+import UserController from "../../src/controllers/userController";
+import UserDAO from "../../src/dao/userDAO";
+import { UserAlreadyExistsError } from "../../src/errors/userError";
+import { Role, User } from "../../src/components/user";
 
-jest.mock("../../src/dao/userDAO")
+jest.mock("../../src/dao/userDAO");
 
 //Example of a unit test for the createUser method of the UserController
 //The test checks if the method returns true when the DAO method returns true
 //The test also expects the DAO method to be called once with the correct parameters
 
-test("It should return true", async () => {
-    const testUser = { //Define a test user object
-        username: "test",
-        name: "test",
-        surname: "test",
-        password: "test",
-        role: "Manager"
-    }
-    jest.spyOn(UserDAO.prototype, "createUser").mockResolvedValueOnce(true); //Mock the createUser method of the DAO
-    const controller = new UserController(); //Create a new instance of the controller
-    //Call the createUser method of the controller with the test user object
-    const response = await controller.createUser(testUser.username, testUser.name, testUser.surname, testUser.password, testUser.role);
+let userController: UserController;
 
-    //Check if the createUser method of the DAO has been called once with the correct parameters
-    expect(UserDAO.prototype.createUser).toHaveBeenCalledTimes(1);
-    expect(UserDAO.prototype.createUser).toHaveBeenCalledWith(testUser.username,
-        testUser.name,
-        testUser.surname,
-        testUser.password,
-        testUser.role);
-    expect(response).toBe(true); //Check if the response is true
+describe("Create new user", () => {
+  beforeEach(() => {
+    userController = new UserController();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks(); // Clears the call counts and arguments of all mocks
+    jest.restoreAllMocks(); // Restores the original implementations of all mocked/spied methods
+  });
+
+  test("User successfully created", async () => {
+    const mockUser = {
+      username: "testUser",
+      name: "test",
+      surname: "user",
+      password: "test",
+      role: "Manager",
+    };
+    const mockFunction = jest.spyOn(UserDAO.prototype, "createUser").mockResolvedValueOnce(true);
+
+    const result = await userController.createUser(
+      mockUser.username,
+      mockUser.name,
+      mockUser.surname,
+      mockUser.password,
+      mockUser.role
+    );
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+    expect(mockFunction).toHaveBeenCalledWith(
+      mockUser.username,
+      mockUser.name,
+      mockUser.surname,
+      mockUser.password,
+      mockUser.role
+    );
+    expect(result).toBeTruthy();
+  });
+
+  test("Username already registered", async () => {
+    const mockUser = {
+      username: "testUser",
+      name: "test",
+      surname: "user",
+      password: "test",
+      role: "Manager",
+    };
+    const mockFunction = jest
+      .spyOn(UserDAO.prototype, "createUser")
+      .mockRejectedValueOnce(new UserAlreadyExistsError());
+
+    const result = userController.createUser(
+      mockUser.username,
+      mockUser.name,
+      mockUser.surname,
+      mockUser.password,
+      mockUser.role
+    );
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+    expect(mockFunction).toHaveBeenCalledWith(
+      mockUser.username,
+      mockUser.name,
+      mockUser.surname,
+      mockUser.password,
+      mockUser.role
+    );
+    await expect(result).rejects.toEqual(new UserAlreadyExistsError());
+  });
+});
+
+describe("Get users", () => {
+  beforeEach(() => {
+    userController = new UserController();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks(); // Clears the call counts and arguments of all mocks
+    jest.restoreAllMocks(); // Restores the original implementations of all mocked/spied methods
+  });
+
+  test("Users successfully retrieved", async () => {
+    const mockUsers: User[] = [
+      new User("testUser1", "test1", "user1", Role.MANAGER, "", ""),
+      new User("testUser2", "test2", "user2", Role.MANAGER, "", ""),
+    ];
+    const mockFunction = jest.spyOn(UserDAO.prototype, "getUsers").mockResolvedValueOnce(mockUsers);
+
+    const result = await userController.getUsers();
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+    expect(result).toStrictEqual(mockUsers);
+  });
+
+  test("General error", async () => {
+    const mockFunction = jest
+      .spyOn(UserDAO.prototype, "getUsers")
+      .mockRejectedValueOnce(new Error("Error"));
+
+    const result = userController.getUsers();
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+    await expect(result).rejects.toEqual(new Error("Error"));
+  });
+});
+
+describe("Get users by role", () => {
+  beforeEach(() => {
+    userController = new UserController();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks(); // Clears the call counts and arguments of all mocks
+    jest.restoreAllMocks(); // Restores the original implementations of all mocked/spied methods
+  });
+
+  test("Users successfully retrieved", async () => {
+    const mockUsers: User[] = [
+      new User("testUser1", "test1", "user1", Role.MANAGER, "", ""),
+      new User("testUser2", "test2", "user2", Role.MANAGER, "", ""),
+    ];
+    const mockFunction = jest
+      .spyOn(UserDAO.prototype, "getUsersByRole")
+      .mockResolvedValueOnce(mockUsers);
+
+    const result = await userController.getUsersByRole("Manager");
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+    expect(result).toStrictEqual(mockUsers);
+  });
+
+  test("General error", async () => {
+    const mockFunction = jest
+      .spyOn(UserDAO.prototype, "getUsersByRole")
+      .mockRejectedValueOnce(new Error("Error"));
+
+    const result = userController.getUsersByRole("Manager");
+
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+    await expect(result).rejects.toEqual(new Error("Error"));
+  });
 });

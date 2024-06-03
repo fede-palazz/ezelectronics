@@ -24,7 +24,7 @@ describe("Add to cart", () => {
 
     test("Add to cart: add a new product successfully", async () => {
 
-        const mockCart = new Cart("customer1", false, null, 0.0, []);
+        const mockCart = new Cart("customer1", false, "", 0.0, []);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
@@ -36,7 +36,7 @@ describe("Add to cart", () => {
     });
 
     test("Add to cart: increase product quantity successfully", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
@@ -70,7 +70,7 @@ describe("Get cart", () => {
     });
 
     test("Get cart: get current cart successfully", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
         const response = await controller.getCart(testUser)
@@ -90,7 +90,7 @@ describe("Checkout cart", () => {
     });
 
     test("Checkout cart: checkout cart successfully", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
@@ -105,7 +105,7 @@ describe("Checkout cart", () => {
     });
 
     test("Checkout cart: empty cart", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, []);
+        const mockCart = new Cart("customer1", false, "", 0.0, []);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
@@ -121,7 +121,7 @@ describe("Checkout cart", () => {
     });
 
     test("Checkout cart: low product stock", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
@@ -144,7 +144,7 @@ describe("Get customers carts", () => {
     });
 
     test("Get customers paid carts: get customers carts successfully", async () => {
-        const mockCart = new Cart("customer1", true, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", true, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getPaidCarts").mockResolvedValueOnce([mockCart]);
         const response = await controller.getCustomerCarts(testUser)
@@ -164,7 +164,7 @@ describe("Remove product from cart", () => {
     });
 
     test("Remove product from cart: remove product successfully", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
@@ -177,7 +177,7 @@ describe("Remove product from cart", () => {
     });
 
     test("Remove product from cart: remove product and decrease quantity successfully", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 2, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 2, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
@@ -208,7 +208,7 @@ describe("Clear cart", () => {
     });
 
     test("Clear cart: clear cart successfully", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(1);
         jest.spyOn(CartDAO.prototype, "deleteProductsInCart").mockResolvedValueOnce(true);
@@ -254,7 +254,7 @@ describe("Get all carts", () => {
     });
 
     test("Get all carts: get all carts successfully", async () => {
-        const mockCart = new Cart("customer1", false, null, 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
+        const mockCart = new Cart("customer1", false, "", 0.0, [new ProductInCart("testProduct", 1, Category.APPLIANCE, 32.0)]);
 
         jest.spyOn(CartDAO.prototype, "getAllCarts").mockResolvedValueOnce([mockCart]);
         const response = await controller.getAllCarts()

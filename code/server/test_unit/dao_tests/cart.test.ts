@@ -184,7 +184,7 @@ describe("Get current Cart", () => {
     });
 
     test("Get current cart - empty or non existing", async () => {
-        const mockEmptyCart = new Cart("customer1", false, null , 0.0, []);
+        const mockEmptyCart = new Cart("customer1", false, "" , 0.0, []);
         const mockDBGet = jest.spyOn(db, "all").mockImplementation((sql, params, callback) => {
             callback(null, "");
             return {} as Database

@@ -231,7 +231,7 @@ class UserDAO {
    * @param address The new address of the user
    * @param birthdate The new birthdate of the user
    * @param username The username of the user to update
-   * @returns A Promise that resolves to true if the information has been updated
+   * @returns A Promise that resolves to the updated User object if the information has been updated
    */
   updateUserInfo(
     name: string,

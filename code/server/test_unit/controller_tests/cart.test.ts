@@ -7,6 +7,7 @@ import { Category } from "../../src/components/product"
 import { Role, User } from "../../src/components/user"
 import { CartNotFoundError, EmptyCartError } from "../../src/errors/cartError"
 import { LowProductStockError } from "../../src/errors/productError"
+import exp from "constants"
 
 jest.mock("../../src/dao/cartDAO")
 
@@ -31,7 +32,11 @@ describe("Add to cart", () => {
         jest.spyOn(CartDAO.prototype, "addProductToCart").mockResolvedValueOnce(true);
         const response = await controller.addToCart(testUser, "testProduct")
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
         expect(CartDAO.prototype.addProductToCart).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.addProductToCart).toHaveBeenCalledWith(1, "testProduct");
         expect(response).toBe(true)
     });
 
@@ -43,7 +48,11 @@ describe("Add to cart", () => {
         jest.spyOn(CartDAO.prototype, "modifyProductQuantity").mockResolvedValueOnce(true);
         const response = await controller.addToCart(testUser, "testProduct")
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.modifyProductQuantity).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.modifyProductQuantity).toHaveBeenCalledWith("testProduct", 1, 1);
         expect(response).toBe(true)
     });
 
@@ -55,6 +64,9 @@ describe("Add to cart", () => {
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.createEmptyCart).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.addProductToCart).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.createEmptyCart).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.addProductToCart).toHaveBeenCalledWith(1, "testProduct");
         expect(response).toBe(true)
     });
 });
@@ -75,6 +87,7 @@ describe("Get cart", () => {
         jest.spyOn(CartDAO.prototype, "getCurrentCart").mockResolvedValueOnce(mockCart);
         const response = await controller.getCart(testUser)
         expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
         expect(response).toBe(mockCart)
     });
 });
@@ -101,6 +114,10 @@ describe("Checkout cart", () => {
         expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.areProductsInCartAvailable).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.checkoutCurrentCart).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.areProductsInCartAvailable).toHaveBeenCalledWith(1);
+        expect(CartDAO.prototype.checkoutCurrentCart).toHaveBeenCalledWith(1, mockCart);
         expect(response).toBe(true)
     });
 
@@ -112,12 +129,15 @@ describe("Checkout cart", () => {
         await expect(controller.checkoutCart(testUser)).rejects.toEqual(new EmptyCartError());
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1);
         expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1);
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
     });
 
     test("Checkout cart: cart not found", async () => {
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(null);
         await expect(controller.checkoutCart(testUser)).rejects.toEqual(new CartNotFoundError());
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1);
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
     });
 
     test("Checkout cart: low product stock", async () => {
@@ -130,6 +150,9 @@ describe("Checkout cart", () => {
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1);
         expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1);
         expect(CartDAO.prototype.areProductsInCartAvailable).toHaveBeenCalledTimes(1);
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.areProductsInCartAvailable).toHaveBeenCalledWith(1);
     });
 });
 
@@ -150,6 +173,7 @@ describe("Get customers carts", () => {
         const response = await controller.getCustomerCarts(testUser)
         expect(CartDAO.prototype.getPaidCarts).toHaveBeenCalledTimes(1)
         expect(response).toEqual([mockCart])
+        expect(CartDAO.prototype.getPaidCarts).toHaveBeenCalledWith(testUser.username);
     });
 });
 
@@ -174,6 +198,9 @@ describe("Remove product from cart", () => {
         expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.removeProductFromCart).toHaveBeenCalledTimes(1)
         expect(response).toBe(true)
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.removeProductFromCart).toHaveBeenCalledWith(1, "testProduct");
     });
 
     test("Remove product from cart: remove product and decrease quantity successfully", async () => {
@@ -186,6 +213,9 @@ describe("Remove product from cart", () => {
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.modifyProductQuantity).toHaveBeenCalledTimes(1)
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.getCurrentCart).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.modifyProductQuantity).toHaveBeenCalledWith("testProduct", 1, -1);
         expect(response).toBe(true)
     });
 
@@ -193,6 +223,7 @@ describe("Remove product from cart", () => {
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(null);
         await expect(controller.removeProductFromCart(testUser, "testProduct")).rejects.toEqual(new CartNotFoundError());
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1);
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
     });
 
 });
@@ -216,12 +247,15 @@ describe("Clear cart", () => {
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1)
         expect(CartDAO.prototype.deleteProductsInCart).toHaveBeenCalledTimes(1)
         expect(response).toBe(true)
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
+        expect(CartDAO.prototype.deleteProductsInCart).toHaveBeenCalledWith(1);
     });
 
     test("Clear cart: cart not found", async () => {
         jest.spyOn(CartDAO.prototype, "getCurrentCartId").mockResolvedValueOnce(null);
         await expect(controller.clearCart(testUser)).rejects.toEqual(new CartNotFoundError());
         expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledTimes(1);
+        expect(CartDAO.prototype.getCurrentCartId).toHaveBeenCalledWith(testUser.username);
     });
 });
 

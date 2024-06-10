@@ -1,4 +1,4 @@
-import { test, expect, jest } from "@jest/globals";
+import { test, expect, jest, describe, beforeEach, afterEach } from "@jest/globals";
 import UserController from "../../src/controllers/userController";
 import UserDAO from "../../src/dao/userDAO";
 import {
@@ -534,14 +534,6 @@ describe("Update user information", () => {
 
   test("Admin user shouldn't update other admin users' information", async () => {
     const mockAdmin: User = new User("adminUser", "admin", "user", Role.ADMIN, "", "");
-    // const mockUpdatedAdmin: User = new User(
-    //   "adminUser",
-    //   "admin_updated",
-    //   "user_updated",
-    //   Role.ADMIN,
-    //   "",
-    //   ""
-    // );
     const mockgetUser = jest
       .spyOn(UserDAO.prototype, "getUserByUsername")
       .mockResolvedValueOnce(mockAdmin);

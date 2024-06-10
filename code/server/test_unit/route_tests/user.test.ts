@@ -192,6 +192,20 @@ describe("GET /: get all users", () => {
     expect(response.status).toBe(401);
     expect(response.body).toEqual({ error: "User is not an admin" });
   });
+
+  test("It should fail if an error occurs", async () => {
+    jest.spyOn(UserController.prototype, "getUsers").mockRejectedValueOnce(new Error("error"));
+    jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementation((req, res, next) => {
+      return next();
+    });
+    jest.spyOn(Authenticator.prototype, "isAdmin").mockImplementation((req, res, next) => {
+      return next();
+    });
+
+    const response = await request(app).get(baseURL);
+    expect(response.status).toBe(503);
+    expect(response.body.error).toEqual("Internal Server Error");
+  });
 });
 
 describe("GET /roles/:role: retrieve all users of a specific role", () => {
@@ -283,6 +297,35 @@ describe("GET /roles/:role: retrieve all users of a specific role", () => {
     expect(response.status).toBe(401);
     expect(response.body.error).toBe("User is not an admin");
     expect(mockFunction).toBeCalledTimes(0);
+  });
+
+  test("It should fail if there is an error", async () => {
+    const testAdmin = new User("testAdmin", "test", "admin", Role.ADMIN, "", "");
+    const mockFunction = jest
+      .spyOn(UserController.prototype, "getUsersByRole")
+      .mockRejectedValueOnce(new Error("error"));
+    jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementation((req, res, next) => {
+      return next();
+    });
+    jest.spyOn(Authenticator.prototype, "isAdmin").mockImplementation((req, res, next) => {
+      return next();
+    });
+    jest.mock("express-validator", () => ({
+      param: jest.fn().mockImplementation(() => ({
+        isString: () => {},
+        isIn: () => {},
+        notEmpty: () => {},
+      })),
+    }));
+    jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => {
+      return next();
+    });
+
+    const response = await request(app).get(baseURL + "/roles/Admin");
+
+    expect(response.status).toBe(503);
+    expect(response.body.error).toBe("Internal Server Error");
+    expect(mockFunction).toBeCalledTimes(1);
   });
 });
 
@@ -639,6 +682,38 @@ describe("DELETE /: delete all non Admin users", () => {
     const response = await request(app).delete(baseURL + "/");
 
     expect(response.status).toBe(200);
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+  });
+
+  test("It should fail if there is an error", async () => {
+    const reqUser = {
+      username: "adminUser",
+      role: "Admin",
+    };
+    const mockFunction = jest
+      .spyOn(UserController.prototype, "deleteAll")
+      .mockRejectedValueOnce(new Error("error"));
+    jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementation((req, res, next) => {
+      return next();
+    });
+    jest.spyOn(Authenticator.prototype, "isAdmin").mockImplementation((req, res, next) => {
+      req.user = reqUser;
+      return next();
+    });
+    jest.mock("express-validator", () => ({
+      param: jest.fn().mockImplementation(() => ({
+        isString: () => {},
+        isIn: () => {},
+        notEmpty: () => {},
+      })),
+    }));
+    jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => {
+      return next();
+    });
+
+    const response = await request(app).delete(baseURL + "/");
+
+    expect(response.status).toBe(503);
     expect(mockFunction).toHaveBeenCalledTimes(1);
   });
 });
@@ -1130,6 +1205,20 @@ describe("DELETE /current: user logout", () => {
 
     expect(response.status).toBe(401);
     expect(mockController).toHaveBeenCalledTimes(0);
+  });
+
+  test("It should fail if there is an error", async () => {
+    const mockController = jest
+      .spyOn(Authenticator.prototype, "logout")
+      .mockRejectedValueOnce(new Error("error"));
+    jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementation((req, res, next) => {
+      return next();
+    });
+
+    const response = await request(app).delete(baseAuthURL + "/current");
+
+    expect(response.status).toBe(503);
+    expect(mockController).toHaveBeenCalledTimes(1);
   });
 });
 

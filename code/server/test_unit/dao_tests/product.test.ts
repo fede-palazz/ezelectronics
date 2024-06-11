@@ -1,7 +1,7 @@
 import { test, expect, jest, describe, beforeEach, afterEach } from "@jest/globals";
 import ProductDAO from "../../src/dao/productDAO";
 import db from "../../src/db/db";
-import { Database, RunResult } from "sqlite3";
+import { Database } from "sqlite3";
 import { Category, Product } from "../../src/components/product";
 import { ProductAlreadyExistsError, ProductNotFoundError } from "../../src/errors/productError";
 

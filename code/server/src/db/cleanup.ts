@@ -8,14 +8,42 @@ import db from "../db/db";
  */
 
 export function cleanup() {
-  db.serialize(() => {
-    // Delete all data from the database.
-    db.run("DELETE FROM users");
-    //Add delete statements for other tables here
-    db.run("DELETE FROM carts");
-    db.run("DELETE FROM products");
-    db.run("DELETE FROM productsInCarts");
-    db.run("DELETE FROM reviews");
+  return new Promise<void>((resolve, reject) => {
+    db.serialize(() => {
+      db.run("DELETE FROM users", (err) => {
+        if (err) return reject(err);
+        db.run("DELETE FROM carts", (err) => {
+          if (err) return reject(err);
+          db.run("DELETE FROM products", (err) => {
+            if (err) return reject(err);
+            db.run("DELETE FROM productsInCarts", (err) => {
+              if (err) return reject(err);
+              db.run("DELETE FROM reviews", (err) => {
+                if (err) return reject(err);
+                resolve();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+}
 
+export function startTransaction() { 
+  return new Promise<void>((resolve, reject) => {
+    db.run("BEGIN TRANSACTION", (err) => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+}
+
+export function rollbackTransaction() {
+  return new Promise<void>((resolve, reject) => {
+    db.run("ROLLBACK", (err) => {
+      if (err) return reject(err);
+      resolve();
+    });
   });
 }

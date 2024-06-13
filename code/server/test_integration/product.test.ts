@@ -50,7 +50,6 @@ const login = async (userInfo: any) => {
 };
 
 beforeAll(async () => {
-    await startTransaction();
     await cleanup();
     await postUser(customer);
     await postUser(admin);
@@ -60,24 +59,40 @@ beforeAll(async () => {
 
 afterAll(async () => {
     await cleanup();
-    await rollbackTransaction();
 });
+
+const product1 = new Product(
+    1000,
+    "iPhone 13",
+    Category.SMARTPHONE,
+    "2021-09-24",
+    "6.1-inch display",
+    10
+);
+
+const product2 = new Product(
+    500,
+    "iPhone 12",
+    Category.SMARTPHONE,
+    "2020-09-24",
+    "6.1-inch display",
+    5
+);
+const product3 = new Product(
+    200,
+    "MacBook Air",
+    Category.LAPTOP,
+    "2021-09-24",
+    "13-inch display",
+    3
+);
 
 describe("POST ezelectronics/products", () => {
     test("POST /ezelectronics/products - register a new product - Scenario 6.1", async () => {
-        const product = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            10
-        );
-
         await request(app)
             .post(`${routePath}/products`)
             .set("Cookie", adminCookie)
-            .send(product)
+            .send(product1)
             .expect(200);
     });
 
@@ -89,18 +104,6 @@ describe("POST ezelectronics/products", () => {
             "2021-09-24",
             "6.1-inch display",
             10
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product.sellingPrice,
-                product.model,
-                product.category,
-                product.arrivalDate,
-                product.details,
-                product.quantity,
-            ]
         );
 
         await request(app)
@@ -128,6 +131,75 @@ describe("POST ezelectronics/products", () => {
     });
 });
 
+describe("GET ezelectronics/products", () => {
+    test("GET /ezelectronics/products - get a single product - Scenario 8.1", async () => {
+        await request(app)
+            .get(`${routePath}/products?grouping=model&model=${product1.model}`)
+            .set("Cookie", adminCookie)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body).toEqual([product1]);
+            });
+    });
+
+    test("GET /ezelectronics/products - product not found - Scenario 8.2", async () => {
+        await request(app)
+            .get(`${routePath}/products?grouping=model&model=${"iPhone 14"}`)
+            .set("Cookie", adminCookie)
+            .expect(404);
+    });
+
+    test("GET /ezelectronics/products - get all products - Scenario 8.3", async () => {
+        const product2 = new Product(
+            500,
+            "iPhone 12",
+            Category.SMARTPHONE,
+            "2020-09-24",
+            "6.1-inch display",
+            5
+        );
+
+        await request(app).post(`${routePath}/products`).set("Cookie", adminCookie).send(product2);
+
+        await request(app)
+            .get(`${routePath}/products`)
+            .set("Cookie", adminCookie)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body).toEqual([product1, product2]);
+            });
+    });
+
+    test("GET /ezelectronics/products - get all products of the same category - Scenario 8.4", async () => {
+        await request(app).post(`${routePath}/products`).set("Cookie", adminCookie).send(product3);
+
+        await request(app)
+            .get(`${routePath}/products?grouping=category&category=${Category.SMARTPHONE}`)
+            .set("Cookie", adminCookie)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body).toEqual([product1, product2]);
+            });
+    });
+
+    test("GET /ezelectronics/products - category not found - Scenario 8.5", async () => {
+        await request(app)
+            .get(`${routePath}/products?grouping=category&category=${"Tablet"}`)
+            .set("Cookie", adminCookie)
+            .expect(422);
+    });
+
+    test("GET /ezelectronics/products - get all products of the same model - Scenario 8.6", async () => {
+        await request(app)
+            .get(`${routePath}/products?grouping=model&model=${product1.model}`)
+            .set("Cookie", adminCookie)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body).toEqual([product1]);
+            });
+    });
+});
+
 describe("PATCH ezelectronics/products/:model", () => {
     test("PATCH /ezelectronics/products/:model - change product quantity - Scenario 6.4", async () => {
         const product = new Product(
@@ -137,18 +209,6 @@ describe("PATCH ezelectronics/products/:model", () => {
             "2021-09-24",
             "6.1-inch display",
             10
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product.sellingPrice,
-                product.model,
-                product.category,
-                product.arrivalDate,
-                product.details,
-                product.quantity,
-            ]
         );
 
         const newQuantity = 20;
@@ -163,7 +223,7 @@ describe("PATCH ezelectronics/products/:model", () => {
     test("PATCH /ezelectronics/products/:model - product not found - Scenario 6.5", async () => {
         const product = new Product(
             1000,
-            "iPhone 13",
+            "iPhone 14",
             Category.SMARTPHONE,
             "2021-09-24",
             "6.1-inch display",
@@ -182,257 +242,82 @@ describe("PATCH ezelectronics/products/:model", () => {
 
 describe("PATCH ezelectronics/products/:model/sell", () => {
     test("PATCH /ezelectronics/products/:model/sell - sell a product - Scenario 7.1", async () => {
-        const product = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            10
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product.sellingPrice,
-                product.model,
-                product.category,
-                product.arrivalDate,
-                product.details,
-                product.quantity,
-            ]
-        );
-
-        const quantity = 5;
+        const quantity = 30;
 
         await request(app)
-            .patch(`${routePath}/products/${product.model}/sell`)
+            .patch(`${routePath}/products/${product1.model}/sell`)
             .set("Cookie", adminCookie)
             .send({ quantity: quantity })
             .expect(200);
     });
 
     test("PATCH /ezelectronics/products/:model/sell - product not found - Scenario 7.2", async () => {
-        const product = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            10
-        );
-
         const quantity = 5;
 
         await request(app)
-            .patch(`${routePath}/products/${product.model}/sell`)
+            .patch(`${routePath}/products/${"iPhone 14"}/sell`)
             .set("Cookie", adminCookie)
             .send({ quantity: quantity })
             .expect(404);
     });
 
     test("PATCH /ezelectronics/products/:model/sell - product out of stock - Scenario 7.3", async () => {
-        const product = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            0
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product.sellingPrice,
-                product.model,
-                product.category,
-                product.arrivalDate,
-                product.details,
-                product.quantity,
-            ]
-        );
-
         const quantity = 5;
 
         await request(app)
-            .patch(`${routePath}/products/${product.model}/sell`)
+            .patch(`${routePath}/products/${product1.model}/sell`)
             .set("Cookie", adminCookie)
             .send({ quantity: quantity })
             .expect(409);
     });
 });
 
-describe("GET ezelectronics/products", () => {
-    test("GET /ezelectronics/products - get a single product - Scenario 8.1", async () => {
-        const product = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            10
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product.sellingPrice,
-                product.model,
-                product.category,
-                product.arrivalDate,
-                product.details,
-                product.quantity,
-            ]
-        );
-
+describe("GET ezelectronics/products/available", () => {
+    test("GET /ezelectronics/products - get all available products - Scenario 8.7", async () => {
         await request(app)
-            .get(`${routePath}/products?grouping=model&model=${product.model}`)
+            .get(`${routePath}/products/available`)
             .set("Cookie", adminCookie)
             .expect(200)
             .expect((res) => {
-                expect(res.body).toEqual([product]);
+                expect(res.body).toEqual([product2, product3]);
             });
     });
 
-    test("GET /ezelectronics/products - product not found - Scenario 8.2", async () => {
-        const product = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            10
-        );
-
+    test("GET /ezelectronics/products - get all available products of the same category - Scenario 8.8", async () => {
         await request(app)
-            .get(`${routePath}/products?grouping=model&model=${product.model}`)
+            .get(
+                `${routePath}/products/available?grouping=category&category=${Category.SMARTPHONE}`
+            )
+            .set("Cookie", adminCookie)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body).toEqual([product2]);
+            });
+    });
+
+    test("GET /ezelectronics/products - get all available products of the same model - Scenario 8.9", async () => {
+        await request(app)
+            .get(`${routePath}/products/available?grouping=model&model=${product2.model}`)
+            .set("Cookie", adminCookie)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body).toEqual([product2]);
+            });
+    });
+});
+
+describe("DELETE ezelectronics/products/:model", () => {
+    test("DELETE /ezelectronics/products/:model - delete a product - Scenario 6.6", async () => {
+        await request(app)
+            .delete(`${routePath}/products/${product1.model}`)
+            .set("Cookie", adminCookie)
+            .expect(200);
+    });
+
+    test("DELETE /ezelectronics/products/:model - product not found - Scenario 6.7", async () => {
+        await request(app)
+            .delete(`${routePath}/products/${product1.model}`)
             .set("Cookie", adminCookie)
             .expect(404);
-    });
-
-    test("GET /ezelectronics/products - get all products - Scenario 8.3", async () => {
-        const product1 = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            10
-        );
-
-        const product2 = new Product(
-            500,
-            "iPhone 12",
-            Category.SMARTPHONE,
-            "2020-09-24",
-            "6.1-inch display",
-            5
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product1.sellingPrice,
-                product1.model,
-                product1.category,
-                product1.arrivalDate,
-                product1.details,
-                product1.quantity,
-            ]
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product2.sellingPrice,
-                product2.model,
-                product2.category,
-                product2.arrivalDate,
-                product2.details,
-                product2.quantity,
-            ]
-        );
-
-        await request(app)
-            .get(`${routePath}/products`)
-            .set("Cookie", adminCookie)
-            .expect(200)
-            .expect((res) => {
-                expect(res.body).toEqual([product1, product2]);
-            });
-    });
-
-    test("GET /ezelectronics/products - get all products of the same category - Scenario 8.4", async () => {
-        const product1 = new Product(
-            1000,
-            "iPhone 13",
-            Category.SMARTPHONE,
-            "2021-09-24",
-            "6.1-inch display",
-            10
-        );
-
-        const product2 = new Product(
-            500,
-            "iPhone 12",
-            Category.SMARTPHONE,
-            "2020-09-24",
-            "6.1-inch display",
-            5
-        );
-
-        const product3 = new Product(
-            200,
-            "MacBook Air",
-            Category.LAPTOP,
-            "2021-09-24",
-            "13-inch display",
-            3
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product1.sellingPrice,
-                product1.model,
-                product1.category,
-                product1.arrivalDate,
-                product1.details,
-                product1.quantity,
-            ]
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product2.sellingPrice,
-                product2.model,
-                product2.category,
-                product2.arrivalDate,
-                product2.details,
-                product2.quantity,
-            ]
-        );
-
-        db.run(
-            "INSERT INTO products (sellingPrice, model, category, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)",
-            [
-                product3.sellingPrice,
-                product3.model,
-                product3.category,
-                product3.arrivalDate,
-                product3.details,
-                product3.quantity,
-            ]
-        );
-
-        await request(app)
-            .get(`${routePath}/products?grouping=category&category=${Category.SMARTPHONE}`)
-            .set("Cookie", adminCookie)
-            .expect(200)
-            .expect((res) => {
-                expect(res.body).toEqual([product1, product2]);
-            });
     });
 });

@@ -29,21 +29,3 @@ export function cleanup() {
     });
   });
 }
-
-export function startTransaction() { 
-  return new Promise<void>((resolve, reject) => {
-    db.run("BEGIN TRANSACTION", (err) => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
-}
-
-export function rollbackTransaction() {
-  return new Promise<void>((resolve, reject) => {
-    db.run("ROLLBACK", (err) => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
-}

@@ -178,77 +178,8 @@ describe("ReviewRoutes", () => {
             expect(response.status).toBe(409);
             expect(response.body).toEqual({ error: "You have already reviewed this product", status: 409 });
         });
-    });
 
-    describe("GET /reviews/:model", () => {
-        test("should return reviews for a product", async () => {
-            const testReviews: ProductReview[] = [
-                new ProductReview("test-model-1", testCustomer.username, 5, "2023-06-09", "Amazing product!"),
-                new ProductReview("test-model-2", testCustomer.username, 4, "2023-06-08", "Very good!"),
-                new ProductReview("test-model-3", testCustomer.username, 3, "2023-06-07", "It's okay."),
-                new ProductReview("test-model-4", testCustomer.username, 2, "2023-06-06", "Not as expected."),
-                new ProductReview("test-model-5", testCustomer.username, 1, "2023-06-05", "Terrible product!")
-            ];
-
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-
-            jest.mock("express-validator", () => ({
-                param: jest.fn().mockImplementation(() => ({
-                    isString: () => { },
-                    isIn: () => { },
-                    notEmpty: () => { },
-                })),
-            }));
-
-            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
-            jest.spyOn(ReviewController.prototype, "getProductReviews").mockImplementation(() => Promise.resolve(testReviews));
-
-            const response = await request(app).get(baseURL + "/reviews/test-model").send();
-
-            expect(response.status).toBe(200);
-            expect(response.body).toEqual(testReviews);
-            expect(ReviewController.prototype.getProductReviews).toHaveBeenCalledWith("test-model");
-        });
-
-        test("should return 401 if user is not logged in", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                res.status(401).json({ error: "Unauthenticated user", status: 401 });
-            });
-
-            const response = await request(app)
-                .get(baseURL + "/reviews/test-model");
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
-        });
-
-        test("should return 404 if product not found", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-
-            jest.mock("express-validator", () => ({
-                param: jest.fn().mockImplementation(() => ({
-                    isString: () => { },
-                    isIn: () => { },
-                    notEmpty: () => { },
-                })),
-            }));
-
-            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
-            jest.spyOn(ReviewController.prototype, "getProductReviews").mockImplementation(() => Promise.reject(new ProductNotFoundError()));
-
-            const response = await request(app).get(baseURL + "/reviews/test-model");
-            console.log(response);
-            expect(response.status).toBe(404);
-            expect(response.body).toEqual({ error: "Product not found", status: 404 });
-        });
-    });
-
-
-    describe("DELETE /reviews/:model", () => {
-        test("should delete a review", async () => {
+        test("should return 422 if validation fails", async () => {
             jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
                 next();
             });
@@ -259,201 +190,311 @@ describe("ReviewRoutes", () => {
 
             jest.mock("express-validator", () => ({
                 param: jest.fn().mockImplementation(() => ({
-                    isString: () => { },
-                    isIn: () => { },
-                    notEmpty: () => { },
+                    isString: () => ({
+                        notEmpty: () => ({
+                            withMessage: () => { }
+                        })
+                    }),
                 })),
             }));
 
-            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
-            jest.spyOn(ReviewController.prototype, "deleteReview").mockImplementation(() => Promise.resolve(null));
+            jest.mock("express-validator", () => ({
+                body: jest.fn().mockImplementation(() => ({
+                    isString: () => ({
+                        notEmpty: () => ({
+                            withMessage: () => { }
+                        })
+                    }),
+                })),
+            }));
 
-            const response = await request(app).delete(baseURL + "/reviews/test-model");
-
-            expect(response.status).toBe(200);
-            expect(ReviewController.prototype.deleteReview).toHaveBeenCalledWith("test-model", testCustomer);
-        });
-
-        test("should return 401 if user is not logged in", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                res.status(401).json({ error: "Unauthenticated user", status: 401 });
+            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => {
+                res.status(422).json({ error: "The parameters are not formatted properly\n\n", status: 422 });
             });
 
             const response = await request(app)
-                .delete(baseURL + "/reviews/test-model")
-                ;
+                .post(baseURL + "/reviews/test-model")
+                .send({ score: "", comment: "" }); // Invalid data
 
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
-        });
-
-        test("should return 401 if user is not a customer", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-            jest.spyOn(Authenticator.prototype, "isCustomer").mockImplementationOnce((req, res, next) => {
-                res.status(401).json({ error: "User is not a customer", status: 401 });
-            });
-
-            const response = await request(app).delete(baseURL + "/reviews/test-model");
-
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ error: "User is not a customer", status: 401 });
-        });
-
-        test("should return 404 if review not found", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-            jest.spyOn(Authenticator.prototype, "isCustomer").mockImplementationOnce((req, res, next) => {
-                req.user = testCustomer;
-                next();
-            });
-            jest.mock("express-validator", () => ({
-                param: jest.fn().mockImplementation(() => ({
-                    isString: () => { },
-                    isIn: () => { },
-                    notEmpty: () => { },
-                })),
-            }));
-            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
-            jest.spyOn(ReviewController.prototype, "deleteReview").mockImplementation(() => Promise.reject(new NoReviewProductError()));
-
-            const response = await request(app).delete(baseURL + "/reviews/test-model");
-
-            expect(response.status).toBe(404);
-            expect(response.body).toEqual({ error: "You have not reviewed this product", status: 404 });
+            expect(response.status).toBe(422);
+            expect(response.body).toEqual({ error: "The parameters are not formatted properly\n\n", status: 422 });
         });
     });
+});
 
-    describe("DELETE /reviews/:model/all", () => {
-        test("should delete all reviews of a product", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-            jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
-                req.user = testManager; // or testAdmin
-                next();
-            });
+describe("GET /reviews/:model", () => {
+    test("should return reviews for a product", async () => {
+        const testReviews: ProductReview[] = [
+            new ProductReview("test-model-1", testCustomer.username, 5, "2023-06-09", "Amazing product!"),
+            new ProductReview("test-model-2", testCustomer.username, 4, "2023-06-08", "Very good!"),
+            new ProductReview("test-model-3", testCustomer.username, 3, "2023-06-07", "It's okay."),
+            new ProductReview("test-model-4", testCustomer.username, 2, "2023-06-06", "Not as expected."),
+            new ProductReview("test-model-5", testCustomer.username, 1, "2023-06-05", "Terrible product!")
+        ];
 
-            jest.mock("express-validator", () => ({
-                param: jest.fn().mockImplementation(() => ({
-                    isString: () => { },
-                    isIn: () => { },
-                    notEmpty: () => { },
-                })),
-            }));
-
-            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
-            jest.spyOn(ReviewController.prototype, "deleteReviewsOfProduct").mockImplementation(() => Promise.resolve(null));
-
-            const response = await request(app).delete(baseURL + "/reviews/test-model/all");
-
-            expect(response.status).toBe(200);
-            expect(ReviewController.prototype.deleteReviewsOfProduct).toHaveBeenCalledWith("test-model");
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
         });
 
-        test("should return 401 if user is not logged in", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                res.status(401).json({ error: "Unauthenticated user", status: 401 });
-            });
+        jest.mock("express-validator", () => ({
+            param: jest.fn().mockImplementation(() => ({
+                isString: () => { },
+                isIn: () => { },
+                notEmpty: () => { },
+            })),
+        }));
 
-            const response = await request(app).delete(baseURL + "/reviews/test-model/all");
+        jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
+        jest.spyOn(ReviewController.prototype, "getProductReviews").mockImplementation(() => Promise.resolve(testReviews));
 
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
-        });
+        const response = await request(app).get(baseURL + "/reviews/test-model").send();
 
-        test("should return 401 if user is not admin or manager", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-            jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
-                res.status(401).json({ error: "User is not an admin or manager", status: 401 });
-            });
-
-            const response = await request(app).delete(baseURL + "/reviews/test-model/all");
-
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ error: "User is not an admin or manager", status: 401 });
-        });
-
-        test("should return 404 if product not found", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-            jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
-                req.user = testManager; // or testAdmin;
-                next();
-            });
-
-            jest.mock("express-validator", () => ({
-                param: jest.fn().mockImplementation(() => ({
-                    isString: () => { },
-                    isIn: () => { },
-                    notEmpty: () => { },
-                })),
-            }));
-
-            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
-            jest.spyOn(ReviewController.prototype, "deleteReviewsOfProduct").mockImplementation(() => Promise.reject(new ProductNotFoundError()));
-
-            const response = await request(app).delete(baseURL + "/reviews/test-model/all");
-
-
-            expect(response.status).toBe(404);
-            expect(response.body).toEqual({ error: "Product not found", status: 404 });
-        });
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(testReviews);
+        expect(ReviewController.prototype.getProductReviews).toHaveBeenCalledWith("test-model");
     });
 
-    describe("DELETE /reviews", () => {
-        test("should delete all reviews", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-            jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
-                req.user = testAdmin; // or testManager;
-                next();
-            });
-
-            jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
-
-            jest.spyOn(ReviewController.prototype, "deleteAllReviews").mockImplementation(() => Promise.resolve(null));
-
-            const response = await request(app).delete(baseURL + "/reviews");
-
-
-            expect(response.status).toBe(200);
-            expect(ReviewController.prototype.deleteAllReviews).toHaveBeenCalled();
+    test("should return 401 if user is not logged in", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            res.status(401).json({ error: "Unauthenticated user", status: 401 });
         });
 
-        test("should return 401 if user is not logged in", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                res.status(401).json({ error: "Unauthenticated user", status: 401 });
-            });
-
-            const response = await request(app).delete(baseURL + "/reviews");
-
-
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
-        });
-
-        test("should return 401 if user is not admin or manager", async () => {
-            jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
-                next();
-            });
-            jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
-                res.status(401).json({ error: "User is not an admin or manager", status: 401 });
-            });
-
-            const response = await request(app).delete(baseURL + "/reviews");
-
-
-            expect(response.status).toBe(401);
-            expect(response.body).toEqual({ error: "User is not an admin or manager", status: 401 });
-        });
+        const response = await request(app)
+            .get(baseURL + "/reviews/test-model");
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
     });
+
+    test("should return 404 if product not found", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+
+        jest.mock("express-validator", () => ({
+            param: jest.fn().mockImplementation(() => ({
+                isString: () => { },
+                isIn: () => { },
+                notEmpty: () => { },
+            })),
+        }));
+
+        jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
+        jest.spyOn(ReviewController.prototype, "getProductReviews").mockImplementation(() => Promise.reject(new ProductNotFoundError()));
+
+        const response = await request(app).get(baseURL + "/reviews/test-model");
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual({ error: "Product not found", status: 404 });
+    });
+});
+
+
+describe("DELETE /reviews/:model", () => {
+    test("should delete a review", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isCustomer").mockImplementationOnce((req, res, next) => {
+            req.user = testCustomer;
+            next();
+        });
+
+        jest.mock("express-validator", () => ({
+            param: jest.fn().mockImplementation(() => ({
+                isString: () => { },
+                isIn: () => { },
+                notEmpty: () => { },
+            })),
+        }));
+
+        jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
+        jest.spyOn(ReviewController.prototype, "deleteReview").mockImplementation(() => Promise.resolve(null));
+
+        const response = await request(app).delete(baseURL + "/reviews/test-model");
+
+        expect(response.status).toBe(200);
+        expect(ReviewController.prototype.deleteReview).toHaveBeenCalledWith("test-model", testCustomer);
+    });
+
+    test("should return 401 if user is not logged in", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            res.status(401).json({ error: "Unauthenticated user", status: 401 });
+        });
+
+        const response = await request(app)
+            .delete(baseURL + "/reviews/test-model")
+            ;
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
+    });
+
+    test("should return 401 if user is not a customer", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isCustomer").mockImplementationOnce((req, res, next) => {
+            res.status(401).json({ error: "User is not a customer", status: 401 });
+        });
+
+        const response = await request(app).delete(baseURL + "/reviews/test-model");
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "User is not a customer", status: 401 });
+    });
+
+    test("should return 404 if review not found", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isCustomer").mockImplementationOnce((req, res, next) => {
+            req.user = testCustomer;
+            next();
+        });
+        jest.mock("express-validator", () => ({
+            param: jest.fn().mockImplementation(() => ({
+                isString: () => { },
+                isIn: () => { },
+                notEmpty: () => { },
+            })),
+        }));
+        jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
+        jest.spyOn(ReviewController.prototype, "deleteReview").mockImplementation(() => Promise.reject(new NoReviewProductError()));
+
+        const response = await request(app).delete(baseURL + "/reviews/test-model");
+
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual({ error: "You have not reviewed this product", status: 404 });
+    });
+});
+
+describe("DELETE /reviews/:model/all", () => {
+    test("should delete all reviews of a product", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
+            req.user = testManager; // or testAdmin
+            next();
+        });
+
+        jest.mock("express-validator", () => ({
+            param: jest.fn().mockImplementation(() => ({
+                isString: () => { },
+                isIn: () => { },
+                notEmpty: () => { },
+            })),
+        }));
+
+        jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
+        jest.spyOn(ReviewController.prototype, "deleteReviewsOfProduct").mockImplementation(() => Promise.resolve(null));
+
+        const response = await request(app).delete(baseURL + "/reviews/test-model/all");
+
+        expect(response.status).toBe(200);
+        expect(ReviewController.prototype.deleteReviewsOfProduct).toHaveBeenCalledWith("test-model");
+    });
+
+    test("should return 401 if user is not logged in", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            res.status(401).json({ error: "Unauthenticated user", status: 401 });
+        });
+
+        const response = await request(app).delete(baseURL + "/reviews/test-model/all");
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
+    });
+
+    test("should return 401 if user is not admin or manager", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
+            res.status(401).json({ error: "User is not an admin or manager", status: 401 });
+        });
+
+        const response = await request(app).delete(baseURL + "/reviews/test-model/all");
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "User is not an admin or manager", status: 401 });
+    });
+
+    test("should return 404 if product not found", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
+            req.user = testManager; // or testAdmin;
+            next();
+        });
+
+        jest.mock("express-validator", () => ({
+            param: jest.fn().mockImplementation(() => ({
+                isString: () => { },
+                isIn: () => { },
+                notEmpty: () => { },
+            })),
+        }));
+
+        jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
+        jest.spyOn(ReviewController.prototype, "deleteReviewsOfProduct").mockImplementation(() => Promise.reject(new ProductNotFoundError()));
+
+        const response = await request(app).delete(baseURL + "/reviews/test-model/all");
+
+
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual({ error: "Product not found", status: 404 });
+    });
+});
+
+describe("DELETE /reviews", () => {
+    test("should delete all reviews", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
+            req.user = testAdmin; // or testManager;
+            next();
+        });
+
+        jest.spyOn(ErrorHandler.prototype, "validateRequest").mockImplementation((req, res, next) => next());
+
+        jest.spyOn(ReviewController.prototype, "deleteAllReviews").mockImplementation(() => Promise.resolve(null));
+
+        const response = await request(app).delete(baseURL + "/reviews");
+
+
+        expect(response.status).toBe(200);
+        expect(ReviewController.prototype.deleteAllReviews).toHaveBeenCalled();
+    });
+
+    test("should return 401 if user is not logged in", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            res.status(401).json({ error: "Unauthenticated user", status: 401 });
+        });
+
+        const response = await request(app).delete(baseURL + "/reviews");
+
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "Unauthenticated user", status: 401 });
+    });
+
+    test("should return 401 if user is not admin or manager", async () => {
+        jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {
+            next();
+        });
+        jest.spyOn(Authenticator.prototype, "isAdminOrManager").mockImplementationOnce((req, res, next) => {
+            res.status(401).json({ error: "User is not an admin or manager", status: 401 });
+        });
+
+        const response = await request(app).delete(baseURL + "/reviews");
+
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "User is not an admin or manager", status: 401 });
+    });
+
 
     test("should handle errors", async () => {
         jest.spyOn(Authenticator.prototype, "isLoggedIn").mockImplementationOnce((req, res, next) => {

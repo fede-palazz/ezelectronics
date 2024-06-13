@@ -28,7 +28,7 @@ class CartDAO {
           }
           if (!rows || rows.length === 0) {
             // Empty cart or non existing one
-            resolve(new Cart(username, false, null, 0.0, []));
+            resolve(new Cart(username, false, "", 0.0, []));
             return;
           }
           const products: ProductInCart[] = rows.map((row: any) => {
@@ -331,7 +331,7 @@ class CartDAO {
           // Create cart objects
           for (const row of rows) {
             if (currentCartId !== row.id) {
-              cart = new Cart(row.customer, row.paid, row.paymentDate, row.total, []);
+              cart = new Cart(row.customer, !!row.paid, row.paymentDate, row.total, []);
               carts.push(cart);
               currentCartId = row.id;
             }

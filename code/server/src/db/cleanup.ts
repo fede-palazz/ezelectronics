@@ -11,15 +11,15 @@ export function cleanup() {
   return new Promise<void>((resolve, reject) => {
     db.serialize(() => {
       db.run("DELETE FROM users", (err) => {
-        if (err) return reject(err);
+        if (err) return reject();
         db.run("DELETE FROM carts", (err) => {
-          if (err) return reject(err);
+          if (err) return reject();
           db.run("DELETE FROM products", (err) => {
-            if (err) return reject(err);
+            if (err) return reject();
             db.run("DELETE FROM productsInCarts", (err) => {
-              if (err) return reject(err);
+              if (err) return reject();
               db.run("DELETE FROM reviews", (err) => {
-                if (err) return reject(err);
+                if (err) return reject();
                 resolve();
               });
             });

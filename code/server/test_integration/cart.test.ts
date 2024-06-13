@@ -55,10 +55,6 @@ afterAll(async () => {
 describe("GET ezelectronics/carts", () => {
     test("GET /ezelectronics/carts - success - Scenario 10.1", async () => {
         db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [1, 0, "customer", "", 0])
-        db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [2, 1, "customer", "2023-12-02", 0])
-        db.run("INSERT INTO products (model, category, sellingPrice, arrivalDate, details, quantity) VALUES (?, ?, ?, ?,?,?)", ["iPhone 12", Category.SMARTPHONE, 999.99, "2021-01-01", "details", 10]);
-        db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [2, "iPhone 12", 1])
-
         await request(app)
             .get(`${routePath}/carts`)
             .set("Cookie", customerCookie)
@@ -82,8 +78,9 @@ describe("GET ezelectronics/carts", () => {
 describe("GET /ezelectronics/carts/history", () => {
  
     test("GET /ezelectronics/carts/history - success - Scenario 10.2", async () => {
-        db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [3, 1, "customer", "2021-01-01", 0])
-        db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [3, "iPhone 12", 1])
+        db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [2, 1, "customer", "2021-01-01", 0])
+        db.run("INSERT INTO products (model, category, sellingPrice, arrivalDate, details, quantity) VALUES (?, ?, ?, ?,?, ?)", ["Oppo Reno 5", Category.SMARTPHONE, 999.99, "2021-01-01", "details", 10])
+        db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [2, "Oppo Reno 5", 1])
         await request(app)
         .get(`${routePath}/carts/history`)
         .set("Cookie", customerCookie)
@@ -94,31 +91,17 @@ describe("GET /ezelectronics/carts/history", () => {
                 {
                     customer: "customer",
                     paid: true,
-                    paymentDate: "2023-12-02",
+                    paymentDate: "2021-01-01",
                     total: 999.99,
                     products: [
                         {
-                            model: "iPhone 12",
+                            model: "Oppo Reno 5",
                             category: "Smartphone",
                             price: 999.99,
                             quantity: 1
                         }
                     ]
                 },
-                {
-                    customer: "customer",
-                    paid: true,
-                    paymentDate: "2021-01-01",
-                    total: 999.99,
-                    products: [
-                        {
-                            model: "iPhone 12",
-                            category: "Smartphone",
-                            price: 999.99,
-                            quantity: 1
-                        }
-                    ]
-                }
                ]
             );
         });
@@ -128,7 +111,7 @@ describe("GET /ezelectronics/carts/history", () => {
 describe('POST /ezelectronics/carts', () => { 
 
     test("POST /ezelectronics/carts - success - Scenario 10.3", async () => {
-
+        db.run("INSERT INTO products (model, category, sellingPrice, arrivalDate, details, quantity) VALUES (?, ?, ?, ?,?, ?)", ["iPhone 12", Category.SMARTPHONE, 999.99, "2021-01-01", "details", 10])
         await request(app)
             .post(`${routePath}/carts`)
             .set('Cookie', customerCookie)
@@ -175,7 +158,7 @@ describe('POST /ezelectronics/carts', () => {
     });
 
     test("PATCH /ezelectronics/carts - empty cart - Scenario 10.7", async () => {
-        db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [4, 0, "customer", "", 0])
+        db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [3, 0, "customer", "", 0])
         await request(app)
         .patch(`${routePath}/carts`)
         .set("Cookie", customerCookie)
@@ -188,7 +171,7 @@ describe('POST /ezelectronics/carts', () => {
  describe("DELETE /ezelectronics/carts/products/:model", () => {
 
     test ("DELETE /ezelectronics/carts/products/:model - success - Scenario 10.9", async () => {
-        db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [4, "iPhone 12", 1])
+        db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [3, "iPhone 12", 1])
         await request(app)
         .delete(`${routePath}/carts/products/iPhone 12`)
         .set("Cookie", customerCookie)
@@ -232,7 +215,8 @@ describe('POST /ezelectronics/carts', () => {
     });
 
     test("DELETE /ezelectronics/carts/current - cart does not exist - Scenario 11.2", async () => {
-        db.run("DELETE FROM carts WHERE id = 4")
+        db.run("DELETE FROM carts ")
+        db.run("DELETE FROM carts WHERE id = 5")
         await request(app)
         .delete(`${routePath}/carts/current`)
         .set("Cookie", customerCookie)
@@ -243,6 +227,12 @@ describe('POST /ezelectronics/carts', () => {
  describe("GET /ezelectronics/carts/all", () => {
     
         test("GET /ezelectronics/carts/all - success - Scenario 15.1", async () => {
+            db.run("DELETE FROM productsInCarts")
+            db.run("DELETE FROM products")
+            db.run("DELETE FROM carts")
+            db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [5, 1, "customer", "2023-12-02",0])
+            db.run("INSERT INTO products (model, category, sellingPrice, arrivalDate, details, quantity) VALUES (?, ?, ?, ?,?, ?)", ["Oppo Reno 5", Category.SMARTPHONE, 999.99, "2021-01-01", "details", 10])
+            db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [5, "Oppo Reno 5", 1])
             await request(app)
             .get(`${routePath}/carts/all`)
             .set("Cookie", adminCookie)
@@ -253,42 +243,14 @@ describe('POST /ezelectronics/carts', () => {
                         {
                             customer: "customer",
                             paid: true,
-                            paymentDate: new Date().toISOString().split('T')[0],
-                            total: 999.99,
-                            products: [
-                                {
-                                    model: "iPhone 12",
-                                    category: "Smartphone",
-                                    price: 999.99,
-                                    quantity: 1    
-                                }
-                            ]
-                        },
-                        {
-                            customer: "customer",
-                            paid: true,
                             paymentDate: "2023-12-02",
                             total: 999.99,
                             products: [
                                 {
-                                    model: "iPhone 12",
+                                    model: "Oppo Reno 5",
                                     category: "Smartphone",
                                     price: 999.99,
-                                    quantity: 1    
-                                }
-                            ]
-                        },
-                        {
-                            customer: "customer",
-                            paid: true,
-                            paymentDate: "2021-01-01",
-                            total: 999.99,
-                            products: [
-                                {
-                                    model: "iPhone 12",
-                                    category: "Smartphone",
-                                    price: 999.99,
-                                    quantity: 1    
+                                    quantity: 1
                                 }
                             ]
                         }

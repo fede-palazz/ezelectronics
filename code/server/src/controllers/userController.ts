@@ -78,11 +78,8 @@ class UserController {
    * @param username - The username of the user to delete. The user must exist.
    * @returns A Promise that resolves to true if the user has been deleted.
    */
-  async deleteUser(user: User, username: string): Promise<Boolean> {
+  async deleteUser(user: User, username: string): Promise<boolean> {
     const existingUser = await this.dao.getUserByUsername(username);
-    if (!existingUser) {
-      return Promise.reject(new UserNotFoundError());
-    }
     if (Utility.isAdmin(existingUser)) {
       return Promise.reject(new UserIsAdminError());
     }
@@ -123,9 +120,6 @@ class UserController {
       throw new DateError();
     }
     const userToUpdate = await this.dao.getUserByUsername(username);
-    if (!userToUpdate) {
-      return Promise.reject(new UserNotFoundError());
-    }
     if (!Utility.isAdmin(user) && user.username !== username) {
       return Promise.reject(new UserNotAdminError());
     }

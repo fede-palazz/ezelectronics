@@ -253,6 +253,7 @@ class AuthRoutes {
       "/",
       body("username").isString().notEmpty().withMessage("Field 'username' is required"),
       body("password").isString().notEmpty().withMessage("Field 'password' is required"),
+      this.errorHandler.validateRequest,
       (req, res, next) =>
         this.authService
           .login(req, res, next)

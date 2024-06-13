@@ -4,7 +4,6 @@ import { app } from "../index"
 import db from "../src/db/db"
 import {cleanup} from "../src/db/cleanup"
 import { Category } from "../src/components/product"
-import { Cart } from "../src/components/cart"
 
 const routePath = "/ezelectronics"
 
@@ -227,12 +226,14 @@ describe('POST /ezelectronics/carts', () => {
  describe("GET /ezelectronics/carts/all", () => {
     
         test("GET /ezelectronics/carts/all - success - Scenario 15.1", async () => {
-            db.run("DELETE FROM productsInCarts")
-            db.run("DELETE FROM products")
-            db.run("DELETE FROM carts")
-            db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [5, 1, "customer", "2023-12-02",0])
-            db.run("INSERT INTO products (model, category, sellingPrice, arrivalDate, details, quantity) VALUES (?, ?, ?, ?,?, ?)", ["Oppo Reno 5", Category.SMARTPHONE, 999.99, "2021-01-01", "details", 10])
-            db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [5, "Oppo Reno 5", 1])
+            db.serialize(() => {
+                db.run("DELETE FROM productsInCarts")
+                db.run("DELETE FROM products")
+                db.run("DELETE FROM carts")
+                db.run("INSERT INTO carts (id, paid, customer, paymentDate, total) VALUES (?, ?, ?, ?, ?)", [5, 1, "customer", "2023-12-02",0])
+                db.run("INSERT INTO products (model, category, sellingPrice, arrivalDate, details, quantity) VALUES (?, ?, ?, ?,?, ?)", ["Oppo Reno 5", Category.SMARTPHONE, 999.99, "2021-01-01", "details", 10])
+                db.run("INSERT INTO productsInCarts(cart_id, product_model, quantity_in_cart) VALUES (?, ?, ?)", [5, "Oppo Reno 5", 1])
+            });
             await request(app)
             .get(`${routePath}/carts/all`)
             .set("Cookie", adminCookie)

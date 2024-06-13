@@ -172,7 +172,6 @@ describe("GET /users", () => {
     expect(cust.role).toBe(customer.role);
 
     const adm = users.body.find((user: any) => user.username === admin.username);
-    console.log(adm);
     expect(adm).toBeDefined();
     expect(adm.name).toBe(admin.name);
     expect(adm.surname).toBe(admin.surname);

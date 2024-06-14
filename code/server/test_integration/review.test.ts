@@ -85,6 +85,52 @@ describe("POST /reviews/:model", () => {
         expect(review.score).toBe(5);
         expect(review.comment).toBe("Great product!");
     });
+
+    test("should return 404 if product does not exist", async () => {
+        await request(app)
+            .post(routePath + "/reviews/nonExistingModel")
+            .set("Cookie", customerCookie)
+            .send({ score: 5, comment: "Great product!" })
+            .expect(404);
+    });
+
+    test("should return 409 if customer already reviewed the product", async () => {
+        await request(app)
+            .post(routePath + "/reviews/testModel")
+            .set("Cookie", customerCookie)
+            .send({ score: 5, comment: "Great product!" })
+            .expect(409);
+    });
+
+    test("should return 422 if score is out of range", async () => {
+        await request(app)
+            .post(routePath + "/reviews/testModel")
+            .set("Cookie", customerCookie)
+            .send({ score: 6, comment: "Great product!" })
+            .expect(422);
+    });
+
+    test("should return 422 if comment is null", async () => {
+        await request(app)
+            .post(routePath + "/reviews/testModel")
+            .set("Cookie", customerCookie)
+            .send({ score: 5, comment: null })
+            .expect(422);
+    });
+
+    test("It should return a 422 error code if at least one request body parameter is empty/missing", async () => {
+        await request(app)
+            .post(routePath + "/reviews/testModel")
+            .set("Cookie", customerCookie)
+            .send({ score: "", comment: "Great product!" })
+            .expect(422);
+        await request(app)
+            .post(routePath + "/reviews/testModel")
+            .set("Cookie", customerCookie)
+            .send({ score: 5, comment: "" })
+            .expect(422);
+    });
+
 });
 
 describe("DELETE /reviews/:model", () => {
@@ -104,6 +150,33 @@ describe("DELETE /reviews/:model", () => {
         });
 
         expect(review).toBeUndefined();
+    });
+
+    test("should return 404 if product does not exist", async () => {
+        const response = await request(app)
+            .delete(`${routePath}/reviews/nonExistingModel`)
+            .set("Cookie", customerCookie);
+
+        expect(response.status).toBe(404);
+    });
+
+    test("should return 404 if customer has no review for the product", async () => {
+        await new Promise<void>((resolve, reject) => {
+            db.run("INSERT INTO products (model, category, sellingPrice, arrivalDate, details, quantity) VALUES (?, ?, ?, ?, ?, ?)", ["anotherModel", "TestCategory", 99.99, "2023-01-01", "details", 100], (err) => {
+                if (err) {
+                    console.error("Error inserting product:", err);
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+
+        const response = await request(app)
+            .delete(`${routePath}/reviews/anotherModel`)
+            .set("Cookie", customerCookie);
+
+        expect(response.status).toBe(404);
     });
 });
 
@@ -126,6 +199,16 @@ describe("GET /reviews/:model", () => {
             { user: customer.username, model: "testModel", score: 5, date: "2023-06-09", comment: "Amazing product!" }
         ]);
     });
+
+    test("should return 404 if product does not exist", async () => {
+        const response = await request(app)
+            .get(`${routePath}/reviews/notamodel`)
+            .set("Cookie", customerCookie);
+
+        expect(response.status).toBe(404);
+
+    });
+
 });
 
 describe("DELETE /reviews/:model/all", () => {
@@ -145,6 +228,14 @@ describe("DELETE /reviews/:model/all", () => {
         });
 
         expect(reviews.length).toBe(0);
+    });
+
+    test("should return 404 if product does not exist", async () => {
+        const response = await request(app)
+            .delete(`${routePath}/reviews/nonExistingModel/all`)
+            .set("Cookie", adminCookie);
+
+        expect(response.status).toBe(404);
     });
 });
 

@@ -1,6 +1,6 @@
 # Test Report
 
-<The goal of this document is to explain how the application was tested, detailing how the test cases were defined and what they cover>
+The goal of this document is to explain how the application was tested, detailing how the test cases were defined and what they cover.
 
 # Contents
 
@@ -15,7 +15,7 @@
 
 # Dependency graph
 
-     <report the here the dependency graph of EzElectronics>
+![dependency_graph](Immagini/dependency_graph.png)
 
 # Integration approach
 

@@ -62,6 +62,9 @@ class ReviewDAO {
             reject(err);
             return;
           }
+          if (rows.length == 0) {
+            reject(new ProductNotFoundError());
+          }
           const reviews = rows.map(
             (row: any) => new ProductReview(row.product, row.user, row.score, row.date, row.comment)
           );

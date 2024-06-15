@@ -348,7 +348,7 @@ describe("Delete user by username", () => {
   });
 });
 
-describe("Delete user by username", () => {
+describe("Delete all users", () => {
   beforeEach(() => {
     userController = new UserController();
   });

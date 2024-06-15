@@ -37,13 +37,48 @@ The goal of this document is to explain how the application was tested, detailin
 
 # Tests
 
-<in the table below list the test cases defined For each test report the object tested, the test level (API, integration, unit) and the technique used to define the test case (BB/ eq partitioning, BB/ boundary, WB/ statement coverage, etc)> <split the table if needed>
-
 ## User Unit Tests
 
-|   Test case name    | Object(s) tested | Test level |     Technique used     |
-| :-----------------: | :--------------: | :--------: | :--------------------: |
-| User authentication |     UserDAO      |    Unit    | WB/ statement coverage |
+|     Test case name      | Object(s) tested | Test level | Technique used |
+| :---------------------: | :--------------: | :--------: | :------------: |
+|   User authentication   |     UserDAO      |    Unit    |       WB       |
+|     Create account      |     UserDAO      |    Unit    |       WB       |
+|  Get user by username   |     UserDAO      |    Unit    |       WB       |
+|      Get all users      |     UserDAO      |    Unit    |       WB       |
+|    Get users by role    |     UserDAO      |    Unit    |       WB       |
+| Delete user by username |     UserDAO      |    Unit    |       WB       |
+|    Delete all users     |     UserDAO      |    Unit    |       WB       |
+|    Update user info     |     UserDAO      |    Unit    |       WB       |
+|                         |                  |            |                |
+|     Create new user     |  UserController  |    Unit    |       WB       |
+|        Get users        |  UserController  |    Unit    |       WB       |
+|    Get users by role    |  UserController  |    Unit    |       WB       |
+|  Get user by username   |  UserController  |    Unit    |       WB       |
+| Delete user by username |  UserController  |    Unit    |       WB       |
+|    Delete all users     |  UserController  |    Unit    |       WB       |
+| Update user information |  UserController  |    Unit    |       WB       |
+|                         |                  |            |                |
+|         POST /          |    UserRoutes    |    Unit    |       WB       |
+|          GET /          |    UserRoutes    |    Unit    |       WB       |
+|    GET /roles/:role     |    UserRoutes    |    Unit    |       WB       |
+|     GET /:username      |    UserRoutes    |    Unit    |       WB       |
+|    DELETE /:username    |    UserRoutes    |    Unit    |       WB       |
+|        DELETE /         |    UserRoutes    |    Unit    |       WB       |
+|    PATCH /:username     |    UserRoutes    |    Unit    |       WB       |
+
+## User Integration Tests
+
+|      Test case name      | Object(s) tested | Test level | Technique used |
+| :----------------------: | :--------------: | :--------: | :------------: |
+|       POST /users        |    UserRoutes    |    API     |       BB       |
+| DELETE /sessions/current |    UserRoutes    |    API     |       BB       |
+|      POST /sessions      |    UserRoutes    |    API     |       BB       |
+|        GET /users        |    UserRoutes    |    API     |       BB       |
+|  GET /users/roles/:role  |    UserRoutes    |    API     |       BB       |
+|   GET /users/:username   |    UserRoutes    |    API     |       BB       |
+|  PATCH /users/:username  |    UserRoutes    |    API     |       BB       |
+| DELETE /users/:username  |    UserRoutes    |    API     |       BB       |
+|      DELETE /users       |    UserRoutes    |    API     |       BB       |
 
 ## Cart Unit Tests
 
@@ -61,44 +96,42 @@ The goal of this document is to explain how the application was tested, detailin
 | Delete all products from a cart |     CartDAO      |    Unit    | WB |
 | Check availability of a product in cart |     CartDAO      |    Unit    | WB |
 | Checkout current cart |     CartDAO      |    Unit    | WB |
- | | | | 
- | Add to cart |     CartController      |    Unit    | WB |
- | Get cart |     CartController      |    Unit    | WB |
- | Checkout cart |     CartController      |    Unit    | WB |
- | Get customer carts |     CartController      |    Unit    | WB |
- | Remove product from cart |     CartController      |    Unit    | WB |
- | Clear cart |     CartController      |    Unit    | WB |
- | Delete all carts |     CartController      |    Unit    | WB |
- | Get all carts |     CartController      |    Unit    | WB |
- | | | |
- | GET / | CartRoute | Unit | WB |
- | POST / | CartRoute | Unit | WB |
- | PATCH / | CartRoute | Unit | WB |
- | GET /history | CartRoute | Unit | WB |
- | DELETE /products/:model | CartRoute | Unit | WB |
- | DELETE /current | CartRoute | Unit | WB |
-| DELETE / | CartRoute | Unit | WB |
-| GET /all | CartRoute | Unit | WB |
+| | | ||
+| Add to cart |     CartController      |    Unit    | WB |
+| Get cart |     CartController      |    Unit    | WB |
+| Checkout cart |     CartController      |    Unit    | WB |
+| Get customer carts |     CartController      |    Unit    | WB |
+| Remove product from cart |     CartController      |    Unit    | WB |
+| Clear cart |     CartController      |    Unit    | WB |
+| Delete all carts |     CartController      |    Unit    | WB |
+| Get all carts |     CartController      |    Unit    | WB |
+| | | ||
+| GET / | CartRoutes | Unit | WB |
+| POST / | CartRoutes | Unit | WB |
+| PATCH / | CartRoutes | Unit | WB |
+| GET /history | CartRoutes | Unit | WB |
+| DELETE /products/:model | CartRoutes | Unit | WB |
+| DELETE /current | CartRoutes | Unit | WB |
+| DELETE / | CartRoutes | Unit | WB |
+| GET /all | CartRoutes | Unit | WB |
 
 ## Cart Integration Tests
 
 |   Test case name    | Object(s) tested | Test level |     Technique used     |
 | :-----------------: | :--------------: | :--------: | :--------------------: |
-| GET /ezelectronics/carts |     CartRoute      |    API    | BB |
-| GET /ezelectronics/carts/history |     CartRoute      |    API    | BB |
-| POST /ezelectronics/carts |     CartRoute      |    API    | BB |
-| PATCH /ezelectronics/carts |     CartRoute      |    API    | BB |
-| DELETE /ezelectronics/carts/products/:model |     CartRoute      |    API    | BB |
-| DELETE /ezelectronics/carts/current |     CartRoute      |    API    | BB |
-| GET /ezelectronics/carts/all |     CartRoute      |    API    | BB |
-| DELETE /ezelectronics/carts |     CartRoute      |    API    | BB |
+| GET /ezelectronics/carts |     CartRoutes     |    API    | BB |
+| GET /ezelectronics/carts/history |     CartRoutes     |    API    | BB |
+| POST /ezelectronics/carts |     CartRoutes     |    API    | BB |
+| PATCH /ezelectronics/carts |     CartRoutes     |    API    | BB |
+| DELETE /ezelectronics/carts/products/:model |     CartRoutes     |    API    | BB |
+| DELETE /ezelectronics/carts/current |     CartRoutes     |    API    | BB |
+| GET /ezelectronics/carts/all |     CartRoutes     |    API    | BB |
+| DELETE /ezelectronics/carts |     CartRoutes     |    API    | BB |
 
 
 # Coverage
 
 ## Coverage of FR
-
-<Report in the following table the coverage of functional requirements and scenarios(from official requirements) >
 
 | Functional Requirement or scenario | Test(s) |
 | :--------------------------------: | :-----: |

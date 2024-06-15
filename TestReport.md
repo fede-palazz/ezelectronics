@@ -22,18 +22,13 @@ The goal of this document is to explain how the application was tested, detailin
 
 # Integration approach
 
-    <Write here the integration sequence you adopted, in general terms (top down, bottom up, mixed) and as sequence
+    L'approccio di testing utilizzato è di tipo bottom up, cominciando a testare i singoli moduli dal basso verso l'alto per poi testare il livello API.
     
-    (ex: step1: unit A, step 2: unit A+B, step 3: unit A+B+C, etc)>
-    
-    <Some steps may  correspond to unit testing (ex step1 in ex above)>
-    
-    <One step will  correspond to API testing, or testing unit route.js>
-    
-    step1: unit DAO
-    step2: unit Controller
-    step3: unit Route
-    step4
+    La sequenza di testing è stata:
+    - step1: unit DAO
+    - step2: unit Controller
+    - step3: unit Routes
+    - step4: integration Routes (API testing)
 
 # Tests
 

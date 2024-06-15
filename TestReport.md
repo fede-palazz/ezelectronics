@@ -9,6 +9,9 @@ The goal of this document is to explain how the application was tested, detailin
 - [Dependency graph](#dependency-graph)
 - [Integration approach](#integration-approach)
 - [Tests](#tests)
+  - [User Unit Tests](#user-unit-tests)
+  - [Cart Unit Tests](#cart-unit-tests)
+  - [Cart Integration Tests](#cart-integration-tests)
 - [Coverage](#coverage)
   - [Coverage of FR](#coverage-of-fr)
   - [Coverage white box](#coverage-white-box)
@@ -41,6 +44,55 @@ The goal of this document is to explain how the application was tested, detailin
 |   Test case name    | Object(s) tested | Test level |     Technique used     |
 | :-----------------: | :--------------: | :--------: | :--------------------: |
 | User authentication |     UserDAO      |    Unit    | WB/ statement coverage |
+
+## Cart Unit Tests
+
+|   Test case name    | Object(s) tested | Test level |     Technique used     |
+| :-----------------: | :--------------: | :--------: | :--------------------: |
+| Cart creation and visualization |     CartDAO      |    Unit    | WB |
+| Create empty cart |     CartDAO      |    Unit    | WB |
+| Get current cart |     CartDAO      |    Unit    | WB |
+| Add product to cart |     CartDAO      |    Unit    | WB |
+| Remove product from cart |     CartDAO      |    Unit    | WB |
+| Modify product quantity in cart |     CartDAO      |    Unit    | WB |
+| Get paid carts |     CartDAO      |    Unit    | WB |
+| Delete all carts |     CartDAO      |    Unit    | WB |
+| Get all carts |     CartDAO      |    Unit    | WB |
+| Delete all products from a cart |     CartDAO      |    Unit    | WB |
+| Check availability of a product in cart |     CartDAO      |    Unit    | WB |
+| Checkout current cart |     CartDAO      |    Unit    | WB |
+ | | | | 
+ | Add to cart |     CartController      |    Unit    | WB |
+ | Get cart |     CartController      |    Unit    | WB |
+ | Checkout cart |     CartController      |    Unit    | WB |
+ | Get customer carts |     CartController      |    Unit    | WB |
+ | Remove product from cart |     CartController      |    Unit    | WB |
+ | Clear cart |     CartController      |    Unit    | WB |
+ | Delete all carts |     CartController      |    Unit    | WB |
+ | Get all carts |     CartController      |    Unit    | WB |
+ | | | |
+ | GET / | CartRoute | Unit | WB |
+ | POST / | CartRoute | Unit | WB |
+ | PATCH / | CartRoute | Unit | WB |
+ | GET /history | CartRoute | Unit | WB |
+ | DELETE /products/:model | CartRoute | Unit | WB |
+ | DELETE /current | CartRoute | Unit | WB |
+| DELETE / | CartRoute | Unit | WB |
+| GET /all | CartRoute | Unit | WB |
+
+## Cart Integration Tests
+
+|   Test case name    | Object(s) tested | Test level |     Technique used     |
+| :-----------------: | :--------------: | :--------: | :--------------------: |
+| GET /ezelectronics/carts |     CartRoute      |    API    | BB |
+| GET /ezelectronics/carts/history |     CartRoute      |    API    | BB |
+| POST /ezelectronics/carts |     CartRoute      |    API    | BB |
+| PATCH /ezelectronics/carts |     CartRoute      |    API    | BB |
+| DELETE /ezelectronics/carts/products/:model |     CartRoute      |    API    | BB |
+| DELETE /ezelectronics/carts/current |     CartRoute      |    API    | BB |
+| GET /ezelectronics/carts/all |     CartRoute      |    API    | BB |
+| DELETE /ezelectronics/carts |     CartRoute      |    API    | BB |
+
 
 # Coverage
 
@@ -75,14 +127,14 @@ The goal of this document is to explain how the application was tested, detailin
 |               FR4.3                |         |
 |               FR4.4                |         |
 |               FR4.5                |         |
-|               FR5.1                |         |
-|               FR5.2                |         |
-|               FR5.3                |         |
-|               FR5.4                |         |
-|               FR5.5                |         |
-|               FR5.6                |         |
-|               FR5.7                |         |
-|               FR5.8                |         |
+|               FR5.1                |  GET /ezelectronics/carts        |
+|               FR5.2                | POST /ezelectronics/carts        |
+|               FR5.3                | PATCH /ezelectronics/carts        |
+|               FR5.4                | GET /ezelectronics/carts/history        |
+|               FR5.5                | DELETE /ezelectronics/carts/products/:model        |
+|               FR5.6                | DELETE /ezelectronics/carts/current        |
+|               FR5.7                | GET /ezelectronics/carts/all         |
+|               FR5.8                | DELETE /ezelectronics/carts         |
 
 ## Coverage white box
 

@@ -72,27 +72,46 @@ describe("create new review", () => {
         expect(ReviewDAO.prototype.addReview).toHaveBeenCalledWith(testReview.model, testReview.user.username, testReview.score, testReview.comment);
     });
 });
+describe("Get product reviews", () => {
+    beforeEach(() => {
+        controller = new ReviewController();
+    });
+    afterEach(() => {
+        jest.clearAllMocks();
+        jest.restoreAllMocks();
+    });
+    test("get Product Reviews", async () => {
+        const mockReviews = [
+            { product: "testModel", user: "user1", score: 5, date: "2024-01-01", comment: "Great product!" },
+            { product: "testModel", user: "user2", score: 4, date: "2024-01-02", comment: "Good value." },
+            { product: "testModel", user: "user3", score: 3, date: "2024-01-03", comment: "Average." }
+        ];
 
-test("get Product Reviews", async () => {
-    const mockReviews = [
-        { product: "testModel", user: "user1", score: 5, date: "2024-01-01", comment: "Great product!" },
-        { product: "testModel", user: "user2", score: 4, date: "2024-01-02", comment: "Good value." },
-        { product: "testModel", user: "user3", score: 3, date: "2024-01-03", comment: "Average." }
-    ];
+        const expectedReviews = mockReviews.map(
+            (row: any) => new ProductReview(row.product, row.user, row.score, row.date, row.comment)
+        );
 
-    const expectedReviews = mockReviews.map(
-        (row: any) => new ProductReview(row.product, row.user, row.score, row.date, row.comment)
-    );
+        jest.spyOn(ReviewDAO.prototype, "getProductReviews").mockResolvedValueOnce(expectedReviews); //Mock the createReview method of the DAO
+        const controller = new ReviewController(); //Create a new instance of the controller
+        //Call the createReview method of the controller with the test Review object
+        const response = await controller.getProductReviews("model");
 
-    jest.spyOn(ReviewDAO.prototype, "getProductReviews").mockResolvedValueOnce(expectedReviews); //Mock the createReview method of the DAO
-    const controller = new ReviewController(); //Create a new instance of the controller
-    //Call the createReview method of the controller with the test Review object
-    const response = await controller.getProductReviews("model");
+        //Check if the createReview method of the DAO has been called once with the correct parameters
+        expect(ReviewDAO.prototype.getProductReviews).toHaveBeenCalledTimes(1);
+        expect(ReviewDAO.prototype.getProductReviews).toHaveBeenCalledWith("model");
+        expect(response).toBe(expectedReviews)
+    });
 
-    //Check if the createReview method of the DAO has been called once with the correct parameters
-    expect(ReviewDAO.prototype.getProductReviews).toHaveBeenCalledTimes(1);
-    expect(ReviewDAO.prototype.getProductReviews).toHaveBeenCalledWith("model");
-    expect(response).toBe(expectedReviews)
+    test("not found product", async () => {
+
+        jest.spyOn(ReviewDAO.prototype, "getProductReviews").mockRejectedValueOnce(new ProductNotFoundError()); //Mock the createReview method of the DAO
+        //Call the createReview method of the controller with the test Review object
+        await expect(controller.getProductReviews("model")).rejects.toThrow(ProductNotFoundError);
+
+        //Check if the createReview method of the DAO has been called once with the correct parameters
+        expect(ReviewDAO.prototype.getProductReviews).toHaveBeenCalledTimes(1);
+        expect(ReviewDAO.prototype.getProductReviews).toHaveBeenCalledWith("model");
+    });
 });
 
 describe("Delete Review", () => {

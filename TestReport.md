@@ -123,46 +123,119 @@ The goal of this document is to explain how the application was tested, detailin
 | GET /ezelectronics/carts/all |     CartRoutes     |    API    | BB |
 | DELETE /ezelectronics/carts |     CartRoutes     |    API    | BB |
 
+## Product Unit Tests
+
+|           Test case name           | Object(s) tested  | Test level | Technique used |
+| :--------------------------------: | :---------------: | :--------: | :------------: |
+|          Register product          |    ProductDAO     |    Unit    |       WB       |
+|      Change product quantity       |    ProductDAO     |    Unit    |       WB       |
+|            Sell product            |    ProductDAO     |    Unit    |       WB       |
+|            Get products            |    ProductDAO     |    Unit    |       WB       |
+|      Get products by category      |    ProductDAO     |    Unit    |       WB       |
+|       Get available products       |    ProductDAO     |    Unit    |       WB       |
+| Get available products by category |    ProductDAO     |    Unit    |       WB       |
+|            Get product             |    ProductDAO     |    Unit    |       WB       |
+|           Delete product           |    ProductDAO     |    Unit    |       WB       |
+|        Delete all products         |    ProductDAO     |    Unit    |       WB       |
+|                                    |                   |            |                |
+|         Register products          | ProductController |    Unit    |       WB       |
+|      Change product quantity       | ProductController |    Unit    |       WB       |
+|            Sell product            | ProductController |    Unit    |       WB       |
+|            Get products            | ProductController |    Unit    |       WB       |
+|       Get available products       | ProductController |    Unit    |       WB       |
+|        Delete all products         | ProductController |    Unit    |       WB       |
+|           Delete product           | ProductController |    Unit    |       WB       |
+|                                    |                   |            |                |
+|               POST /               |   ProductRoutes   |    Unit    |       WB       |
+|           PATCH /:model            |   ProductRoutes   |    Unit    |       WB       |
+|         PATCH /:model/sell         |   ProductRoutes   |    Unit    |       WB       |
+|               GET /                |   ProductRoutes   |    Unit    |       WB       |
+|           GET /available           |   ProductRoutes   |    Unit    |       WB       |
+|              DELETE /              |   ProductRoutes   |    Unit    |       WB       |
+|           DELETE /:model           |   ProductRoutes   |    Unit    |       WB       |
+
+## Product Integration Tests
+
+|       Test case name        | Object(s) tested | Test level | Technique used |
+| :-------------------------: | :--------------: | :--------: | :------------: |
+|       POST /products        |  ProductRoutes   |    API     |       BB       |
+|        GET /products        |  ProductRoutes   |    API     |       BB       |
+|   PATCH /products/:model    |  ProductRoutes   |    API     |       BB       |
+| PATCH /products/:model/sell |  ProductRoutes   |    API     |       BB       |
+|   GET /products/available   |  ProductRoutes   |    API     |       BB       |
+|   DELETE /products/:model   |  ProductRoutes   |    API     |       BB       |
+
+## Review Unit Tests
+
+|       Test case name       | Object(s) tested | Test level | Technique used |
+| :------------------------: | :--------------: | :--------: | :------------: |
+|    Review registration     |    ReviewDAO     |    Unit    |       WB       |
+|  Get reviews of a product  |    ReviewDAO     |    Unit    |       WB       |
+|       Delete review        |    ReviewDAO     |    Unit    |       WB       |
+| Delete reviews of product  |    ReviewDAO     |    Unit    |       WB       |
+|     Delete all reviews     |    ReviewDAO     |    Unit    |       WB       |
+|                            |                  |            |                |
+|     Create new review      | ReviewController |    Unit    |       WB       |
+|    Get product reviews     | ReviewController |    Unit    |       WB       |
+|       Delete review        | ReviewController |    Unit    |       WB       |
+| Delete reviews of product  | ReviewController |    Unit    |       WB       |
+|     Delete all reviews     | ReviewController |    Unit    |       WB       |
+|                            |                  |            |                |
+|    POST /reviews/:model    |   ReviewRoutes   |    Unit    |       WB       |
+|    GET /reviews/:model     |   ReviewRoutes   |    Unit    |       WB       |
+|   DELETE /reviews/:model   |   ReviewRoutes   |    Unit    |       WB       |
+| DELETE /reviews/:model/all |   ReviewRoutes   |    Unit    |       WB       |
+|      DELETE /reviews       |   ReviewRoutes   |    Unit    |       WB       |
+
+## Review Integration Tests
+
+|       Test case name       | Object(s) tested | Test level | Technique used |
+| :------------------------: | :--------------: | :--------: | :------------: |
+|    POST /reviews/:model    |   ReviewRoutes   |    API     |       BB       |
+|   DELETE /reviews/:model   |   ReviewRoutes   |    API     |       BB       |
+|    GET /reviews/:model     |   ReviewRoutes   |    API     |       BB       |
+| DELETE /reviews/:model/all |   ReviewRoutes   |    API     |       BB       |
+|      DELETE /reviews       |   ReviewRoutes   |    API     |       BB       |
 
 # Coverage
 
 ## Coverage of FR
 
 | Functional Requirement or scenario | Test(s) |
-| :--------------------------------: | :-----: |
-|               FR1.1                |         |
-|               FR1.2                |         |
-|               FR1.3                |         |
-|               FR2.1                |         |
-|               FR2.2                |         |
-|               FR2.3                |         |
-|               FR2.4                |         |
-|               FR2.5                |         |
-|               FR2.6                |         |
-|               FR3.1                |         |
-|               FR3.2                |         |
-|               FR3.3                |         |
-|               FR3.4                |         |
-|              FR3.4.1               |         |
-|               FR3.5                |         |
-|              FR3.5.1               |         |
-|               FR3.6                |         |
-|              FR3.6.1               |         |
-|               FR3.7                |         |
-|               FR3.8                |         |
-|               FR4.1                |         |
-|               FR4.2                |         |
-|               FR4.3                |         |
-|               FR4.4                |         |
-|               FR4.5                |         |
-|               FR5.1                |  GET /ezelectronics/carts        |
-|               FR5.2                | POST /ezelectronics/carts        |
-|               FR5.3                | PATCH /ezelectronics/carts        |
-|               FR5.4                | GET /ezelectronics/carts/history        |
-|               FR5.5                | DELETE /ezelectronics/carts/products/:model        |
-|               FR5.6                | DELETE /ezelectronics/carts/current        |
-|               FR5.7                | GET /ezelectronics/carts/all         |
-|               FR5.8                | DELETE /ezelectronics/carts         |
+| :--------------------------------- | :------ |
+|               FR1.1 - Login               | POST /ezelectronics/sessions |
+|               FR1.2 - Logout               | DELETE /ezelectronics/sessions/current |
+|               FR1.3 - Create a new user account               | POST /ezelectronics/users |
+|               FR2.1 - Show the list of all users               | GET /ezelectronics/users |
+|               FR2.2 - Show the list of all users with a specific role               | GET /ezelectronics/users/roles/:role |
+|               FR2.3 - Show the information of a single user               | GET /ezelectronics/users/:username |
+|               FR2.4 - Update the information of a single user               | PATCH /ezelectronics/users/:username |
+|               FR2.5 - Delete a single *non Admin* user               | DELETE /ezelectronics/users/:username |
+|               FR2.6 - Delete all *non Admin* users               | DELETE /ezelectronics/users |
+|               FR3.1 - Register a set of new products               | POST /ezelectronics/products |
+|               FR3.2 - Update the quantity of a product               | PATCH /ezelectronics/products/:model |
+|               FR3.3 - Sell a product               | PATCH /ezelectronics/products/:model/sell |
+|               FR3.4 - Show the list of all products               | GET /ezelectronics/products |
+|              FR3.4.1 - Show the list of all available products              | GET /ezelectronics/products/available |
+|               FR3.5 - Show the list of all products with the same category               | GET /ezelectronics/products |
+|              FR3.5.1 - Show the list of all available products with the same category              | GET /ezelectronics/products/available |
+|               FR3.6 - Show the list of all products with the same model               | GET /ezelectronics/products |
+|              FR3.6.1 - Show the list of all available products with the same model              | GET /ezelectronics/products/available |
+|               FR3.7 - Delete a product               | DELETE /ezelectronics/products/:model |
+|               FR3.8 - Delete all products               | DELETE /ezelectronics/products |
+|               FR4.1 - Add a new review to a product               | POST /ezelectronics/reviews/:model |
+|               FR4.2 - Get the list of all reviews assigned to a product               | GET /ezelectronics/reviews/:model |
+|               FR4.3 - Delete a review given to a product               | DELETE /ezelectronics/reviews/:model |
+|               FR4.4 - Delete all reviews of a product               | DELETE /ezelectronics/reviews/:model/all |
+|               FR4.5 - Delete all reviews of all products               | DELETE /ezelectronics/reviews |
+|               FR5.1 - Show the information of the current cart               |  GET /ezelectronics/carts        |
+|               FR5.2 - Add a product to the current cart               | POST /ezelectronics/carts        |
+|               FR5.3 - Checkout the current cart               | PATCH /ezelectronics/carts        |
+|               FR5.4 - Show the history of the paid carts               | GET /ezelectronics/carts/history        |
+|               FR5.5 - Remove a product from the current cart               | DELETE /ezelectronics/carts/products/:model        |
+|               FR5.6 - Delete the current cart               | DELETE /ezelectronics/carts/current        |
+|               FR5.7 - See the list of all carts of all users               | GET /ezelectronics/carts/all         |
+|               FR5.8 - Delete all carts               | DELETE /ezelectronics/carts         |
 
 ## Coverage white box
 

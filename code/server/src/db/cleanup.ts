@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 import db from "../db/db";
 
@@ -8,9 +8,24 @@ import db from "../db/db";
  */
 
 export function cleanup() {
+  return new Promise<void>((resolve, reject) => {
     db.serialize(() => {
-        // Delete all data from the database.
-        db.run("DELETE FROM users")
-        //Add delete statements for other tables here
-    })
+      db.run("DELETE FROM users", (err) => {
+        if (err) return reject();
+        db.run("DELETE FROM carts", (err) => {
+          if (err) return reject();
+          db.run("DELETE FROM products", (err) => {
+            if (err) return reject();
+            db.run("DELETE FROM productsInCarts", (err) => {
+              if (err) return reject();
+              db.run("DELETE FROM reviews", (err) => {
+                if (err) return reject();
+                resolve();
+              });
+            });
+          });
+        });
+      });
+    });
+  });
 }

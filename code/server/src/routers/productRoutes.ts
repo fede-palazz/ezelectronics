@@ -161,17 +161,17 @@ class ProductRoutes {
       this.authenticator.isLoggedIn,
       this.authenticator.isAdminOrManager,
       query("grouping")
-        .optional({ checkFalsy: true })
+        .optional()
         .isIn(["category", "model"])
         .withMessage("Parameter 'grouping' possible values are 'category', 'model'"),
       query("category")
-        .optional({ checkFalsy: true })
+        .optional()
         .isIn(["Smartphone", "Laptop", "Appliance"])
         .withMessage(
           "Parameter 'category' possible values are 'Smartphone', 'Laptop', 'Appliance'"
         ),
       query("model")
-        .optional({ checkFalsy: true })
+        .optional()
         .isString()
         .notEmpty()
         .withMessage("Parameter 'model' can't be empty if grouping is set to 'model'"),

@@ -56,25 +56,34 @@ class ReviewDAO {
   getProductReviews(model: string): Promise<ProductReview[]> {
     return new Promise<ProductReview[]>((resolve, reject) => {
       try {
-        const sql = "SELECT * FROM reviews WHERE product=?";
-        db.all(sql, [model], (err: Error | null, rows: any) => {
+        const sqlCheckProduct = "SELECT 1 FROM products WHERE model=?";
+        db.get(sqlCheckProduct, [model], (err: Error | null, row: any) => {
           if (err) {
             reject(err);
             return;
           }
-          if (rows.length == 0) {
+          if (!row) {
             reject(new ProductNotFoundError());
+            return;
           }
-          const reviews = rows.map(
-            (row: any) => new ProductReview(row.product, row.user, row.score, row.date, row.comment)
-          );
-          resolve(reviews);
+          const sqlGetReviews = "SELECT * FROM reviews WHERE product=?";
+          db.all(sqlGetReviews, [model], (err: Error | null, rows: any) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            const reviews = rows.map(
+              (row: any) => new ProductReview(row.product, row.user, row.score, row.date, row.comment)
+            );
+            resolve(reviews);
+          });
         });
       } catch (error) {
         reject(error);
       }
     });
   }
+
 
   /**
    * Deletes a review from the database.

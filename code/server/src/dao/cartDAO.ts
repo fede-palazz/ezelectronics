@@ -320,8 +320,8 @@ class CartDAO {
         let currentCartId = -1;
         let cart: Cart;
         const sql = `SELECT C.*, P.model, P.category, P.sellingPrice, PC.quantity_in_cart AS quantity 
-                     FROM carts C LEFT JOIN productsInCarts PC ON C.id=PC.cart_id 
-                     LEFT JOIN products P ON PC.product_model=P.model 
+                     FROM carts C INNER JOIN productsInCarts PC ON C.id=PC.cart_id 
+                     INNER JOIN products P ON PC.product_model=P.model 
                      ORDER BY C.id`;
         db.all(sql, (err: Error | null, rows: any) => {
           if (err) {
